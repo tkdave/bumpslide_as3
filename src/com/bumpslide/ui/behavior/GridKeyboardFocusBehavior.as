@@ -41,7 +41,7 @@ package com.bumpslide.ui.behavior
 		protected var _stage:Stage;
 
 		/**
-		 * Attaches repeater behavior to a button
+		 * Attaches focus behavior to a GridLayout instance
 		 * 
 		 * @param grid_layout  the grid we are managing
 		 * @param keyboard_scope   where we attach keyboard event listeners (defaults to grid_layout.timeline)

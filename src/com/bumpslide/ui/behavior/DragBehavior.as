@@ -143,7 +143,9 @@ package com.bumpslide.ui.behavior
 			velocityCheck = Delegate.callLater( 100, resetVelocity );
 		}
 		
-		
+		/**
+		 * Returns distance dragged relative to the parent of the drag target
+		 */
 		private function getDragDelta():Point
 		{
 			//trace( this + ' whileDragging() ' );		
@@ -151,7 +153,7 @@ package com.bumpslide.ui.behavior
 
 			// get concatenated matrix and use it to transform the delta vector
 			// to support dragging inside things that have been rotated
-			var m:Matrix = dragTarget.transform.concatenatedMatrix;
+			var m:Matrix = dragTarget.parent.transform.concatenatedMatrix;
 			m.invert(); // mapping global-to-local, not local-to-global
 			return m.deltaTransformPoint( delta ); // ignore tx and ty 
 		}
