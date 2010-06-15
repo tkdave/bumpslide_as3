@@ -134,12 +134,12 @@ package com.bumpslide.util
 		/**
 		 * Returns the number of days in a month
 		 */
-		public static function getLastDayOfMonth(m:Number, y:Number):Number 
+		public static function getLastDayOfMonth(monthIndex:Number, year:Number):Number 
 		{	
-			if ((isLeapYear(y)) && (m == 2)) {
+			if ((isLeapYear(year)) && (monthIndex == 1)) {
 				return 29;
 			} else {
-				return DAYS_PER_MONTH[m - 1];
+				return DAYS_PER_MONTH[monthIndex];
 			}
 		}
 

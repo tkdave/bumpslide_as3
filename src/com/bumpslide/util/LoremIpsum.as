@@ -7,7 +7,7 @@ package com.bumpslide.util {
 	public class LoremIpsum {
 		
 		
-		public static const COLORS:Array = [  
+		public static var COLORS:Array = [  
 			0x81B3C3,  
 			0xDF6559,  
 			0xF9D574,  
@@ -15,7 +15,7 @@ package com.bumpslide.util {
 			0x253C4B,  
 			0xffffff];
 			
-		public static const BIRDS:Array = [ 	
+		public static var BIRDS:Array = [ 	
 			'Anseriformes—waterfowl',		
 			'Galliformes—fowl',
 			'Charadriiformes—gulls, button-quails, plovers and allies',
@@ -45,7 +45,7 @@ package com.bumpslide.util {
 			'Passeriformes—passerines' 
 		];
 		
-		public static const ITEMS:Array = [
+		public static var ITEMS:Array = [
 			"Lorem Ipsum",
 			"Consectetuer",
 			"Aenean Volutpat",
@@ -56,7 +56,7 @@ package com.bumpslide.util {
 		];
 		
 		// most "interesting" creative commons photos on flickr with search keyword ('photoshop')
-		public static const IMAGES:Array = ['http://farm5.static.flickr.com/4057/4315145017_ea28fabda0_m.jpg',
+		public static var IMAGES:Array = ['http://farm5.static.flickr.com/4057/4315145017_ea28fabda0_m.jpg',
 			'http://farm3.static.flickr.com/2587/3894970025_797612bdd8_m.jpg',
 			'http://farm3.static.flickr.com/2605/3667880356_02c4707471_m.jpg',
 			'http://farm4.static.flickr.com/3312/3650717808_46054cc96a_m.jpg',
