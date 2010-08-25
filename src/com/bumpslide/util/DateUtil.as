@@ -95,6 +95,7 @@ package com.bumpslide.util
 		 */
 		static public function getFormatted( d:Date, showTime:Boolean = true, showDate:Boolean = true, showWeekday:Boolean = true, showMonth:Boolean = true, showYear:Boolean = true ):String 
 		{
+			if(d==null) return "";
 			// "Saturday, September 15, 2008 9:00pm"
 			var s:String = "";			
 			if(showWeekday) s += DAY_NAMES[d.day] + ", ";
@@ -111,6 +112,7 @@ package com.bumpslide.util
 		 */	
 		public static function getShortHour(d:Date):int 
 		{
+			if(d==null) return 0;
 			var h:int = d.hours;			
 			if(h == 0 || h == 12) {
 				return 12;
@@ -127,6 +129,7 @@ package com.bumpslide.util
 		 */	
 		public static function getAMPM(d:Date):String 
 		{
+			if(d==null) return '';
 			return (d.hours > 11) ? "PM" : "AM";
 		}   
 
@@ -304,5 +307,76 @@ package com.bumpslide.util
 					break;
 			}
 		}  
+		
+		static public function advanceByUnit( d:Date, unit:String ):void {
+			
+			switch( unit ) {					
+				case Unit.MILLISECOND:
+					d.milliseconds += 1;
+					break;
+				case Unit.SECOND:
+					d.seconds += 1;
+					break;
+				case Unit.MINUTE:
+					d.minutes += 1;
+					break;					
+				case Unit.HOUR: 
+					d.hours += 1;
+					break;
+				case Unit.DAY: 
+					d.date += 1; 
+					break;
+				case Unit.MONTH: 
+					d.month += 1; 
+					break;
+				case Unit.YEAR: 
+					d.fullYear += 1;
+					break;
+					
+				case Unit.DECADE:
+					d.fullYear += 10;
+					break;
+				
+				case Unit.CENTURY:
+					d.fullYear += 100;
+					break;
+				
+				default:
+					throw new Error('Invalid unit');
+			}
+		}
+		
+		static public function advanceBySubUnit( d:Date, unit:String ):void {			
+			
+			switch( unit ) {
+				case Unit.SECOND:  
+					d.milliseconds += 100; 
+					break;
+				case Unit.MINUTE:  
+					d.seconds += 15; 
+					break;
+				case Unit.HOUR:    
+					d.minutes += 15; 
+					break;
+				case Unit.DAY:     
+					d.hours += 1; 
+					break;
+				case Unit.MONTH:   
+					d.date += 1; 
+					break;
+				case Unit.YEAR:    
+					d.month += 1; 
+					break;
+				case Unit.DECADE:    
+					d.fullYear += 1; 
+					break;							
+				case Unit.CENTURY:    
+					d.fullYear += 10; 
+					break;		
+				default:  
+					throw new Error('Invalid Unit');
+					break;	
+			}
+		}
 	}
 }
