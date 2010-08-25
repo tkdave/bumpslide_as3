@@ -15,71 +15,83 @@ package com.bumpslide.ui.skin.defaults
 	{
 
 		public var background:Box;
+		public var labelDisplay:Label;
 
-		public var textBox:Label;
 
+		public function get hostComponent():Button {
+			return _hostComponent as Button;	
+		}
 
-		
+		/**
+		 * Create a background box and a label
+		 */		
 		override protected function addChildren():void 
 		{
-			background = add(Box, { cornerRadius: Style.CORNER_RADIUS, filters: [Style.BEVEL_FILTER] });
-			textBox = add(Label);
+			background = add(Box, { cornerRadius: Style.BUTTON_CORNER_RADIUS, filters: [Style.BEVEL_FILTER] });
+			labelDisplay = add(Label);
 		}
-
 		
-		public function get hostComponent():Button {
-			return _hostComponent as Button;
-		}
-
-		
+		/**
+		 * 
+		 */
 		override public function renderSkin( skinState:String ):void 
 		{
+			// call skin state functions (ex: '_over', '_down', '_selected')
 			super.renderSkin(skinState);
 			
 			if(hostComponent == null) return;
 			
+			// If button has padding specified, apply it to label
 			if(hostComponent.padding) {
-				textBox.padding = hostComponent.padding;
+				labelDisplay.padding = hostComponent.padding;
 			}
 			
-			// If we are sizing the button based on the label size,
-			// we can't have the label size be undefined
-			// force it to a single line
-			if(!hostComponent.explicitWidth) {
-				textBox.multiline = false;
-			}
-			
-			textBox.text = hostComponent.label;
-						
+			if(hostComponent.explicitWidth) {
+				labelDisplay.width = hostComponent.width;
+			}						
 			
 			if(hostComponent.label != null && hostComponent.label != "") {
-			
-				var w:Number;
-				var h:Number;
 				
-				// Label Button
-			
+				labelDisplay.text = hostComponent.label;
+				labelDisplay.visible = true;
+				
+				var backgroundWidth:Number;
+				var backgroundHeight:Number;
+				
 				// If button has width explicitly set,
 				// use that to size the label and background width
 				if(hostComponent.explicitWidth) {
-					w = textBox.width = hostComponent.width;
-					Align.center(textBox, hostComponent.width, textBox.actualWidth);
+					backgroundWidth = hostComponent.width;
+					if(hostComponent.centerLabel) {
+						labelDisplay.width = 0;
+						Align.center( labelDisplay, hostComponent.width );
+					} else {
+						labelDisplay.width = hostComponent.width;
+						labelDisplay.x = 0;
+					}
 				} else {
-					w = textBox.actualWidth;
+					// otherwidth, just make the background as wide as the label (with padding)
+					backgroundWidth = labelDisplay.actualWidth;
 				}
 				
+				// If button has height explicitly set,
+				// use that size the label and background height
 				if(hostComponent.explicitHeight) {
-					h = hostComponent.height;
-					Align.middle(textBox, hostComponent.height, textBox.height);
+					backgroundHeight = hostComponent.height;
+					Align.middle(labelDisplay, hostComponent.height, labelDisplay.height);
 				} else {
-					h = textBox.height;
+					// otherwidth, just make the background as tall as the label (with padding)
+					backgroundHeight = labelDisplay.height;
 				}
 				
 				// use the label width to determine the background width
-				background.setSize(w, h);
+				background.setSize(backgroundWidth, backgroundHeight);
 			} else {
 				
 				// No label
+				labelDisplay.text = "";
+				labelDisplay.visible = false;
+				
 				
 				// set the background to the size of the component
 				background.setSize(hostComponent.width, hostComponent.height);
@@ -89,41 +101,41 @@ package com.bumpslide.ui.skin.defaults
 		
 		public function _off():void 
 		{
-			background.color = Style.BUTTON_OFF;
-			textBox.content_txt.textColor = Style.LABEL_TEXT;
+			background.backgroundColor = Style.BUTTON_OFF;
+			labelDisplay.textField.textColor = Style.BUTTON_LABEL;
 			alpha = 1.0;
 		}
 
 		
 		public function _over():void 
 		{
-			background.color = Style.BUTTON_OVER;
+			background.backgroundColor = Style.BUTTON_OVER;
 			
-			textBox.content_txt.textColor = Style.LABEL_TEXT;
+			labelDisplay.textField.textColor = Style.BUTTON_LABEL;
 			alpha = 1.0;
 		}
 
 		
 		public function _down():void 
 		{
-			background.color = Style.BUTTON_DOWN;	
-			textBox.content_txt.textColor = Style.LABEL_TEXT;
+			background.backgroundColor = Style.BUTTON_DOWN;	
+			labelDisplay.textField.textColor = Style.BUTTON_LABEL;
 			alpha = 1.0;
 		}
 
 		
 		public function _selected():void 
 		{
-			background.color = Style.BUTTON_SELECTED;
-			textBox.content_txt.textColor = Style.LABEL_TEXT_SELECTED;
+			background.backgroundColor = Style.BUTTON_SELECTED;
+			labelDisplay.textField.textColor = Style.BUTTON_LABEL_OVER;
 			alpha = 1.0;
 		}
 
 		
 		public function _disabled():void 
 		{
-			background.color = Style.BUTTON_OFF;
-			textBox.content_txt.textColor = Style.LABEL_TEXT;
+			background.backgroundColor = Style.BUTTON_OFF;
+			labelDisplay.textField.textColor = Style.BUTTON_LABEL;
 			alpha = .5;
 		}
 	}

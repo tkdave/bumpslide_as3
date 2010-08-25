@@ -20,32 +20,34 @@ package com.bumpslide.ui
 	 */
 	public class Box extends Component implements IGridItem {
 		
-		protected static const VALID_STYLE:String = "validStyle";
-		
-		protected var _color:Number = 0;
+		protected var _backgroundColor:Number = 0;
+		protected var _backgroundAlpha:Number = 1;
+		protected var _borderSize:int = -1;
+		protected var _borderColor:uint = 0x000000;
+		protected var _borderAlpha:Number = 1;
+		protected var _borderPixelHinting:Boolean = true;
 		protected var _cornerRadius:Number = 0;
 		protected var _tileBitmap:BitmapData;
-		
-		protected var _fillAlpha:Number = 1;
-		
-		protected var _borderWidth:int = -1;
-		protected var _borderColor:uint = 0x000000;		protected var _borderAlpha:Number = 1;
 		protected var _centerOrigin:Boolean = false;
-		protected var _borderPixelHinting:Boolean = true;
 		
-		
-		public function Box( color:Number = 0, width:Number = 64, height:Number = 64, x:Number = 0, y:Number = 0, corner_radius:Number = 0, border_width:Number=-1, border_color:uint=0x000000 ) {
-			super();	
-						
-			delayUpdate = false;		
-			_color = color;		
+		public function Box( color:Number=0xdddddd, width:Number = 64, height:Number = 64, x:Number = 0, y:Number = 0, corner_radius:Number = 0, border_width:Number=-1, border_color:uint=0x000000 ) {
+			super();
+			_backgroundColor = color;		
 			_cornerRadius = corner_radius;	
-			_borderWidth = border_width;
+			_borderSize = border_width;
 			_borderColor = border_color;
 			
 			this.x = x;
 			this.y = y;
+			
+			delayUpdate = false;
+			
 			setSize(width, height);	
+		}
+
+		
+		override protected function initSize():void {
+			super.initSize( );
 		}
 
 		
@@ -60,7 +62,7 @@ package com.bumpslide.ui
 			super.draw();
 			
 			graphics.clear();
-			graphics.beginFill(color, fillAlpha);	
+			graphics.beginFill(backgroundColor, backgroundAlpha);	
 			if(borderWidth>=0) {
 				graphics.lineStyle( borderWidth, borderColor, borderAlpha, borderPixelHinting);
 			}		
@@ -70,7 +72,6 @@ package com.bumpslide.ui
 			drawShape();
 			graphics.endFill();	
 			
-			validate(VALID_STYLE);
 		}    
 		
 		protected function drawShape() : void {
@@ -91,7 +92,7 @@ package com.bumpslide.ui
 		protected var _gridIndex:int;
 
 		public function set gridItemData( v:* ):void {
-			color = v;
+			backgroundColor = v;
 		}            
 
 		public function set gridIndex(v:int):void {
@@ -99,7 +100,7 @@ package com.bumpslide.ui
 		}   
 
 		public function get gridItemData():* {
-			return color;			
+			return backgroundColor;			
 		}
 
 		public function get gridIndex():int {
@@ -111,42 +112,42 @@ package com.bumpslide.ui
 		// GETTERS / SETTERS
 		//--------------------------------------
 		
-		public function set color(val:*):void {
+		public function set backgroundColor(val:*):void {
 			//log('color set to ' + val );
 			if(isNaN(val)) val=parseInt(val, 16);
-			_color = val;
-			invalidate(VALID_STYLE);
+			_backgroundColor = val;
+			invalidate();
 		}
 
-		public function get color():uint {
-			return _color;
+		public function get backgroundColor():uint {
+			return _backgroundColor;
 		}
 		
 		public function set cornerRadius(val:Number):void {
 			_cornerRadius = val;
-			invalidate(VALID_STYLE);
+			invalidate();
 		}
 
 		public function get cornerRadius():Number {
 			return _cornerRadius;
 		}
 		
-		public function get fillAlpha():Number {
-			return _fillAlpha;
+		public function get backgroundAlpha():Number {
+			return _backgroundAlpha;
 		}
 		
-		public function set fillAlpha(fillAlpha:Number):void {
-			_fillAlpha = fillAlpha;
-			invalidate(VALID_STYLE);
+		public function set backgroundAlpha(alpha:Number):void {
+			_backgroundAlpha = alpha;
+			invalidate();
 		}
 		
 		public function get borderWidth():int {
-			return _borderWidth;
+			return _borderSize;
 		}
 		
 		public function set borderWidth(borderWidth:int):void {
-			_borderWidth = borderWidth;
-			invalidate(VALID_STYLE);
+			_borderSize = borderWidth;
+			invalidate();
 		}
 		
 		public function get borderColor():uint {
@@ -156,7 +157,7 @@ package com.bumpslide.ui
 		public function set borderColor(val:*):void {
 			if(isNaN(val)) val=parseInt(val, 16);
 			_borderColor = val;
-			invalidate(VALID_STYLE);
+			invalidate();
 		}
 		
 		public function get borderAlpha():Number {
@@ -165,7 +166,7 @@ package com.bumpslide.ui
 		
 		public function set borderAlpha(borderAlpha:Number):void {
 			_borderAlpha = borderAlpha;
-			invalidate(VALID_STYLE);
+			invalidate();
 		}
 
 		public function get tileBitmap():BitmapData {
@@ -174,7 +175,7 @@ package com.bumpslide.ui
 
 		public function set tileBitmap(bitmap_data:BitmapData):void {
 			_tileBitmap = bitmap_data;
-			invalidate(VALID_STYLE);
+			invalidate();
 		}
 		
 		public function get centerOrigin():Boolean {

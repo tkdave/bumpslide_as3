@@ -11,9 +11,12 @@
  
 package com.bumpslide.ui 
 {
+	import flash.events.Event;
 	import com.bumpslide.util.GridLayout;
 
 	import flash.events.MouseEvent;
+
+	[Event(name="itemClick", type="com.bumpslide.events.UIEvent")]
 
 	/**
 	 * Component that contains a GridLayout managed data grid and a scrollbar
@@ -22,8 +25,8 @@ package com.bumpslide.ui
 	 */
 	public class Grid extends AbstractScrollPanel {
 
-		static public const EVENT_ITEM_CLICK:String = "onGridItemClick";
-		
+		static public const EVENT_ITEM_CLICK:String = GridLayout.EVENT_ITEM_CLICK;
+
 		public var layout:GridLayout;
 		
 		protected var _itemRenderer:Class=null;
@@ -48,7 +51,9 @@ package com.bumpslide.ui
 			super.initContent();
 			layout = new GridLayout(_holder, gridItemRenderer);
 			layout.itemInitProperties = gridItemProps;
-			layout.addEventListener( GridLayout.EVENT_MODEL_CHANGED, eventDelegate( invalidate ) );
+			
+			// update when model (possibly length) changed
+			layout.addEventListener( Event.CHANGE, eventDelegate( invalidate ) );
 			//layout.debugEnabled = true;
 		}
 
@@ -108,6 +113,16 @@ package com.bumpslide.ui
 			
 			super.setContentSize( w, h );
 		}
+		
+		override public function get actualHeight():Number {
+			if(layout && padding) {
+				if(isVertical) {
+					return layout.totalSize * layout.rowHeight + padding.height;	
+				} else {
+					return layout.rows;
+				}
+			} return super.actualHeight;
+		}
 
 		
 		/**
@@ -118,7 +133,7 @@ package com.bumpslide.ui
 		}
 
 		public function set gridItemRenderer(item_renderer:Class):void {
-			_itemRenderer = item_renderer==null ? GridItem : item_renderer;
+			_itemRenderer = item_renderer==null ? Button : item_renderer;
 			//trace('_itemRenderer: ' + (_itemRenderer));
 			//trace('layout: ' + (layout));
 			if(layout != null) layout.itemRenderer = _itemRenderer;
@@ -199,7 +214,22 @@ package com.bumpslide.ui
 			invalidate();
 		}
 		
+		/**
+		 * get array of data associated with selected items
+		 */
+		public function get selectedItems():Array { 
+			var data:Array = [];				
+			for each ( var item:Button in layout.itemClips ) {
+				if(item && item.selected) {
+					data.push( item.gridItemData );
+				}
+			}
+			return data;
+		}
+		
+		
 		public function get gridItemProps():Object {
+			if(_itemProps==null) return { grid:this };
 			return _itemProps;
 		}
 		
@@ -208,7 +238,23 @@ package com.bumpslide.ui
 		 */
 		public function set gridItemProps(itemProps:Object):void {
 			_itemProps = itemProps;
+			// add grid to item props
+			_itemProps.grid = this; 
 			if(layout != null) layout.itemInitProperties = itemProps;
+		}
+		
+		/**
+		 * Returns data at index n
+		 * 
+		 * Optional param (data_provider) can be specified to grab data from a data provider that 
+		 * has not yet been committed.
+		 * 
+		 * This method supports getting data from flash data providers, flex collections, and as3 arrays
+		 */
+		public function getItemAt( n:uint, data_provider:*=null ):* {
+			var dp:* = data_provider ? data_provider : dataProvider;
+			if(dp==null) return null;
+			return dp.getItemAt != undefined ? dp.getItemAt(n) : dp[n];
 		}
 	}
 }

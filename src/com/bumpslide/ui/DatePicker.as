@@ -1,14 +1,16 @@
 package com.bumpslide.ui 
 {
+	import com.bumpslide.events.UIEvent;
+	import flash.display.InteractiveObject;
 	import com.bumpslide.tween.FTween;
-	import com.bumpslide.util.DateUtil;
+	import com.bumpslide.ui.skin.defaults.DefaultDatePickerSkin;
+	import com.bumpslide.ui.skin.defaults.Style;
 
 	import flash.display.BlendMode;
+	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
-	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import flash.filters.DropShadowFilter;
 
 	/**
 	 * DatePicker
@@ -21,50 +23,70 @@ package com.bumpslide.ui
 	public class DatePicker extends Component 
 	{
 		
-		// The calendar icon
-		[Embed(source="/assets/calendar_icon2.png")]
-		public var CalendarIcon:Class;
-
-		public var dateLabel:Label;
-
-		public var chooseButton:Button;
-
+		static public var DefaultSkinClass:Class = DefaultDatePickerSkin;
+		
+		// panel that holds the calendar display
 		public var popup:Panel;
 
+		// the stage (or wherever else you want the popup to live)
 		public var popupHolder:DisplayObjectContainer;
-
-		private var cal:Calendar;
-
-		private var _selectedDate:Date;
+		
+		// the calendar control contained in the popup panel
+		protected var cal:Calendar;
+		
+		private var _showTime:Boolean = true;
+				
+		private var _selectedDate:Date = new Date();
 
 		
 		override protected function addChildren():void 
 		{
-			super.addChildren();
-			
-			selectedDate = new Date();
-			
-			dateLabel = add(Label, { x: 24 });
-			chooseButton = add(Button, { width: 21, height: 21, onClick: handleChooseButtonClick, icon: CalendarIcon });
-			
 			cal = new Calendar();
+			cal.addEventListener(Event.SELECT, handleDateSelect);
+			
 			popup = new Panel(cal);
 			popup.setSize( 160, 160 );
 			popup.alpha = 0;
 			popup.blendMode = BlendMode.LAYER;
-			popup.filters = [new DropShadowFilter(2, 45, 0, .5, 3, 3, 1, 2)];
-			
-			cal.addEventListener(Event.SELECT, handleDateSelect);
-				
+			popup.filters = [Style.DROPSHADOW_FILTER];
+			popup.autoSizeHeight = true;
 			addEventListener(Event.ADDED_TO_STAGE, handleAddedToStage);
+			
+			popup.addEventListener( Component.EVENT_DRAW, handlePopupRedraw);
 		}
 
+		
+		private function handlePopupRedraw(event:UIEvent):void 
+		{
+			if(event.target==popup.content) layoutChildren();
+		}
 
 		
-		override protected function draw():void 
+		override protected function postConstruct():void 
 		{
-			dateLabel.text = DateUtil.getFormatted(selectedDate, false, true, false);			
-			super.draw();
+			super.postConstruct();
+			if(skin==null && skinClass==null) {
+				skinClass = DefaultSkinClass;
+			}
+		}
+
+		
+		override protected function initSkin():void 
+		{
+			super.initSkin();		
+			skin.addEventListener( MouseEvent.CLICK, handleChooseButtonClick );
+		}
+
+			
+		override protected function destroySkin():void 
+		{
+			skin.removeEventListener( MouseEvent.CLICK, handleChooseButtonClick );						
+			super.destroySkin();
+		}
+
+		
+		public function set onSelect( f:Function):void {
+			cal.addEventListener(Event.SELECT, f);
 		}
 
 		
@@ -83,35 +105,46 @@ package com.bumpslide.ui
 		
 		protected function handleChooseButtonClick(event:MouseEvent):void 
 		{
+			
 			if(isOpen) hidePopup();
 			else showPopup();
 		}
 
 		
-		protected function showPopup():void 
-		{	
+		override public function layoutChildren():void 
+		{
+			//super.layoutChildren();
+			if(!isOpen) return;
+			
 			var max_x:Number = popupHolder == stage ? stage.stageWidth : popupHolder.width;
-			max_x -= popup.width + Style.PADDING;
+			max_x -= popup.width + Style.PANEL_PADDING;
 			
 			var max_y:Number = popupHolder == stage ? stage.stageHeight : popupHolder.height;
-			max_y -= popup.height + Style.PADDING;
-			
-			var px:Number = Math.max(0, Math.min(max_x, popupHolder.mouseX + 20));
-			var py:Number = Math.max(0, Math.min(max_y, popupHolder.mouseY - 20));
-			
-			
-			popupHolder.addChild(popup);
+			max_y -= popup.height + Style.PANEL_PADDING;
+			trace('layout datepicker popup');
+			var px:Number = Math.max(0, Math.min(max_x, getBounds(popupHolder).left + 20));
+			var py:Number = Math.max(0, Math.min(max_y, getBounds(popupHolder).top - 100));
+			//var px:Number = getBounds(popupHolder).left + 20;
+			//var py:Number = getBounds(popupHolder).top - 20;
 			popup.move(px, py);
-						
-			cal.selectedDate = selectedDate;
-			FTween.fadeIn(popup, 0, .5);
-			
-			stage.addEventListener(MouseEvent.MOUSE_DOWN, handleStageMouseDown);
-			
 		}
 
 		
-		private function handleStageMouseDown(event:MouseEvent):void 
+		protected function showPopup():void 
+		{			
+			trace('show popup');	
+			popupHolder.addChild(popup);
+									
+			cal.selectedDate = selectedDate;
+			FTween.fadeIn(popup, 0, .5);
+			
+			stage.addEventListener(MouseEvent.MOUSE_UP, handleStageMouseUp);
+			
+			invalidate();
+		}
+
+		
+		private function handleStageMouseUp(event:MouseEvent):void 
 		{
 			if(!popup.hitTestPoint(stage.mouseX, stage.mouseY)) {
 				hidePopup();
@@ -120,8 +153,8 @@ package com.bumpslide.ui
 
 		
 		protected function hidePopup():void 
-		{
-			stage.removeEventListener(MouseEvent.MOUSE_DOWN, handleStageMouseDown);
+		{	trace('hide popup');
+			stage.removeEventListener(MouseEvent.MOUSE_UP, handleStageMouseUp);
 			FTween.fadeOut(popup, 0, .7, d(popupHolder.removeChild, popup));
 		}
 
@@ -138,6 +171,27 @@ package com.bumpslide.ui
 		
 		public function set selectedDate(selectedDate:Date):void {
 			_selectedDate = selectedDate;
+			invalidate();
+		}
+
+		
+		override public function get width():Number {
+			return super.actualWidth;
+		}
+
+		
+		override public function get height():Number {
+			return super.actualHeight;
+		}
+		
+		
+		public function get showTime():Boolean {
+			return _showTime;
+		}
+		
+		
+		public function set showTime(showTime:Boolean):void {
+			_showTime = showTime;
 			invalidate();
 		}
 	}

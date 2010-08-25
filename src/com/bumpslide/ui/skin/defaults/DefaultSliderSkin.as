@@ -9,33 +9,29 @@ package com.bumpslide.ui.skin.defaults
 	import com.bumpslide.ui.skin.ISkinnable;
 
 	/**
-	 * DefaultSliderSkin2
+	 * DefaultSliderSkin
 	 *
 	 * @author David Knape
 	 * @version SVN: $Id: $
 	 */
-	public class DefaultSliderSkin2 extends BasicSliderSkin 
+	public class DefaultSliderSkin extends BasicSliderSkin 
 	{
 		override protected function addChildren():void 
 		{
-			logEnabled = true;
+			//logEnabled = true;
 			
 			// Use panel to control padding around background art
 			background = add( Panel, { 
-				padding: new Padding( 5, 0), 
+				padding: Style.SLIDER_BACKGROUND_PADDING, 
+				backgroundVisible: false,
 				content: create( Box, { 
-					color: Style.BACKGROUND, 
-					fillAlpha: Style.BACKGROUND_ALPHA, 
-					cornerRadius:Style.CORNER_RADIUS,
+					backgroundColor: Style.PANEL_BACKGROUND_COLOR, 
+					cornerRadius:Style.BUTTON_CORNER_RADIUS,
 					filters: [Style.BEVEL_FILTER_INSET]
 				}) 
 			});
 			
-			handle = add( Button );
-			handle.add( PixelIcon, { 
-				data: "  -, -,-,  -, -,-,  -, -,-", 
-				color: Style.LABEL_TEXT, alignH: "center", alignV: "middle" 
-			});
+			handle = add( Button, { icon: new PixelIcon("  -, -,-,  -, -,-,  -, -,-", Style.BUTTON_LABEL) } );			
 		}
 		
 		override public function initHostComponent(host_component:ISkinnable):void 

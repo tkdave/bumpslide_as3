@@ -2,13 +2,18 @@ package com.bumpslide.ui
 {
 	import com.bumpslide.data.constant.Unit;
 	import com.bumpslide.events.UIEvent;
+	import com.bumpslide.ui.skin.defaults.Style;
+	import com.bumpslide.util.Align;
 	import com.bumpslide.util.DateUtil;
+	import com.bumpslide.util.GridLayout;
 
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 
 	/**
-	 * Calendar
+	 * Calendar Control
+	 * 
+	 * This is the calendar used in the DatePicker
 	 *
 	 * @author David Knape
 	 * @version SVN: $Id: $
@@ -23,7 +28,8 @@ package com.bumpslide.ui
 		// selected date
 		private var _selectedDate:Date;
 		private var _selectedDateChanged:Boolean;
-
+		
+		
 		// child components
 		private var leftButton:Button;
 		private var rightButton:Button;
@@ -31,11 +37,14 @@ package com.bumpslide.ui
 		private var grid:Grid;
 		private var topPanel:Panel;
 
+		private var gridLayout:GridLayout;
+
+		private var _monthChanged:Boolean = false;
+
 		
 		override protected function init():void 
 		{
-			super.init();
-			
+			super.init();			
 			displayDate = new Date();
 			selectedDate = new Date();
 		}
@@ -43,12 +52,13 @@ package com.bumpslide.ui
 		
 		override protected function addChildren():void 
 		{
-			grid = add( Grid, { padding:"24 4 0 4", gridItemRenderer: DayRenderer, fixedColumnCount:7, rowHeight: 20, spacing:4 } );
+			grid = add( Grid, { padding:"28 4 0 4", gridItemRenderer: DayRenderer, fixedColumnCount:7, rowHeight: 20, spacing:0 } );
+			//grid.layout.scrollRectDisabled = true;
 			grid.addEventListener(Grid.EVENT_ITEM_CLICK, handleDayClick);
-			grid.background.visible = false;
+			grid.background.alpha = 0;
 			
 			var c:Component = new Component();
-			monthLabel = c.add( Label, { x: 24, autoSize: true, selectable: false  } );
+			monthLabel = c.add( Label, { x: 24, selectable: false , alignH:"center" } );
 			leftButton = c.add( Button, { height: 16, width: 16, onClick: handleClickBack} );			
 			rightButton = c.add( Button, { height: 16,  width: 16, onClick: handleClickForward, alignH: "right" } );
 			
@@ -65,8 +75,10 @@ package com.bumpslide.ui
 											  '*']);
 			
 			topPanel = add( Panel, { content: c, padding: 4 });
+			//topPanel.background.filters = [Style.BEVEL_FILTER_INSET];
 		}
-				
+
+		
 		override protected function initSize():void 
 		{
 			width = 180;
@@ -81,21 +93,19 @@ package com.bumpslide.ui
 			var num_days:int=DateUtil.getLastDayOfMonth(displayDate.month, displayDate.fullYear);
 			var n:int;
 						
-			if(_displayDateChanged) {
+			if(_monthChanged) {
 				
 				// update month label
 				monthLabel.text = DateUtil.getFormatted( displayDate, false, false, false );
+			
 				
 				// create array of dates indexed starting with day of week
 				var days:Array=[];
 				for(n=0; n<num_days; n++) {
 					days[ first_day + n] = create( DayVO, { date: new Date( displayDate.fullYear, displayDate.month, n+1 ) } );
 				}				
-				grid.dataProvider = days;
-				
-				
-				grid.updateNow();
-				
+				grid.dataProvider = days;				
+				grid.updateNow();				
 			}
 			
 			// set size
@@ -109,7 +119,7 @@ package com.bumpslide.ui
 			if(_selectedDateChanged || _displayDateChanged) {
 				for(n=0; n<num_days; n++) {
 					var item:Button = grid.layout.getGridItemAt( first_day + n ) as Button;
-					if(item!=null) {
+					if(item!=null && item.gridItemData!=null) {
 						var d:Date = new Date(item.gridItemData.date);
 						//DateUtil.roundDown(d, Unit.DAY);
 						item.selected = d.time==selectedDate.time;
@@ -119,11 +129,14 @@ package com.bumpslide.ui
 			
 			_selectedDateChanged = false;
 			_displayDateChanged = false;
+			_monthChanged = false;
+			
+			super.draw();
 		}
 		
 		
-		override public function get height():Number {
-			return actualHeight + 8;
+		override public function get actualHeight():Number {
+			return grid.y + grid.actualHeight;
 		}
 		
 		protected function handleDayClick(event:UIEvent):void 
@@ -135,12 +148,14 @@ package com.bumpslide.ui
 		protected function handleClickBack(event:MouseEvent):void {
 			displayDate.month--;
 			_displayDateChanged = true;
+			_monthChanged = true;
 			invalidate();
 		}
 		
 		protected function handleClickForward(event:MouseEvent):void {
 			displayDate.month++;
 			_displayDateChanged = true;
+			_monthChanged = true;
 			invalidate();	
 		}
 
@@ -167,6 +182,18 @@ package com.bumpslide.ui
 		public function set displayDate(displayDate:Date):void {
 			var orig_time:Number = _displayDate ? _displayDate.time : 0;
 			_displayDate = new Date(displayDate);
+			
+			if(orig_time!=_displayDate.time) {
+				_displayDateChanged = true;
+				
+				DateUtil.roundDown(_displayDate, Unit.MONTH);
+				if(orig_time!=_displayDate.time) {
+					_monthChanged = true;					
+				}
+				invalidate();
+			} 
+			
+			
 			DateUtil.roundDown(_displayDate, Unit.MONTH);
 			if(orig_time!=_displayDate.time) {
 				_displayDateChanged = true;
@@ -176,7 +203,12 @@ package com.bumpslide.ui
 	}
 }
 
+import com.bumpslide.ui.Box;
 import com.bumpslide.ui.Button;
+import com.bumpslide.ui.Label;
+import com.bumpslide.ui.skin.defaults.DefaultButtonSkin;
+import com.bumpslide.ui.skin.defaults.Style;
+import com.bumpslide.util.Align;
 
 
 class DayVO extends Object {
@@ -189,9 +221,23 @@ class DayVO extends Object {
 class DayRenderer extends Button 
 {
 
+	
+	
+	public function get background():Box {
+		if(skin) return (skin as DefaultButtonSkin).background as Box;
+		else return null;
+	}
+	
 	override protected function draw():void 
 	{
 		visible = (gridItemData!=null);
+				
 		super.draw();
+		
+		if(background) {
+			background.filters = [];
+			background.borderWidth = 1;
+			background.borderColor = Style.INPUT_FOCUS_BORDER;
+		}
 	}
 }

@@ -1,0 +1,91 @@
+package com.bumpslide.ui.skin.defaults 
+{
+	import com.bumpslide.ui.Box;
+	import com.bumpslide.ui.TextInput;
+	import flash.text.TextField;
+
+	import com.bumpslide.ui.Label;
+	import com.bumpslide.ui.skin.BasicSkin;
+
+	/**
+	 * Default Skin for TextInput Component
+	 *
+	 * @author David Knape
+	 * @version SVN: $Id: $
+	 */
+	public class DefaultTextInputSkin extends BasicSkin 
+	{
+
+		public var inputText:Label;
+		public var hintText:Label;
+		
+		// Skin parts (TextInput is just looking for the text fields)
+		public var input_txt:TextField;
+		public var hint_txt:TextField;
+
+		private var background:Box;
+		
+		
+		public function get hostComponent():TextInput {
+			return _hostComponent as TextInput;
+		}
+		
+		override protected function addChildren():void 
+		{
+			background = addChild( new Box( 0xffffff, 1,1,0,0,Style.BUTTON_CORNER_RADIUS,1,0xaaaaaa) ) as Box;
+			background.filters = [Style.BEVEL_FILTER_INSET ];
+			background.buttonMode = true;
+			
+			inputText = add( Label, {editable: true, maxLines: 1, selectable:true, padding: 3 } );
+			hintText = add( Label, {alpha:.5, maxLines: 1, padding: "0 3"});
+			
+			input_txt = inputText.textField;
+			hint_txt = hintText.textField;
+		}
+
+		
+		override public function renderSkin(skinState:String):void 
+		{
+			super.renderSkin(skinState);
+			
+			inputText.width = hostComponent.width;
+			hintText.width = hostComponent.width;
+			background.setSize( hostComponent.width, inputText.height );
+			
+			
+		}
+
+		public function _focused():void {
+			
+			// Should this logic be in the component?
+			hintText.visible = false;
+			inputText.visible = true;
+			
+			background.backgroundColor = Style.INPUT_FOCUS_BACKGROUND;
+			background.borderColor = Style.INPUT_FOCUS_BORDER;
+			background.filters = [ Style.BEVEL_FILTER_INSET, Style.FOCUS_FILTER ];
+		}
+		
+		public function _normal():void {
+			
+			// Should this logic be in the component?
+			hintText.visible = hostComponent.text==null || hostComponent.text.length==0;
+			inputText.visible = !hintText.visible;
+			
+			background.backgroundColor = Style.INPUT_BACKGROUND;
+			background.borderColor = Style.INPUT_BORDER;
+			background.filters = [Style.BEVEL_FILTER_INSET ];
+		}
+
+		
+		override protected function draw():void 
+		{			
+			inputText.width = hostComponent.width;
+			hintText.width = hostComponent.width;
+			
+			
+		}
+		
+		
+	}
+}

@@ -73,8 +73,8 @@ package com.bumpslide.ui
 		override protected function draw():void {	
 			log('draw '+height+','+width);		
 			// update border and fill color
-			border.color = borderColor;
-			fill.color = fillColor;
+			border.backgroundColor = borderColor;
+			fill.backgroundColor = fillColor;
 			
 			border.visible = (borderThickness>0);
 			 
