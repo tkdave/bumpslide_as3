@@ -22,7 +22,7 @@ package com.bumpslide.net
 		protected var _loaderContext:LoaderContext;
 
 		
-		public function LoaderRequest(loader:Loader, content_url:String, loader_context:LoaderContext, responder:IResponder = null)
+		public function LoaderRequest(loader:Loader, content_url:String, loader_context:LoaderContext=null, responder:IResponder = null)
 		{
 			_loader = loader;
 			_loaderContext = loader_context;
@@ -47,7 +47,7 @@ package com.bumpslide.net
 		override public function cancel():void
 		{
 			super.cancel();
-			doUnloadContent();
+			if(cancelled) doUnloadContent();
 		}
 
 		
@@ -108,5 +108,13 @@ package com.bumpslide.net
 		public function get loaderContext():LoaderContext {
 			return _loaderContext;
 		}
+	
+		
+		override protected function getResult():* {
+			return loader;
+		}
+		
+		
+
 	}
 }
