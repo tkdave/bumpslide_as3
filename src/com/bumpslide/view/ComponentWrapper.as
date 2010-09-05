@@ -1,8 +1,20 @@
+/**
+ * This code is part of the Bumpslide Library maintained by David Knape
+ * Fork me at http://github.com/tkdave/bumpslide_as3
+ * 
+ * Copyright (c) 2010 by Bumpslide, Inc. 
+ * http://www.bumpslide.com/
+ *
+ * This code is released under the open-source MIT license.
+ * See LICENSE.txt for full license terms.
+ * More info at http://www.opensource.org/licenses/mit-license.php
+ */
+
 package com.bumpslide.view 
 {
-	import com.bumpslide.tween.Fade;
+
+	import com.bumpslide.tween.FTween;
 	import com.bumpslide.ui.IResizable;
-	import com.bumpslide.view.BasicView;
 
 	import flash.display.DisplayObject;
 
@@ -44,21 +56,24 @@ package com.bumpslide.view
 		{
 			super.destroy();
 			destroyChild(content);
-			Fade.Cancel(this);
+			FTween.stopTweening( this );
+			//Fade.Cancel(this);
 		}
 
 		
 		override public function transitionIn():void 
 		{
 			super.transitionIn();
-			Fade.In(this, 0, .4, transitionInComplete);
+			//Fade.In(this, 0, .4, transitionInComplete);
+			FTween.fadeIn( this, 0, .15, transitionInComplete );
 		}		
 
 		
 		override public function transitionOut():void 
 		{			
 			super.transitionOut();	
-			Fade.Out(this, 0, .2, transitionOutComplete);
+			//Fade.Out(this, 0, .2, transitionOutComplete);
+			FTween.fadeOut( this, 0, .5, transitionOutComplete );
 		}
 	}
 }

@@ -1,4 +1,16 @@
-﻿/** * This code is part of the Bumpslide Library by David Knape * http://bumpslide.com/ *  * Copyright (c) 2006, 2007, 2008 by Bumpslide, Inc. *  * Released under the open-source MIT license. * http://www.opensource.org/licenses/mit-license.php * see LICENSE.txt for full license terms */ package com.bumpslide.util {
+﻿/**
+ * This code is part of the Bumpslide Library maintained by David Knape
+ * Fork me at http://github.com/tkdave/bumpslide_as3
+ * 
+ * Copyright (c) 2010 by Bumpslide, Inc. 
+ * http://www.bumpslide.com/
+ *
+ * This code is released under the open-source MIT license.
+ * See LICENSE.txt for full license terms.
+ * More info at http://www.opensource.org/licenses/mit-license.php
+ */
+
+package com.bumpslide.util {
 	/**	 * String Utility functions	 * 	 * @author David Knape	 */	public class StringUtil {
 		/**		 * Make text fit by cutting it off and adding ellipsis to the end		 */		static public function abbreviate( origStr:String, maxLength:Number = 50, moreIndicator:String = '...', splitChar:String = ' '):String {						if(origStr == null) return "";						if(origStr.length < maxLength) {				return origStr;			}					var str:String = '';			var n:int = 0;			var pieces:Array = origStr.split(splitChar);	
 			// split string into pieces			var charCount:int = pieces[n].length;			

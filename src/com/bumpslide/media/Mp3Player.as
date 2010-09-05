@@ -1,13 +1,15 @@
 ﻿/**
- * This code is part of the Bumpslide Library by David Knape
- * http://bumpslide.com/
+ * This code is part of the Bumpslide Library maintained by David Knape
+ * Fork me at http://github.com/tkdave/bumpslide_as3
  * 
- * Copyright (c) 2006, 2007, 2008 by Bumpslide, Inc.
- * 
- * Released under the open-source MIT license.
- * http://www.opensource.org/licenses/mit-license.php
- * see LICENSE.txt for full license terms
- */ 
+ * Copyright (c) 2010 by Bumpslide, Inc. 
+ * http://www.bumpslide.com/
+ *
+ * This code is released under the open-source MIT license.
+ * See LICENSE.txt for full license terms.
+ * More info at http://www.opensource.org/licenses/mit-license.php
+ */
+
 package com.bumpslide.media {
 	
 	import flash.events.Event;	import flash.events.EventDispatcher;	import flash.events.IOErrorEvent;	import flash.events.ProgressEvent;	import flash.events.SecurityErrorEvent;	import flash.events.TimerEvent;	import flash.media.ID3Info;	import flash.media.Sound;	import flash.media.SoundChannel;	import flash.media.SoundLoaderContext;	import flash.media.SoundMixer;	import flash.media.SoundTransform;	import flash.net.URLRequest;	import flash.utils.Timer;		import com.bumpslide.events.UIEvent;	import com.bumpslide.util.Delegate;	

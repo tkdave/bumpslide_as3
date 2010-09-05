@@ -10,17 +10,21 @@
  * More info at http://www.opensource.org/licenses/mit-license.php
  */
 
-package com.bumpslide.net {
-	/**
-	 * Like the mx.rpc.responder interface
-	 * 
-	 * Represents a pair of callback functions (result and fault) used to 
-	 * handle the results and/or errors coming from asynchronous calls  
-	 * 
+package com.bumpslide.data 
+{
+	
+	import com.bumpslide.net.IRequest;
+
+	/**
+	 * Lazy Loading Item Provider interface
+	 *
 	 * @author David Knape
 	 */
-	public interface IResponder {
-		function fault(info : Object) : void;
-		function result(data : Object) : void;
+	public interface ILazyItemProvider 
+	{
+		function getItems(start:int, length:int):IRequest;
+		
+		function getTotal():IRequest;
+		
 	}
 }

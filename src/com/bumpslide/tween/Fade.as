@@ -1,29 +1,29 @@
+/**
+ * This code is part of the Bumpslide Library maintained by David Knape
+ * Fork me at http://github.com/tkdave/bumpslide_as3
+ * 
+ * Copyright (c) 2010 by Bumpslide, Inc. 
+ * http://www.bumpslide.com/
+ *
+ * This code is released under the open-source MIT license.
+ * See LICENSE.txt for full license terms.
+ * More info at http://www.opensource.org/licenses/mit-license.php
+ */
+
 package com.bumpslide.tween 
 {
+
+	import com.greensock.TweenLite;
+	import com.greensock.easing.Quad;
+
 	import flash.display.DisplayObject;
-	import flash.utils.getDefinitionByName;
 
 	/**
 	 * FadeIn/FadeOut shortcuts using TweenLite
 	 * 
 	 * These are the functions that were in BaseClip.
 	 * They have been moved here to remove the dependencies 
-	 * on an external tweening engine. 
-	 * 
-	 * We have also made these functions use dynamically linked
-	 * references to TweenLite and the required easing equation.
-	 * 
-	 * Make sure you are using these else where by putting some 
-	 * code like this somewhere in your project:
-	 * 
-	 * <code>
-	 *   static private var useTweenLite:Boolean = InitTweenLite();
-	 *   private static function InitTweenLite():Boolean {
-	 *     // make sure we have TweenLite and Quad imported
-	 *     TweenLite.defaultEase = Quad.easeOut;
-	 *     return true;
-	 *   }
-	 * </code>
+	 * on an external tweening engine.
 	 *   
 	 * @author David Knape
 	 */
@@ -41,9 +41,7 @@ package com.bumpslide.tween
 				target.visible = true; 
 				target.alpha=0;
 			}
-			var tweenFunc:Function = getDefinitionByName('gs.TweenLite.to') as Function;
-			var easeFunc:Function = getDefinitionByName('gs.easing.Quad.easeOut') as Function;
-			tweenFunc.call( null, target, duration, { 'autoAlpha':1, ease:easeFunc, delay:delay, onComplete:onComplete, overwrite:2});         
+			TweenLite.to( target, duration, { '_autoAlpha':1, ease:Quad.easeOut, delay:delay, onComplete:onComplete, overwrite:2});
 		}
 		
 		/**
@@ -51,15 +49,14 @@ package com.bumpslide.tween
 		 */
 		static public function Out(target:DisplayObject, delay:Number=.1, duration:Number=.2, onComplete:Function=null) : void {
 			if (!target.visible) { target.alpha = 0; if(onComplete!=null) onComplete.call(null); return; }
-			var tweenFunc:Function = getDefinitionByName('gs.TweenLite.to') as Function;
-			var easeFunc:Function = getDefinitionByName('gs.easing.Quad.easeIn') as Function;
-			tweenFunc.call( null, target, duration, { 'autoAlpha':0, ease:easeFunc, delay:delay, onComplete:onComplete, overwrite:2});        
+			TweenLite.to( target, duration, { '_autoAlpha':0, ease:Quad.easeIn, delay:delay, onComplete:onComplete, overwrite:2});   
 		}
 		
 		static public function Cancel( target:DisplayObject ) : void {
-			var killFunc:Function = getDefinitionByName('gs.TweenLite.killTweensOf') as Function;
-			killFunc.call( null, target );
+			TweenLite.killTweensOf( target );
 		}
+		
+		
 		
 	}
 }

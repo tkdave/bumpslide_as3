@@ -1,14 +1,16 @@
 /**
- * This code is part of the Bumpslide Library by David Knape
- * http://bumpslide.com/
+ * This code is part of the Bumpslide Library maintained by David Knape
+ * Fork me at http://github.com/tkdave/bumpslide_as3
  * 
- * Copyright (c) 2006, 2007, 2008 by Bumpslide, Inc.
- * 
- * Released under the open-source MIT license.
- * http://www.opensource.org/licenses/mit-license.php
- * see LICENSE.txt for full license terms
+ * Copyright (c) 2010 by Bumpslide, Inc. 
+ * http://www.bumpslide.com/
+ *
+ * This code is released under the open-source MIT license.
+ * See LICENSE.txt for full license terms.
+ * More info at http://www.opensource.org/licenses/mit-license.php
  */
- package com.bumpslide.net {
+
+package com.bumpslide.net {
 	import com.bumpslide.data.Action;	import com.bumpslide.data.ActionQueue;	import com.bumpslide.util.Delegate;		import flash.display.Loader;	import flash.events.Event;	import flash.events.EventDispatcher;	import flash.net.URLRequest;	import flash.system.LoaderContext;	import flash.utils.Dictionary;	
 	/**
 	 * Prioritized loading queue for display object laoders

@@ -1,4 +1,16 @@
-﻿package com.bumpslide.net {	import flash.net.URLLoaderDataFormat;
+﻿/**
+ * This code is part of the Bumpslide Library maintained by David Knape
+ * Fork me at http://github.com/tkdave/bumpslide_as3
+ * 
+ * Copyright (c) 2010 by Bumpslide, Inc. 
+ * http://www.bumpslide.com/
+ *
+ * This code is released under the open-source MIT license.
+ * See LICENSE.txt for full license terms.
+ * More info at http://www.opensource.org/licenses/mit-license.php
+ */
+
+package com.bumpslide.net {	import flash.net.URLLoaderDataFormat;
 	import flash.errors.IOError;	import flash.events.Event;	import flash.events.HTTPStatusEvent;	import flash.events.IEventDispatcher;	import flash.events.IOErrorEvent;	import flash.events.ProgressEvent;	import flash.events.SecurityErrorEvent;	import flash.net.URLLoader;	import flash.net.URLRequest;	import flash.net.URLVariables;
 	[Event(name='progress',type='flash.events.ProgressEvent')]	//[Event(name='ioError',type='flash.events.IOErrorEvent')]	//[Event(name='securityError',type='flash.events.SecurityErrorEvent')]	[Event(name='httpStatus',type='flash.events.HTTPStatusEvent')]			/**	 * This class wraps a URLRequest and provides retry and timeout functionality.	 * 	 * It also implements a basic request interface (IRequest) that makes use of the 	 * IResponder interface.  This class also relays URLLoader progress and complete events.	 * 	 * @author David Knape	 */	public class HTTPRequest extends AbstractRequest {								// private		protected var _urlLoader:URLLoader;		protected var _urlRequest:URLRequest;		protected var _postData:URLVariables;
 		protected var _httpStatus:int;

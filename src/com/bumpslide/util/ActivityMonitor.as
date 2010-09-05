@@ -1,13 +1,15 @@
 /**
- * This code is part of the Bumpslide Library by David Knape
- * http://bumpslide.com/
+ * This code is part of the Bumpslide Library maintained by David Knape
+ * Fork me at http://github.com/tkdave/bumpslide_as3
  * 
- * Copyright (c) 2006, 2007, 2008 by Bumpslide, Inc.
- * 
- * Released under the open-source MIT license.
- * http://www.opensource.org/licenses/mit-license.php
- * see LICENSE.txt for full license terms
- */ 
+ * Copyright (c) 2010 by Bumpslide, Inc. 
+ * http://www.bumpslide.com/
+ *
+ * This code is released under the open-source MIT license.
+ * See LICENSE.txt for full license terms.
+ * More info at http://www.opensource.org/licenses/mit-license.php
+ */
+
 package com.bumpslide.util {
 	import flash.events.TimerEvent;	
 	import flash.events.Event;	
@@ -28,7 +30,7 @@ package com.bumpslide.util {
 		private var _timeoutSecs:uint;
 		private var _timer:Timer;
 		private var _stage:InteractiveObject;
-		private var debugEnabled:Boolean=false;
+		public var debugEnabled:Boolean=false;
 
 		function ActivityMonitor(stage:InteractiveObject, timeoutSeconds:uint = 90) {
 			_timeoutSecs = timeoutSeconds;
@@ -40,29 +42,23 @@ package com.bumpslide.util {
 		public function start():void {
 			debug('start');
 			_timer.start();
+			_stage.addEventListener(MouseEvent.MOUSE_UP, uiEventHandler);
 			_stage.addEventListener(MouseEvent.MOUSE_DOWN, uiEventHandler);
-			_stage.addEventListener(MouseEvent.MOUSE_MOVE, uiEventHandler);			_stage.addEventListener(KeyboardEvent.KEY_DOWN, uiEventHandler);
+			_stage.addEventListener(MouseEvent.MOUSE_MOVE, uiEventHandler);			_stage.addEventListener(KeyboardEvent.KEY_UP, uiEventHandler);
+			_stage.addEventListener(KeyboardEvent.KEY_DOWN, uiEventHandler);
 		}
 
 		public function stop():void {
 			debug('stop');
 			_timer.stop();
+			_stage.removeEventListener(MouseEvent.MOUSE_UP, uiEventHandler);
 			_stage.removeEventListener(MouseEvent.MOUSE_DOWN, uiEventHandler);			_stage.removeEventListener(MouseEvent.MOUSE_MOVE, uiEventHandler);
+			_stage.removeEventListener(KeyboardEvent.KEY_UP, uiEventHandler);
 			_stage.removeEventListener(KeyboardEvent.KEY_DOWN, uiEventHandler);
 		}
 
 		protected function uiEventHandler(e:Event = null):void {
-			switch(e.type) {
-				case MouseEvent.MOUSE_DOWN:
-					debug('noticed mouse click');
-					break;
-				case MouseEvent.MOUSE_MOVE:
-					debug('noticed mouse movement');
-					break;
-				case KeyboardEvent.KEY_DOWN:
-					debug('noticed key press');
-					break;
-			}
+			debug('noticed event: ' + e.type );
 			_timer.reset();
 			_timer.start();
 		}
