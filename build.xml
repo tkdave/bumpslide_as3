@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="BumpslideAS3" basedir="." default="compile-swc">
+<project name="BumpslideAS3" basedir="." default="usage">
 	
 	<!-- based on Jesse Freeman's FlashTDDProject Build File - http://github.com/theflashbum/FlashTDDProject -->
 
@@ -130,9 +130,11 @@
 		
 		<java jar="${FLEX_HOME}/lib/compc.jar" dir="${FLEX_HOME}/frameworks" fork="true" maxmemory="512m" failonerror="true">
 			<arg value="-output=${bin.loc}/${project.filename}.swc"/>
+			
 			<!-- the classes we want in the SWC -->
 			<arg value="-sp+=${main.src.loc}"/>
-			<arg value="-include-sources=${doc.src.loc}"/>
+			<arg value="-include-sources=${swc.src.loc}"/>
+			
 			<!-- the classes we don't want in the SWC -->
 			<arg value="-external-library-path+=${FLEX_HOME}/frameworks/libs"/>
 			<arg value="-external-library-path+=${lib.loc}"/>
