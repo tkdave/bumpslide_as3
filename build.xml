@@ -65,7 +65,7 @@
 		<mkdir dir="${report.loc}" />
 
 		<java jar="${FLEX_HOME}/lib/mxmlc.jar" dir="${FLEX_HOME}/frameworks" fork="true" failonerror="true">
-			<arg value="${test.src.loc}/Test.mxml" />
+			<arg value="${test.src.loc}/TestRunner.mxml" />
 			<arg value="-source-path=${main.src.loc}" />
 			
 			<arg value="-output=${bin.loc}/TestRunner.swf" />
@@ -117,6 +117,7 @@
 			<arg line="-window-title '${project.name}'" />
 			<arg line="-main-title '${project.name}'" />
 			<arg line="-footer '${project.name} - Documentation generated at: ${docgen.time}'" />
+			<arg value="+configname=air" />
 		</java>
 
 		<echo>[create-docs] ASDOC documentation generated successfully</echo>
