@@ -72,8 +72,8 @@ package com.bumpslide.util {
 			'http://farm3.static.flickr.com/2587/3894970025_797612bdd8_m.jpg',
 			'http://farm3.static.flickr.com/2605/3667880356_02c4707471_m.jpg',
 			'http://farm4.static.flickr.com/3312/3650717808_46054cc96a_m.jpg',
-			'http://farm4.static.flickr.com/3566/3496095474_6f60f8fd33_m.jpg',
-			'http://farm4.static.flickr.com/3347/3411775886_fcf0af1a42_m.jpg',
+			'http://farm4.static.flickr.com/3566/3496095474_6f60f8fd33_m.jpg', // 4 - Square (lighthouse)
+			'http://farm4.static.flickr.com/3347/3411775886_fcf0af1a42_m.jpg', // 5 - Horizontal (tilt shift cars)
 			'http://farm4.static.flickr.com/3646/3306656930_4187b98452_m.jpg',
 			'http://farm4.static.flickr.com/3344/3215868087_cce5882430_m.jpg',
 			'http://farm4.static.flickr.com/3012/3017515135_2b8ab4f3a4_m.jpg',

@@ -12,12 +12,12 @@
 
 package com.bumpslide.ui.skin.defaults
 {
+
 	import com.bumpslide.data.type.Padding;
 
 	import flash.filters.BevelFilter;
 	import flash.filters.BitmapFilter;
 	import flash.filters.DropShadowFilter;
-	import flash.filters.GlowFilter;
 	import flash.text.TextFormat;
 
 	/**
