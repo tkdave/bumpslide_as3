@@ -12,7 +12,7 @@ package com.bumpslide.ui
 	 * 
 	 * @author David Knape
 	 */
-	public class Container extends Box 
+	public class Container extends Component 
 	{		
 		protected var _layout:String = Direction.HORIZONTAL;
 
@@ -21,7 +21,7 @@ package com.bumpslide.ui
 		private var _backgroundVisible:Boolean = false;
 		
 		public function Container() {
-			backgroundAlpha = 0;
+			//backgroundAlpha = 0;
 			super();
 		}
 
@@ -50,9 +50,9 @@ package com.bumpslide.ui
 		}
 
 		
-		override protected function drawShape():void {
-			if(backgroundVisible) super.drawShape();
-		}
+//		override protected function drawShape():void {
+//			if(backgroundVisible) super.drawShape();
+//		}
 
 		protected function childFilter( item:*, index:int, array:Array ):Boolean {
 			return item!=boundsShape;
