@@ -43,20 +43,18 @@ package com.bumpslide.ui
 				
 		override protected function addChildren():void {
 			super.addChildren();
-			//updateDelay = 1;
-			_holder.cacheAsBitmap = false;		}
-				override public function destroy():void {
-			layout.destroy();
-			super.destroy();		}
-		override protected function initContent():void {			
-			super.initContent();
+			
 			layout = new GridLayout(_holder, gridItemRenderer);
 			layout.itemInitProperties = gridItemProps;
 			
 			// update when model (possibly length) changed
 			layout.addEventListener( Event.CHANGE, eventDelegate( invalidate ) );
-			//layout.debugEnabled = true;
-		}
+			layout.debugEnabled = logEnabled;
+			
+			_holder.cacheAsBitmap = false;		}
+				override public function destroy():void {
+			layout.destroy();
+			super.destroy();		}
 
 		override protected function initScrollTarget():void {
 			scrollbar.scrollTarget = layout;			}

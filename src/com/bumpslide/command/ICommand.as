@@ -22,7 +22,7 @@ package com.bumpslide.command {
 	public interface ICommand extends IEventDispatcher {
 		
 		 // run the command
-		 function execute( event:CommandEvent) : void;
+		 function execute( event:CommandEvent=null ) : void;
 		 
 		 // cancels pending activity (for asynchronous commands)
 		 function cancel() : void;

@@ -12,11 +12,11 @@
 
 package com.bumpslide.ui.skin.defaults 
 {
+
 	import com.bumpslide.ui.Box;
 	import com.bumpslide.ui.Button;
 	import com.bumpslide.ui.Label;
 	import com.bumpslide.ui.skin.BasicSkin;
-	import com.bumpslide.util.Align;
 
 	/**
 	 * Programmatic button skin with a bunch of nice label placement logic.
@@ -50,7 +50,9 @@ package com.bumpslide.ui.skin.defaults
 		{
 			// call skin state functions (ex: '_over', '_down', '_selected')
 			super.renderSkin(skinState);
-			
+		}
+		
+		override protected function draw():void {
 			if(hostComponent == null) return;
 			
 			// If button has padding specified, apply it to label
@@ -59,6 +61,7 @@ package com.bumpslide.ui.skin.defaults
 			}
 			
 			if(hostComponent.explicitWidth) {
+				labelDisplay.maxLines = 1;
 				labelDisplay.width = hostComponent.width;
 			}						
 			
@@ -73,14 +76,21 @@ package com.bumpslide.ui.skin.defaults
 				// If button has width explicitly set,
 				// use that to size the label and background width
 				if(hostComponent.explicitWidth) {
+					labelDisplay.width = hostComponent.width;
+					labelDisplay.maxLines = 1;
+					labelDisplay.x = 0;
+						
 					backgroundWidth = hostComponent.width;
-					if(hostComponent.centerLabel) {
-						labelDisplay.width = 0;
-						Align.center( labelDisplay, hostComponent.width );
-					} else {
-						labelDisplay.width = hostComponent.width;
-						labelDisplay.x = 0;
-					}
+					
+					//if(hostComponent.centerLabel) {
+						//labelDisplay.width = 0;
+					//	Align.center( labelDisplay, hostComponent.width, labelDisplay.actualWidth );
+				//	}
+//					 else {
+//						labelDisplay.width = hostComponent.width;
+//						labelDisplay.maxLines = 1;
+//						labelDisplay.x = 0;
+//					}
 				} else {
 					// otherwidth, just make the background as wide as the label (with padding)
 					backgroundWidth = labelDisplay.actualWidth;
@@ -90,7 +100,7 @@ package com.bumpslide.ui.skin.defaults
 				// use that size the label and background height
 				if(hostComponent.explicitHeight) {
 					backgroundHeight = hostComponent.height;
-					Align.middle(labelDisplay, hostComponent.height, labelDisplay.height);
+					//Align.middle(labelDisplay, hostComponent.height, labelDisplay.height);
 				} else {
 					// otherwidth, just make the background as tall as the label (with padding)
 					backgroundHeight = labelDisplay.height;

@@ -14,9 +14,7 @@ package com.bumpslide.ui
 
 	import com.bumpslide.util.Delegate;
 
-	import flash.debugger.enterDebugger;
 	import flash.display.MovieClip;
-	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.geom.Rectangle;
 	import flash.text.TextField;
@@ -93,7 +91,7 @@ package com.bumpslide.ui
 		}
 
 
-		private function handleStageRender( e:Event ):void
+		protected function handleStageRender( e:Event ):void
 		{
 			if(stage)
 				stage.removeEventListener( Event.RENDER, handleStageRender );

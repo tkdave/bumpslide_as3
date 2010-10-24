@@ -29,8 +29,7 @@ package com.bumpslide.net {
 
 		public var file:File;
 		private var _stream:FileStream;
-		private var _bytes:ByteArray;
-
+		
 		public function FileRequest(file:File, responder:IResponder = null) {
 			this.file = file;
 			super(responder);

@@ -70,8 +70,8 @@ package com.bumpslide.view
 		 */
 		override protected function draw():void {			
 			if(hasChanged(VALID_VIEW)) {	
-				validate(VALID_VIEW);
 				updateView();
+				validate(VALID_VIEW);
 			}
 			
 			if(hasChanged(VALID_SIZE)) {
@@ -86,13 +86,28 @@ package com.bumpslide.view
 		 * transition out old page and load the next one
 		 */
 		protected function updateView():void {
+			
+			
+//			if(currentView.viewState == ViewState.TRANSITIONING_OUT) {
+//				
+//				// We interrupted a transition out
+//				trace('interrupt');
+//				//removeView( currentView );
+//			}
+			
+			// If we have old views still hanging around, remove them now, including current view
+			if(_oldViews.length) {
+				// remove stale views, including current views that happen to be still transitioning out
+				removeOldViews( true );				
+			}
 				
-			if(_currentView != null) {
-					
+			if(currentView != null) {
+				
 				// instead of killing the current view, move a reference
 				// to a stack of old views, so we can add new views on top
 				// and allow for crossfades, and things of that sort
 				_oldViews.push(currentView);
+				
 				log('updatePage() - transitioning out current view ' + currentView );
 				currentView.transitionOut();
 				//currentView = null;
@@ -130,6 +145,7 @@ package com.bumpslide.view
 			initView();
 						
 			if(currentView != null) {
+								
 				log('addNewView() created ' + currentView);				
 				currentView.addEventListener(ViewChangeEvent.TRANSITION_OUT_COMPLETE, handleTransitionOutComplete, false, 0, true);
 				currentView.addEventListener(ViewChangeEvent.TRANSITION_IN_COMPLETE, handleTransitionInComplete, false, 0, true);
@@ -143,12 +159,13 @@ package com.bumpslide.view
 		/**
 		 * Remove all the old views
 		 */
-		protected function removeOldViews():void {
+		protected function removeOldViews( including_current_view:Boolean = false ):void {
+			
 			while( _oldViews.length ) {
 				var view:IView = _oldViews.pop();
-				log(' - removing ' + view );
-				if(view is DisplayObject) destroyChild( view as DisplayObject );
-				view.removeEventListener(ViewChangeEvent.TRANSITION_OUT_COMPLETE, handleTransitionOutComplete);				view.removeEventListener(ViewChangeEvent.TRANSITION_IN_COMPLETE, handleTransitionInComplete);
+				if(including_current_view || view!=currentView) {
+					removeView( view );
+				}
 			}
 			_oldViews = new Array();
 			
@@ -159,6 +176,16 @@ package com.bumpslide.view
 			} catch (e:*) {}
 		}
 
+		protected function removeView( view:IView ):void {
+			
+			if(view == _currentView) _currentView = null;
+			
+			log(' - removing ' + view );
+			if(view is DisplayObject) destroyChild( view as DisplayObject );
+			view.removeEventListener(ViewChangeEvent.TRANSITION_OUT_COMPLETE, handleTransitionOutComplete);
+			view.removeEventListener(ViewChangeEvent.TRANSITION_IN_COMPLETE, handleTransitionInComplete);
+		}
+		
 		/**
 		 * The current view
 		 */
@@ -193,8 +220,10 @@ package com.bumpslide.view
 		 * notify transition out complete
 		 */
 		private function handleChildTransitionOutComplete(event:ViewChangeEvent):void {
-			currentView.removeEventListener(ViewChangeEvent.TRANSITION_OUT_COMPLETE, handleChildTransitionOutComplete);
-			super.transitionOutComplete();
+			if(event.target==currentView) {
+				currentView.removeEventListener(ViewChangeEvent.TRANSITION_OUT_COMPLETE, handleChildTransitionOutComplete);
+				super.transitionOutComplete();
+			}
 		}
 	}
 }

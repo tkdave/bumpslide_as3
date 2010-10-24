@@ -74,6 +74,7 @@
 
 			<!-- Include classes from SWCs in this folder, but only the ones we use. -->
 			<arg value="-library-path+=${lib.loc}" />
+			<arg value="+configname=air" />
 
 			<!-- So true. -->
 			<arg value="-incremental=true" />
@@ -82,7 +83,7 @@
 		</java>
 
 		<!-- Execute TestRunner.swf as FlexUnit tests and publish reports -->
-		<flexunit swf="bin/TestRunner.swf" toDir="${report.loc}" haltonfailure="false" verbose="true" localTrusted="true" failureproperty="flexunit.failed" />
+		<flexunit swf="bin/TestRunner.swf" toDir="${report.loc}" haltonfailure="false" verbose="true" player="air" localTrusted="true" failureproperty="flexunit.failed" />
 		<!-- Generate readable JUnit-style reports -->
 		<junitreport todir="${report.loc}">
 			<fileset dir="${report.loc}">

@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Application  xmlns:mx="http://www.adobe.com/2006/mxml"
-				 xmlns:fu="http://www.adobe.com/2009/flexUnitUIRunner"
-				 xmlns:flexunit="org.flexunit.flexui.*"
-				 creationComplete="onCreationComplete()"
-				 width="148" height="148" paddingTop="0"
-				 backgroundColor="#320401" horizontalScrollPolicy="off" verticalScrollPolicy="off">
-	<mx:Script>
+<ui:Application  xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:ui="com.bumpslide.ui.*"
+				 creationComplete="onCreationComplete()">
+	<fx:Script>
 		<![CDATA[
 			import org.flexunit.internals.TraceListener;
 			import org.flexunit.listeners.CIListener;
@@ -22,6 +18,6 @@
 				core.run(BumpslideTestSuite);
 			}
 		]]>
-	</mx:Script>
-	<mx:Label text="Running Unit Tests..." horizontalCenter="0" verticalCenter="0"/>
-</mx:Application>
+	</fx:Script>
+	<ui:Label text="Running Unit Tests..." alignH="center" alignV="middle"/>
+</ui:Application>

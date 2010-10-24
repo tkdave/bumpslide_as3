@@ -45,8 +45,8 @@ package com.bumpslide.command {
 		
 		protected var _callback:IResponder;		
 		
-		public function execute(event:CommandEvent):void {
-			debug('execute() eventData=' + event.data );
+		public function execute(event:CommandEvent=null):void {
+			debug('execute() ' + (event ? 'event.data=' + event.data : '' ));
 			callback = event;
 			notifyComplete();
 		}

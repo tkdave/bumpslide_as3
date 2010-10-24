@@ -162,13 +162,13 @@ package com.bumpslide.util
 				}
 			}
 			if(img == null || img.width == 0 || img.height == 0)
-				return null;
+				return new BitmapData(1,1,true,0x0000000);
 
 			var w:Number;
 			var h:Number;
 
 			// support flex bitmaps
-			if(img['measuredHeight']) {
+			if(isFlexAsset(img)) {
 				w = img['measuredWidth'];
 				h = img['measuredHeight'];
 			} else {

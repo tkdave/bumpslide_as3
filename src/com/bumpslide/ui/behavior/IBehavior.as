@@ -12,6 +12,7 @@
 
 package com.bumpslide.ui.behavior 
 {
+	import flash.display.InteractiveObject;
 
 	/**
 	 * IBehavior
@@ -21,6 +22,7 @@ package com.bumpslide.ui.behavior
 	 */
 	public interface IBehavior 
 	{
+		
 		
 		
 	}

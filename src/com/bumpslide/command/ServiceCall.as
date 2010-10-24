@@ -31,8 +31,8 @@ package com.bumpslide.command {
 
 		protected var rpc:IRequest;
 		
-		override public function execute(event:CommandEvent):void {
-			callback = event;	
+		override public function execute(event:CommandEvent=null):void {
+			callback = event;
 			var url:String = event.data as String;  // event.data is the URL
 			rpc = new HTTPRequest( new URLRequest( url ), this );
 			rpc.load();

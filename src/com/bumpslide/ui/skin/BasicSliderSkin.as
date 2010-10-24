@@ -22,7 +22,6 @@ package com.bumpslide.ui.skin
 	 * Movie Clip SliderSkin
 	 *
 	 * @author David Knape
-	 * @version SVN: $Id: $
 	 */
 	public class BasicSliderSkin extends BasicSkin implements ISkin 
 	{	
@@ -54,6 +53,12 @@ package com.bumpslide.ui.skin
 		{
 			if(hostComponent==null) return;
 						
+			updateNow();
+		}
+		
+		
+		override protected function draw():void
+		{
 			drawBack();
 			drawHandle();
 		}
@@ -63,6 +68,7 @@ package com.bumpslide.ui.skin
 		 */
 		protected function drawBack():void 
 		{
+			
 			if(background == null) return;
 			
 			if(background is IResizable) { 

@@ -80,7 +80,7 @@ package com.bumpslide.data
 			_complete = false;
 			run();
 		}
-
+		
 		
 		override public function clear():void 
 		{
@@ -127,7 +127,7 @@ package com.bumpslide.data
 		
 		public function doRun():void 
 		{			
-			debug('doRun');
+			debug('doRun (paused='+paused+')');
 			
 			Delegate.cancel(_runDelay);
 			

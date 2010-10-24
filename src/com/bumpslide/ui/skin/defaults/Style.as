@@ -48,7 +48,7 @@ package com.bumpslide.ui.skin.defaults
 		public static var INPUT_TEXT_HINT:uint = 0xAAAAAA;
 		
 		// Default Label Text Format
-		public static var LABEL_TEXT_FORMAT:TextFormat = new TextFormat('Arial', 10, 0x333333);
+		public static var LABEL_TEXT_FORMAT:TextFormat = new TextFormat('Arial', 11, 0x333333, true);
 		public static var LABEL_FONT_EMBEDDED:Boolean = false;
 		
 		// Some Filters
@@ -58,9 +58,9 @@ package com.bumpslide.ui.skin.defaults
 		public static var DROPSHADOW_FILTER:BitmapFilter = new DropShadowFilter(2, 45, 0, .3, 6, 6, 1, 2);
 
 		public static var SCROLLBAR_GAP:Number = 4;
-		public static var SCROLLBAR_WIDTH:Number = 16;
+		public static var SCROLLBAR_WIDTH:Number = 20;
 		
-		public static var SLIDER_BACKGROUND_PADDING:Padding=new Padding( 5, 0); // Slider Track
+		public static var SLIDER_BACKGROUND_PADDING:Padding=new Padding( 0, 0); // Slider Track
 
 	
 	}

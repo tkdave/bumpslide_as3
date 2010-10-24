@@ -19,9 +19,10 @@ package com.bumpslide.ui
 		protected var _spacing:Number = 10;
 
 		private var _backgroundVisible:Boolean = false;
-		
-		public function Container() {
-			//backgroundAlpha = 0;
+
+		public function Container( layout:String = 'horizontal' )
+		{
+			this.layout = layout;
 			super();
 		}
 
@@ -33,7 +34,8 @@ package com.bumpslide.ui
 			
 			addEventListener( Event.ADDED, handleChildAddedOrRemoved );
 			addEventListener( Event.REMOVED, handleChildAddedOrRemoved );
-			addEventListener( Component.EVENT_DRAW, handleRedraw );
+			//addEventListener( Component.EVENT_DRAW, handleRedraw );
+			addEventListener( Component.EVENT_SIZE_CHANGED, handleChildSizeChange );
 			
 			callLater( 100, invalidate );	
 		}
@@ -45,8 +47,13 @@ package com.bumpslide.ui
 		}
 
 		
-		private function handleRedraw(event:UIEvent):void {
-			if(event.target.parent==this) updateNow();
+		private function handleChildSizeChange(event:UIEvent):void {
+			if(event.target.parent==this) {
+				//trace('[Container] handle child size change', event.target);
+				event.stopPropagation();
+				invalidate(VALID_SIZE);
+				updateNow();
+			}
 		}
 
 		

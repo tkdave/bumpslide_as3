@@ -199,6 +199,9 @@ package com.bumpslide.data
 			* get the ItemPendingError for this page
 			*/
 			
+			// David's note: Are you kidding me?  The error is the callback?
+			// I safely ignore all this nonsense now, and I believe this 
+			// is no longer relevant to either Spark or Bumpslide list rendering engines
 			var itemPendingError : ItemPendingError = getItemPendingError( page_num );
 			var responders : Array = itemPendingError.responders;
 			if(responders)

@@ -37,6 +37,8 @@ package com.bumpslide.ui {
 			while( n<1 ) {		
 				var p1:Point = Point.interpolate( to, from, n );
 				n+=lStep;
+				// but don't draw past the desired end point
+				if(n>1.0) n=1.0;
 				var p2:Point = Point.interpolate( to, from, n );
 				n+=gStep;
 				graphics.moveTo( p1.x, p1.y );
@@ -45,7 +47,7 @@ package com.bumpslide.ui {
 		} 
 		
 		/**
-		 * Draws a dotted line using draging API circles for each dot
+		 * Draws a dotted line using drawing API circles for each dot
 		 * 
 		 * Use graphics.beginFill to determine color
 		 */

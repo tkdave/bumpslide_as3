@@ -18,7 +18,6 @@ package com.bumpslide.ui.skin
 	 * MovieClipSliderSkin
 	 *
 	 * @author David Knape
-	 * @version SVN: $Id: $
 	 */
 	public class MovieClipSliderSkin extends BasicSliderSkin 
 	{
@@ -45,10 +44,12 @@ package com.bumpslide.ui.skin
 		
 		override protected function drawBack():void 
 		{
-			if(hostComponent.isVertical) {
-				background.height = hostComponent.height;
-			} else {
-				background.width = hostComponent.width;
+			if(background) {
+				if(hostComponent.isVertical) {
+					background.height = height;
+				} else {
+					background.width = width;
+				}
 			}
 		}
 	}

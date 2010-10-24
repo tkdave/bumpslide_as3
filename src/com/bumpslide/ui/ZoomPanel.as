@@ -30,6 +30,7 @@ package com.bumpslide.ui {
 
 		override protected function addChildren():void {
 			super.addChildren();
+			_holder.scrollRect = null;
 			delayUpdate = false;
 			addEventListener( MouseEvent.MOUSE_WHEEL, handleMouseWheel);
 		}
@@ -38,11 +39,6 @@ package com.bumpslide.ui {
 			var n:Number = Math.round( event.delta / 2 ); // tame that bitch	
 			if(n>0) while(n--) zoomIn();
 			else while(n++) zoomOut();
-		}
-
-		override protected function initContent():void {
-			super.initContent();
-			_holder.scrollRect = null;
 		}
 		
 		override protected function setContentSize(w:Number, h:Number):void {	
