@@ -10,10 +10,12 @@
  * More info at http://www.opensource.org/licenses/mit-license.php
  */
 
-package com.bumpslide.view {
-	import com.bumpslide.view.IView;
+package com.bumpslide.view
+{
+
+	import com.bumpslide.events.ViewChangeEvent;
+	import com.bumpslide.tween.FTween;
 	import com.bumpslide.ui.Component;
-	import com.bumpslide.events.ViewChangeEvent;	
 	
 	/**
 	 * Abstract Transitionable View
@@ -31,11 +33,25 @@ package com.bumpslide.view {
 		public function transitionIn():void {
 			_viewState = ViewState.TRANSITIONING_IN;
 			dispatchEvent( new ViewChangeEvent( ViewChangeEvent.TRANSITION_IN ) );
-		}		
+			doTransitionIn();
+		}
+
+
+		protected function doTransitionIn():void
+		{
+			FTween.fadeIn( this, 0, .2, transitionInComplete );
+		}
 		
 		public function transitionOut():void {
 			_viewState = ViewState.TRANSITIONING_OUT;			
 			dispatchEvent( new ViewChangeEvent( ViewChangeEvent.TRANSITION_OUT ) );
+			doTransitionOut();
+		}
+
+
+		protected function doTransitionOut():void
+		{
+			FTween.fadeOut( this, 0, .5, transitionOutComplete );
 		}
 		
 		protected function transitionOutComplete() : void {
@@ -54,6 +70,13 @@ package com.bumpslide.view {
 		public function get viewState():String {
 			return _viewState;
 		}
+		
+		
+		override public function destroy():void
+		{
+			super.destroy();
+			FTween.stopTweening(this);
+		}
 	}
 }
 
@@ -64,16 +87,14 @@ package com.bumpslide.view {
 //	/**
 //	 * Example View Implementation
 //	 */
-//	public class AppView extends AbstractView {
+//	public class AppView extends BasicView {
 //		
-//		override public function transitionIn():void {
+//		override public function doTransitionIn():void {
 //			FTween.fadeIn( this, 0, .2, transitionInComplete );
-//			super.transitionIn();
 //		}		
 //		
-//		override public function transitionOut():void {	
+//		override public function doTransitionOut():void {	
 //			FTween.fadeOut( this, 0, .5, transitionOutComplete );
-//			super.transitionOut();
 //		}
 //	}
 //}

@@ -83,7 +83,7 @@ package com.bumpslide.command {	import com.bumpslide.util.ObjectUtil;
 		 */
 		public function set commands( cmds:Array ):void {
 			for each ( var cmd:* in cmds ) {
-				trace('adding ' + cmd );
+				//trace('adding ' + cmd );
 				add( cmd );
 			}
 		}	}}

@@ -13,6 +13,7 @@
 package com.bumpslide.ui.skin 
 {
 
+	import com.bumpslide.ui.Component;
 	import com.bumpslide.ui.IResizable;
 	import com.bumpslide.util.Delegate;
 
@@ -31,6 +32,13 @@ package com.bumpslide.ui.skin
 
 		protected var _host:ISkinnable;
 
+		public function MovieClipSkin()
+		{
+			super();
+			stop();
+		}
+		
+		
 		
 		/**
 		 * When state changes, go to a new frame

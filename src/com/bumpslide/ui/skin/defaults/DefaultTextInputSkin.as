@@ -23,9 +23,8 @@ package com.bumpslide.ui.skin.defaults
 	 * Default Skin for TextInput Component
 	 *
 	 * @author David Knape
-	 * @version SVN: $Id: $
 	 */
-	public class DefaultTextInputSkin extends BasicSkin 
+	dynamic public class DefaultTextInputSkin extends BasicSkin 
 	{
 
 		public var inputText:Label;
@@ -44,8 +43,13 @@ package com.bumpslide.ui.skin.defaults
 		
 		override protected function addChildren():void 
 		{
-			background = addChild( new Box( 0xffffff, 1,1,0,0,Style.BUTTON_CORNER_RADIUS,1,0xaaaaaa) ) as Box;
-			background.filters = [Style.BEVEL_FILTER_INSET ];
+			if(this['_background']==null) {
+				background = addChild( new Box( 0xffffff, 1,1,0,0,Style.BUTTON_CORNER_RADIUS,1,0xaaaaaa) ) as Box;
+				background.filters = [Style.BEVEL_FILTER_INSET ];
+				
+			} else {
+				background = this['_background'];
+			}
 			background.buttonMode = true;
 			
 			inputText = add( Label, {editable: true, maxLines: 1, selectable:true, padding: 3 } );
@@ -69,7 +73,7 @@ package com.bumpslide.ui.skin.defaults
 
 		public function _focused():void {
 			
-			// Should this logic be in the component?
+			// Should this logic be in the component?  yes...
 			hintText.visible = false;
 			inputText.visible = true;
 			

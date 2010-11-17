@@ -128,6 +128,23 @@ package com.bumpslide.util
 			img.cacheAsBitmap = true;
 			img.scrollRect = scroll_rect;
 		}
+		
+		
+		/**
+		 * Remove any crop or scale performed by this class
+		 */
+		static public function reset( img:DisplayObject ):void {
+			
+			if(img is Loader) {
+				try {
+					img = (img as Loader).content;
+				} catch (error:Error) {
+				}
+			}
+			img.scrollRect = null;
+			img.scaleX = img.scaleY = 1;
+			img.cacheAsBitmap = false;		
+		}
 
 
 		static public function getSize( img:DisplayObject ) : Rectangle

@@ -91,6 +91,7 @@ package com.bumpslide.util {
         /**
          * Constrained stage width
          */
+        [Bindable(name='resize')]
         public function get width () : Number {
             return _width;
         }
@@ -98,6 +99,7 @@ package com.bumpslide.util {
         /**
          * Constrained stage height
          */
+        [Bindable(name='resize')]
         public function get height () : Number {
             return _height;
         }

@@ -27,11 +27,13 @@ package com.bumpslide.data {
 		private var _action:Function;
 		private var _priority:int;
 		private var _creationIndex:int;
+		private var _name:String="";
 		
-		public function Action(action:Function, priority:int=-1) {
+		public function Action(action:Function, priority:int=-1, name:String="") {
 			_priority = priority;
 			_action = action;
 			_creationIndex = lastNum++;
+			_name = name;
 		}
 		
 		public function get action():Function {
@@ -55,11 +57,21 @@ package com.bumpslide.data {
 		}
 		
 		public function toString() : String {
-			return "[Action "+_creationIndex + "]";
+			return "[Action "+_creationIndex + " "+name+"]";
 		}
 		
 		public function get creationIndex():int {
 			return _creationIndex;
+		}
+
+
+		public function get name():String {
+			return _name;
+		}
+
+
+		public function set name( name:String ):void {
+			_name = name;
 		}
 	}
 }

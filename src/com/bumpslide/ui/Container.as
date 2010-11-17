@@ -70,6 +70,7 @@ package com.bumpslide.ui
 			var kids:Array = children.filter( childFilter );
 			
 			for each ( var child:DisplayObject in kids ) {
+				child[ layout == Direction.HORIZONTAL ? 'y' : 'x' ] = 0;
 				child.x = child.y = 0;
 			}
 			
@@ -91,9 +92,7 @@ package com.bumpslide.ui
 		}		
 		
 		/**
-		 * Layout direction
-		 * 
-		 * 
+		 * Layout direction ('horizontal' or 'vertical')
 		 */
 		[Inspectable(type="String",enumeration="horizontal,vertical")]
 		public function set layout(layout:String):void {
@@ -105,6 +104,7 @@ package com.bumpslide.ui
 			return _spacing;
 		}		
 		
+		[Inspectable]
 		public function set spacing(spacing:Number):void {
 			_spacing = spacing;
 			invalidate();

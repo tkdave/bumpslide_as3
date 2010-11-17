@@ -49,6 +49,9 @@ package com.bumpslide.view
 
 		// holder for old views
 		protected var _oldViews:Array;
+		
+		// whether or not to call 'destroy' on views when they are removed
+		public var destroyOldViews:Boolean = true;
 
 		/**
 		 * Constructor
@@ -71,15 +74,22 @@ package com.bumpslide.view
 		override protected function draw():void {			
 			if(hasChanged(VALID_VIEW)) {	
 				updateView();
-				validate(VALID_VIEW);
 			}
 			
-			if(hasChanged(VALID_SIZE)) {
-				if(currentView is IResizable) {
-					( currentView as IResizable).setSize( width, height );
-				}
+			if(hasChanged(VALID_SIZE) || hasChanged(VALID_VIEW)) {
+				sizeContent();
 			}
+			
+			validate(VALID_VIEW);
+			validate(VALID_SIZE);
+			
 			super.draw();
+		}
+		
+		protected function sizeContent():void {
+			if(currentView is IResizable) {
+				( currentView as IResizable).setSize( width, height );
+			}
 		}
 
 		/**
@@ -115,6 +125,7 @@ package com.bumpslide.view
 				log('updatePage() - currentView is null. Adding new view now...');
 				addNewView();
 			}
+			
 		}
 
 
@@ -181,7 +192,7 @@ package com.bumpslide.view
 			if(view == _currentView) _currentView = null;
 			
 			log(' - removing ' + view );
-			if(view is DisplayObject) destroyChild( view as DisplayObject );
+			if(view is DisplayObject) destroyChild( view as DisplayObject, destroyOldViews );
 			view.removeEventListener(ViewChangeEvent.TRANSITION_OUT_COMPLETE, handleTransitionOutComplete);
 			view.removeEventListener(ViewChangeEvent.TRANSITION_IN_COMPLETE, handleTransitionInComplete);
 		}

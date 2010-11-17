@@ -87,7 +87,7 @@ package com.bumpslide.ui
 			}
 			
 			// list for component redraw and invalidate size
-			addEventListener(Component.EVENT_DRAW, function (event:UIEvent):void {
+			addEventListener( Component.EVENT_SIZE_CHANGED, function( event:UIEvent ):void {
 				invalidateSize();
 			});
 			
@@ -134,5 +134,7 @@ package com.bumpslide.ui
 				content.height = unscaledHeight;
 			}
 		}
+		
+		
 	}
 }

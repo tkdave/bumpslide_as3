@@ -31,6 +31,9 @@ package com.bumpslide.util {
 		private var _timer:Timer;
 		private var _stage:InteractiveObject;
 		public var debugEnabled:Boolean=false;
+		
+		public var timeStart:Number;
+		public var timeEnd:Number;
 
 		function ActivityMonitor(stage:InteractiveObject, timeoutSeconds:uint = 90) {
 			_timeoutSecs = timeoutSeconds;
@@ -41,6 +44,7 @@ package com.bumpslide.util {
 		
 		public function start():void {
 			debug('start');
+			timeStart = new Date().time;
 			_timer.start();
 			_stage.addEventListener(MouseEvent.MOUSE_UP, uiEventHandler);
 			_stage.addEventListener(MouseEvent.MOUSE_DOWN, uiEventHandler);
@@ -61,13 +65,29 @@ package com.bumpslide.util {
 			debug('noticed event: ' + e.type );
 			_timer.reset();
 			_timer.start();
+		
+			// update session end time every time 	
+			timeEnd = new Date().time;
 		}
+		
+		
 
 		private function timeoutHandler(event:TimerEvent):void {
 			debug('User has been idle for '+_timeoutSecs+' seconds.');
 			_timer.stop();
 			_timer.reset();
+			
+			// use timeout as final ending time
+			//timeEnd = new Date().time;
+			
 			dispatchEvent(new Event(EVENT_IDLE));
+		}
+		
+		/**
+		 * Time spent interacting with the display in milliseconds
+		 */
+		public function getTimeSpent():Number {
+			return timeEnd - timeStart;
 		}
 		
 		private function debug(s:String) : void  {

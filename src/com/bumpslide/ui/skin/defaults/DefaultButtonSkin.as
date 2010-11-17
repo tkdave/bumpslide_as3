@@ -39,8 +39,10 @@ package com.bumpslide.ui.skin.defaults
 		 */		
 		override protected function addChildren():void 
 		{
-			background = add(Box, { cornerRadius: Style.BUTTON_CORNER_RADIUS, filters: [Style.BEVEL_FILTER] });
+			background = add(Box, { width: width, height:height, cornerRadius: Style.BUTTON_CORNER_RADIUS, filters: [Style.BEVEL_FILTER] });
 			labelDisplay = add(Label);
+			
+			background.visible = false;
 		}
 		
 		/**
@@ -118,6 +120,7 @@ package com.bumpslide.ui.skin.defaults
 				// set the background to the size of the component
 				background.setSize(hostComponent.width, hostComponent.height);
 			}
+			background.visible = true;
 		} 		
 
 		

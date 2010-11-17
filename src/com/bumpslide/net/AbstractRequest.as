@@ -286,7 +286,9 @@ package com.bumpslide.net
 		}
 
 
-		/**		 * Number of times to retry request if it is timing out		 * 		 * This includes the initial attempt. A request with a retryCount of 3 will be attempted 3 times.		 */
+		/**		 * Number of times to retry request if it is timing out		 * 		 * This includes the initial attempt. A request with a retryCount of 3 will be attempted 3 times.
+		 * 
+		 * A request with retry count of 1 will only be requested once.		 */
 		public function get retryCount():uint {
 			return _retryCount;
 		}

@@ -70,7 +70,7 @@ package com.bumpslide.command
 		{
 			if(faultHandler != null) {
 				try {
-					faultHandler.call(null, data);
+					faultHandler.call(null, info);
 				} catch (e:ArgumentError) {
 					faultHandler.call(null);
 				}

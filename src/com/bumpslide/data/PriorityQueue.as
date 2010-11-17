@@ -46,7 +46,7 @@ package com.bumpslide.data {
 		public function enqueue(obj:IPrioritizable):void
 		{
 			_q.push( obj );
-			_q.sortOn( ['priority','creationIndex'], [Array.NUMERIC, Array.NUMERIC]);
+			_q.sortOn( ['priority','creationIndex'], [Array.DESCENDING|Array.NUMERIC, Array.NUMERIC]);
 		}
 
 		/**
