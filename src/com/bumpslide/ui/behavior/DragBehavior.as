@@ -86,7 +86,7 @@ package com.bumpslide.ui.behavior
 		 * removes event listeners, thus removing behavior
 		 */
 		public function remove():void {
-			stopDragging();
+			stopDragging( null, false );
 			dragTarget.removeEventListener(MouseEvent.MOUSE_DOWN, handleMouseDown);
 			delete _targets[dragTarget];
 		}
@@ -168,14 +168,14 @@ package com.bumpslide.ui.behavior
 		}
 
 		
-		public function stopDragging(event:Event = null):void {		
+		public function stopDragging(event:Event = null, dispatch_event:Boolean=true):void {		
 			Delegate.cancel( velocityCheck );	
 			if(velocity==null) velocity=new Point();
 			_isDragging = false;
 			dragTarget.stage.removeEventListener(MouseEvent.MOUSE_MOVE, whileDragging);
 			dragTarget.stage.removeEventListener(MouseEvent.MOUSE_UP, stopDragging);
 			dragTarget.stage.removeEventListener(Event.MOUSE_LEAVE, stopDragging);			
-			dragTarget.dispatchEvent(new DragEvent(DragEvent.EVENT_DRAG_STOP, spriteStart, getDragDelta(), velocity));
+			if(dispatch_event) dragTarget.dispatchEvent(new DragEvent(DragEvent.EVENT_DRAG_STOP, spriteStart, getDragDelta(), velocity));
 			
 			mouseStart = null;
 			spriteStart = null;
