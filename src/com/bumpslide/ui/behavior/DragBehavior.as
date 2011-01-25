@@ -156,6 +156,11 @@ package com.bumpslide.ui.behavior
 			// to support dragging inside things that have been rotated
 			var m:Matrix = dragTarget.parent.transform.concatenatedMatrix;
 			m.invert(); // mapping global-to-local, not local-to-global
+			
+			// accomodate SWF's that are stretched in the browser
+			var stretchFactor:Number = dragTarget.root.transform.concatenatedMatrix.a;
+			m.scale( stretchFactor, stretchFactor );
+			
 			return m.deltaTransformPoint( delta ); // ignore tx and ty 
 		}
 

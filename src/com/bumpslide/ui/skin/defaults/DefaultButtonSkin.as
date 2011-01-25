@@ -43,6 +43,7 @@ package com.bumpslide.ui.skin.defaults
 			labelDisplay = add(Label);
 			
 			background.visible = false;
+			_off();
 		}
 		
 		/**
@@ -50,6 +51,8 @@ package com.bumpslide.ui.skin.defaults
 		 */
 		override public function renderSkin( skinState:String ):void 
 		{
+			
+			
 			// call skin state functions (ex: '_over', '_down', '_selected')
 			super.renderSkin(skinState);
 		}
