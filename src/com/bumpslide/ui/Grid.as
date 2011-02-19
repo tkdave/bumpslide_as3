@@ -42,10 +42,11 @@ package com.bumpslide.ui
 		}		
 				
 		override protected function addChildren():void {
-			super.addChildren();
 			
 			layout = new GridLayout(_holder, gridItemRenderer);
 			layout.itemInitProperties = gridItemProps;
+			
+			super.addChildren();
 			
 			// update when model (possibly length) changed
 			layout.addEventListener( Event.CHANGE, eventDelegate( invalidate ) );

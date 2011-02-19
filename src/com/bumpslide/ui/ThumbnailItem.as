@@ -43,7 +43,7 @@ package com.bumpslide.ui
 		 */
 		override protected function addChildren():void {
 			//delayUpdate = false;
-			cacheAsBitmap = true;
+			//cacheAsBitmap = true;
 			
 			if(_padding==null) _padding = new Padding( 3 );
 			
@@ -53,7 +53,7 @@ package com.bumpslide.ui
 			image = addChild( new Image() ) as Image;
 			
 			// configure image to fade in and crop
-			image.fadeOnLoad = true;     
+			//image.fadeOnLoad = true;     
 			image.scaleMode = Image.SCALE_CROP;
 			image.addEventListener(Image.EVENT_LOADED, onImageLoaded);
 		}
@@ -98,7 +98,7 @@ package com.bumpslide.ui
 		override protected function drawGridItem():void {			
 			cancelCall( _pendingLoad );
 			image.unload();  
-			_pendingLoad = callLater( 200, doLoad );
+			_pendingLoad = callLater( 10, doLoad );
 		}	
 
 		
@@ -115,7 +115,7 @@ package com.bumpslide.ui
 		 */
 		protected function doLoad(e:Event=null) : void {
 			//removeEventListener( Event.ENTER_FRAME, doLoad );
-			image.load( url, 1, new LoaderContext(true) );  		
+			image.load( url, -gridIndex, new LoaderContext(true) );  		
 		}
 		
 		/**

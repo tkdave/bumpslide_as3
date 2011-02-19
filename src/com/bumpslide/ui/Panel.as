@@ -35,7 +35,7 @@ package com.bumpslide.ui {
 		
 		private var _title:String;
 				function Panel( content:DisplayObject = null, padding:*=  null, background_color:uint = NaN, background_alpha:Number = NaN):void 		{
-			trace(this+' CTOR');
+			//trace(this+' CTOR');
 			_holder = add( Sprite );			_constructorArgs = arguments;			super();		}				override protected function postConstruct():void 		{
 			super.postConstruct();						// apply constructor arguments			if(_constructorArgs!=null) {				if(content==null) content = _constructorArgs[0];				if(_constructorArgs[1]!=null) padding = _constructorArgs[1];				if(backgroundBox != null && !isNaN( _constructorArgs[2])) backgroundBox.backgroundColor = _constructorArgs[2];				if(!isNaN( _constructorArgs[3])) background.alpha = _constructorArgs[3];			}
 			
@@ -95,7 +95,7 @@ package com.bumpslide.ui {
 			}						
 			super.draw();
 			
-			_handlingChildSizeChange = false;		}				protected function positionContent():void 		{			_holder.x = padding.left;			_holder.y = padding.top;		}				protected function setContentSize(w:Number, h:Number):void 		{			trace('setContentSize ' +w, h );
+			_handlingChildSizeChange = false;		}				protected function positionContent():void 		{			_holder.x = padding.left;			_holder.y = padding.top;		}				protected function setContentSize(w:Number, h:Number):void 		{			//trace('setContentSize ' +w, h );
 			
 			// mask
 			scrollRectSet('width', contentWidth);
