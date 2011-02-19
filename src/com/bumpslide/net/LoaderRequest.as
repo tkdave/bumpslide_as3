@@ -49,7 +49,8 @@ package com.bumpslide.net
 		 */
 		public function unload():void 
 		{			
-			cancel();
+			if(complete) doUnloadContent();
+			else cancel();
 		}
 
 		

@@ -200,6 +200,7 @@ package com.bumpslide.net
 			_loadTimer.stop();
 			_loadTimer.removeEventListener( TimerEvent.TIMER, handleTimeout );
 			_loadTimer.removeEventListener( TimerEvent.TIMER_COMPLETE, handleFinalTimeout );
+			Delegate.cancel( _retryDelay );
 		}
 
 		protected var _retryDelay:Timer;

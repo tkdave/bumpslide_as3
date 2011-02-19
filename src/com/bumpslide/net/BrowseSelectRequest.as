@@ -6,7 +6,7 @@ package com.bumpslide.net
 
 
 	/**
-	 * BrowseSelectRequest
+	 * Wraps a File Browse operation
 	 *
 	 * @author David Knape
 	 */
