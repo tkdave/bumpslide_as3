@@ -21,7 +21,7 @@ package com.bumpslide.data {
 	 */
 	public class PriorityQueue {
 		
-		private var _q:Array;
+		protected var _q:Array;
 		
 		/**
 		 * Initializes a Queue

@@ -19,14 +19,6 @@ package com.bumpslide.net {
 	 */
 	public interface IRequest {
 		
-		/**
-		function set retryCount (n:uint):void;	
-		function get retryCount ():uint;
-								
-		function set timeout(seconds:uint):void;
-		function get timeout():uint;
-		*/
-		
 		function load():void;		
 		function cancel():void;
 						
