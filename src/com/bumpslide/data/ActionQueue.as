@@ -23,7 +23,7 @@ package com.bumpslide.data
 	import flash.utils.Timer;		
 
 
-	[Event(name="complete", type="flash.event.Event")]
+	[Event(name="complete", type="flash.events.Event")]
 
 	/**
 	 * Generic Multi-threaded, prioritized, queue
