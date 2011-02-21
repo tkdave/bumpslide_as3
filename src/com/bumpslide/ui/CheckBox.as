@@ -27,7 +27,7 @@ package com.bumpslide.ui
 
 		static public var DefaultSkinClass:Class = DefaultCheckboxSkin;
 
-		public function CheckBox(width:Number=120, height:Number=20, x:Number=0, y:Number=0, lbl:String="", is_selected:Boolean=false, on_change:Function=null )
+		public function CheckBox(width:Number=-1, height:Number=-1, x:Number=0, y:Number=0, lbl:String="", is_selected:Boolean=false, on_change:Function=null )
 		{
 			super( width, height, x, y, lbl );
 

@@ -30,7 +30,6 @@ package com.bumpslide.ui.skin.defaults
 	 * A click on anywhere on this skin will launch the calendar popup
 	 *
 	 * @author David Knape
-	 * @version SVN: $Id: $
 	 */
 	public class DefaultDatePickerSkin extends BasicSkin 
 	{	
@@ -50,13 +49,15 @@ package com.bumpslide.ui.skin.defaults
 
 		override protected function addChildren():void 
 		{			
-			dateLabel = add(Label, { x: 24, autoSize: true });
+			dateLabel = add(Label, { x: 24, text:'Select a date...' });
 			chooseButton = add(Button, { width: 21, height: 21, icon: CalendarIcon });
 		}
 		
-		override public function renderSkin(skinState:String):void 
+		
+		override protected function draw():void
 		{
-			dateLabel.text = DateUtil.getFormatted( hostComponent.selectedDate, hostComponent.showTime, true, false, true, true );	
+			super.draw();
+			dateLabel.text = DateUtil.getFormatted( hostComponent.selectedDate, hostComponent.showTime, true, false, true, true );
 		}
 	}
 }

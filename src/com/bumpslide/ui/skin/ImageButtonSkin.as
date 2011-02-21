@@ -14,10 +14,8 @@ package com.bumpslide.ui.skin
 {
 
 	import com.bumpslide.ui.Button;
-	
-	
 
-	import mx.core.SpriteAsset;
+	import flash.display.Sprite;
 
 	/**
 	 * ImageButtonSkin
@@ -31,7 +29,7 @@ package com.bumpslide.ui.skin
 		[Embed(source="/assets/button_bg.png",scaleGridTop="5", scaleGridLeft="5", scaleGridRight="35",  scaleGridBottom="17")]
 		private var embeddedImage:Class;
 
-		private var background:SpriteAsset;
+		private var background:Sprite;
 		
 		/**
 		 * Assume host component is a button
@@ -40,18 +38,18 @@ package com.bumpslide.ui.skin
 			return _hostComponent as Button;
 		}
 		
+		override protected function addChildren():void
+		{
+			addChild( background = new embeddedImage() );
+			addChild( background );
+		}
 		override public function initHostComponent( host_component:ISkinnable ):void
 		{
 			super.initHostComponent( host_component );
-			background = new embeddedImage() as SpriteAsset;
-			addChild( background );
 		}
 
-
-		override public function renderSkin( skinState:String ):void
+		override protected function draw():void
 		{
-			super.renderSkin( skinState );
-
 			background.width = hostComponent.width;
 			background.height = hostComponent.height;
 		}

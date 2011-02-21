@@ -68,8 +68,7 @@ package com.bumpslide.ui
 				label_txt.mouseWheelEnabled = false;
 			}
 		}
-
-
+  		
 		override protected function draw():void
 		{
 			try {
@@ -78,24 +77,16 @@ package com.bumpslide.ui
 			} catch (e:Error) {
 				gotoAndStop( skinState );
 			}
-
-			if(stage) {
+			
+			// now, invalidate stage and wait for render event
+			// so we can update content inside the frames of movieclip skins
+			if (stage) {
 				stage.addEventListener( Event.RENDER, handleStageRender );
 				stage.invalidate();
 			} else {
 				Delegate.onEnterFrame( render );
 			}
 
-			// and render now just for fun
-			render();
-		}
-
-
-		protected function handleStageRender( e:Event ):void
-		{
-			if(stage)
-				stage.removeEventListener( Event.RENDER, handleStageRender );
-			render();
 		}
 
 
@@ -109,7 +100,7 @@ package com.bumpslide.ui
 		 * This is the function that gets called just before the frame is rendered 
 		 * and is a good place to programmatically affect any clips placed on the stage.
 		 */
-		protected function render():void
+		override protected function render():void
 		{
 			// render label before rendering the background
 

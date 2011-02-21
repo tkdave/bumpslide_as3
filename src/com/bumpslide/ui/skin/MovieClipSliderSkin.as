@@ -37,8 +37,7 @@ package com.bumpslide.ui.skin
 			}
 			
 			
-			hostComponent.padding = p;						
-			hostComponent.fixedHandleSize = ( hostComponent.isVertical ) ? handle.height : handle.width;
+			hostComponent.padding = p;
 		}
 
 		

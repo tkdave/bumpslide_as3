@@ -12,9 +12,10 @@ package com.bumpslide.ui
 	dynamic public class VBox extends Container
 	{
 
-		public function VBox()
+		public function VBox( children:Array = null)
 		{
 			super( Direction.VERTICAL );
+			if(children) this.children = children;
 		}
 
 	}

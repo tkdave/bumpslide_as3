@@ -49,14 +49,6 @@ package com.bumpslide.ui.skin
 			
 		}
 		
-		override public function renderSkin( skinState:String ):void
-		{
-			if(hostComponent==null) return;
-						
-			updateNow();
-		}
-		
-		
 		override protected function draw():void
 		{
 			drawBack();

@@ -64,9 +64,9 @@ package com.bumpslide.ui
 		}
 
 
-		override protected function initSkin():void
+		override protected function initSkinParts():void
 		{
-			super.initSkin();
+			super.initSkinParts();
 
 			if (input_txt == null) input_txt = getSkinPart( 'input_txt' );
 			if (hint_txt == null) hint_txt = getSkinPart( 'hint_txt' );

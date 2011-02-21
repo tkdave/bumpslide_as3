@@ -15,7 +15,12 @@ package com.bumpslide.ui {	import com.bumpslide.data.constant.Position;	impor
 		protected var _label:String;				private var _padding:Padding;				// icon image 		public var iconImage:Image;				// the icon (fed to iconImage.source)		// display object, class, or url		private var _icon:*;  		
 		private var _iconAlignH:String = Position.CENTER;
 		private var _iconAlignV:String = Position.MIDDLE;
-						public function Button( width:Number=100, height:Number=20, x:Number=0, y:Number=0, lbl:String="", defaultClickHandler:Function=null) {						// don't overwrite values set from stage placement in Flash			if(explicitWidth==-1) this.width = width;			if(explicitHeight==-1) this.height = height;			if(x!=0) this.x = x;			if(y!=0) this.y = y;			if(lbl!="") label = lbl;			if(defaultClickHandler!=null) {				addEventListener( MouseEvent.CLICK, defaultClickHandler );			}		}				/**		 * Component initialization (provides initButton hook)		 */		override protected function init():void {			stop();			initButton();							super.init();		}		/**		 * Define default skin in postConstruct so that we don't override 		 * properties set in MXML		 */		override protected function postConstruct():void 		{
+						public function Button( width:Number=-1, height:Number=-1, x:Number=0, y:Number=0, lbl:String="", defaultClickHandler:Function=null) {			
+			super();
+			
+			if(width!=-1) this.width = width;
+			if(height!=-1) this.height = height;
+						if(x!=0) this.x = x;			if(y!=0) this.y = y;			if(lbl!="") label = lbl;			if(defaultClickHandler!=null) {				addEventListener( MouseEvent.CLICK, defaultClickHandler );			}		}				/**		 * Component initialization (provides initButton hook)		 */		override protected function init():void {			stop();			initButton();							super.init();		}		/**		 * Define default skin in postConstruct so that we don't override 		 * properties set in MXML		 */		override protected function postConstruct():void 		{
 			super.postConstruct();						initDefaultSkin();
 		}
 		

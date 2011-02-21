@@ -55,9 +55,9 @@ package com.bumpslide.ui {
 		}
 		
 		
-		override protected function initSkin() : void
+		override protected function initSkinParts() : void
 		{
-			super.initSkin();
+			super.initSkinParts();
 			
 			// wire up the close button if it's here
 			var closeButton:DisplayObject = getSkinPart('closeButton');

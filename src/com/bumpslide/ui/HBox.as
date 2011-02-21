@@ -12,9 +12,10 @@ package com.bumpslide.ui
 	dynamic public class HBox extends Container
 	{
 
-		public function HBox()
+		public function HBox( children:Array = null)
 		{
 			super( Direction.HORIZONTAL );
+			if(children) this.children = children;
 		}
 	}
 }

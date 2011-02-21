@@ -12,14 +12,13 @@
 
 package com.bumpslide.ui 
 {
+
 	import com.bumpslide.events.UIEvent;
-	import flash.display.InteractiveObject;
 	import com.bumpslide.tween.FTween;
 	import com.bumpslide.ui.skin.defaults.DefaultDatePickerSkin;
 	import com.bumpslide.ui.skin.defaults.Style;
 
 	import flash.display.BlendMode;
-	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -30,11 +29,9 @@ package com.bumpslide.ui
 	 * Displays Date and contains button that, when clicked, opens a calendar control popup.
 	 *
 	 * @author David Knape
-	 * @version SVN: $Id: $
 	 */
 	public class DatePicker extends Component 
 	{
-		
 		static public var DefaultSkinClass:Class = DefaultDatePickerSkin;
 		
 		// panel that holds the calendar display
@@ -57,7 +54,7 @@ package com.bumpslide.ui
 			cal.addEventListener(Event.SELECT, handleDateSelect);
 			
 			popup = new Panel(cal);
-			popup.setSize( 160, 160 );
+			popup.setSize( 200, 200 );
 			popup.alpha = 0;
 			popup.blendMode = BlendMode.LAYER;
 			popup.filters = [Style.DROPSHADOW_FILTER];
@@ -83,9 +80,9 @@ package com.bumpslide.ui
 		}
 
 		
-		override protected function initSkin():void 
+		override protected function initSkinParts():void 
 		{
-			super.initSkin();		
+			super.initSkinParts();		
 			skin.addEventListener( MouseEvent.CLICK, handleChooseButtonClick );
 		}
 
@@ -133,18 +130,16 @@ package com.bumpslide.ui
 			
 			var max_y:Number = popupHolder == stage ? stage.stageHeight : popupHolder.height;
 			max_y -= popup.height + Style.PANEL_PADDING;
-			trace('layout datepicker popup');
+			//trace('layout datepicker popup');
 			var px:Number = Math.max(0, Math.min(max_x, getBounds(popupHolder).left + 20));
 			var py:Number = Math.max(0, Math.min(max_y, getBounds(popupHolder).top - 100));
-			//var px:Number = getBounds(popupHolder).left + 20;
-			//var py:Number = getBounds(popupHolder).top - 20;
 			popup.move(px, py);
 		}
 
 		
 		protected function showPopup():void 
 		{			
-			trace('show popup');	
+			//trace('show popup');	
 			popupHolder.addChild(popup);
 									
 			cal.selectedDate = selectedDate;

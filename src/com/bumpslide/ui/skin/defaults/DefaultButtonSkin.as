@@ -17,6 +17,9 @@ package com.bumpslide.ui.skin.defaults
 	import com.bumpslide.ui.Button;
 	import com.bumpslide.ui.Label;
 	import com.bumpslide.ui.skin.BasicSkin;
+	import com.bumpslide.util.Align;
+
+	import flash.text.TextFormatAlign;
 
 	/**
 	 * Programmatic button skin with a bunch of nice label placement logic.
@@ -43,18 +46,14 @@ package com.bumpslide.ui.skin.defaults
 			labelDisplay = add(Label);
 			
 			background.visible = false;
-			_off();
+			
 		}
 		
-		/**
-		 * 
-		 */
-		override public function renderSkin( skinState:String ):void 
+		
+		override protected function init():void
 		{
-			
-			
-			// call skin state functions (ex: '_over', '_down', '_selected')
-			super.renderSkin(skinState);
+			super.init();
+			_off();
 		}
 		
 		override protected function draw():void {
@@ -68,6 +67,7 @@ package com.bumpslide.ui.skin.defaults
 			if(hostComponent.explicitWidth) {
 				labelDisplay.maxLines = 1;
 				labelDisplay.width = hostComponent.width;
+				labelDisplay.textAlign = TextFormatAlign.CENTER;
 			}						
 			
 			if(hostComponent.label != null && hostComponent.label != "") {
@@ -86,16 +86,7 @@ package com.bumpslide.ui.skin.defaults
 					labelDisplay.x = 0;
 						
 					backgroundWidth = hostComponent.width;
-					
-					//if(hostComponent.centerLabel) {
-						//labelDisplay.width = 0;
-					//	Align.center( labelDisplay, hostComponent.width, labelDisplay.actualWidth );
-				//	}
-//					 else {
-//						labelDisplay.width = hostComponent.width;
-//						labelDisplay.maxLines = 1;
-//						labelDisplay.x = 0;
-//					}
+
 				} else {
 					// otherwidth, just make the background as wide as the label (with padding)
 					backgroundWidth = labelDisplay.actualWidth;
@@ -105,7 +96,7 @@ package com.bumpslide.ui.skin.defaults
 				// use that size the label and background height
 				if(hostComponent.explicitHeight) {
 					backgroundHeight = hostComponent.height;
-					//Align.middle(labelDisplay, hostComponent.height, labelDisplay.height);
+					Align.middle( labelDisplay, backgroundHeight, labelDisplay.actualHeight );
 				} else {
 					// otherwidth, just make the background as tall as the label (with padding)
 					backgroundHeight = labelDisplay.height;

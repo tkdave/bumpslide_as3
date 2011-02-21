@@ -37,8 +37,8 @@ package com.bumpslide.ui
 
 		private var _content:DisplayObject;
 
-		private var _watchSize:Boolean;
-
+		private var _watchSize:Boolean = false;
+		
 		
 		/**
 		 * Creates a new wrapper with content passed in as constructor arg
@@ -127,6 +127,8 @@ package com.bumpslide.ui
 		override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void 
 		{
 			super.updateDisplayList(unscaledWidth, unscaledHeight);
+			
+			
 			if(content is IResizable) {
 				(content as IResizable).setSize(unscaledWidth, unscaledHeight);
 			} else {
@@ -134,7 +136,7 @@ package com.bumpslide.ui
 				content.height = unscaledHeight;
 			}
 		}
-		
+
 		
 	}
 }

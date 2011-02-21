@@ -53,6 +53,7 @@ package com.bumpslide.ui.skin
 			} catch (e:Error) {
 				// whatever
 			}
+			invalidate();
 		}
 		
 		override public function get width():Number {
