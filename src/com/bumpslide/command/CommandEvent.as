@@ -25,7 +25,6 @@ package com.bumpslide.command
 	 * Commands must store the event as it's callback in order to make this work.
 	 *  
 	 * @author David Knape
-	 * @version SVN: $Id: CommandEvent.as 578 2009-12-01 20:38:51Z dknape $
 	 */
 	public class CommandEvent extends Event implements IResponder 
 	{
@@ -50,16 +49,6 @@ package com.bumpslide.command
 			return new CommandEvent(type, data);
 		}
 
-		
-		/**
-		 * Dispatch the command via the command event dispatcher
-		 */
-		public function dispatch():Boolean 
-		{
-			return CommandEventDispatcher.getInstance().dispatchEvent(this);
-		} 
-
-		
 		override public function toString():String 
 		{
 			return '[CommandEvent] "' + type + '" data=' + data;
@@ -88,13 +77,5 @@ package com.bumpslide.command
 				}
 			}
 		}
-
-		
-		// Send Generic Command Event
-		static public function send( type:String, data:Object = null, resultHandler:Function = null, faultHandler:Function = null):void 
-		{
-			var cmd:CommandEvent = new CommandEvent(type, data, resultHandler, faultHandler);
-			cmd.dispatch();
-		} 
 	}
 }

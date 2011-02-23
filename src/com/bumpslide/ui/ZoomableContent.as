@@ -54,13 +54,15 @@ package com.bumpslide.ui {
 		 * Since content is behind a scrollRect, we can't get it's actual size.
 		 * This function yanks it off the display list, measures it, and puts it back
 		 */
-		public function refreshContentSize():void {
+		public function refreshContentSize(event:Event=null):void {
 			if(content) {				
+				
 				if(contains(content)) removeChild(content);
 				content.visible = true;
 				content.scaleX = content.scaleY = 1;
-				_contentWidth = content.width;
-				_contentHeight = content.height;
+				var b:Rectangle = content.getBounds(this);
+				_contentWidth = b.width;
+				_contentHeight = b.height;
 				//trace('_contentWidth: ' + (_contentWidth));
 				
 				addChild(content);
@@ -90,13 +92,26 @@ package com.bumpslide.ui {
 		}
 
 		public function set content(content:DisplayObject):void {
-			if(_content) destroyChild(_content);
+			
+			var loader:Loader;
+			var img:Image;
+			
+			if(_content) {
+				loader = _content as Loader;
+				img = _content as Image;
+				if(loader) loader.contentLoaderInfo.removeEventListener(Event.INIT, refreshContentSize);
+				if(img) img.removeEventListener(Image.EVENT_LOADED, refreshContentSize);
+				destroyChild(_content);
+			}
 			_content = content;
+			
 			reset();
 			
-			if(content != null && (content is Loader)) {
-				(content as Loader).contentLoaderInfo.addEventListener(Event.INIT, eventDelegate(refreshContentSize));
-			}
+			loader = _content as Loader;
+			img = _content as Image;
+			if(loader) loader.contentLoaderInfo.addEventListener(Event.INIT, refreshContentSize);
+			if(img) img.addEventListener(Image.EVENT_LOADED, refreshContentSize);
+				
 			refreshContentSize();
 		}
 

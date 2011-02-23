@@ -1,16 +1,22 @@
-package com.bumpslide.command
+package com.bumpslide.command.robotlegs
 {
+
+	import com.bumpslide.command.CommandEvent;
+	import com.bumpslide.command.CommandQueue;
+	import com.bumpslide.command.ICommand;
 
 	import org.robotlegs.core.IInjector;
 
 	/**
-	 * Robotlegs Friendly Command Queue 
+	 * Robotlegs-friendly Command Queue 
 	 * 
-	 * Supports dependency injection into each command being run
+	 * Supports Dependency Injection into each command being run.
 	 *
+	 * This class can be used in MXML or Actionscript.
+	 * 
 	 * @author David Knape
 	 */
-	public class RLCommandQueue extends CommandQueue
+	public class CommandSequence extends CommandQueue
 	{
 
 		[Inject]

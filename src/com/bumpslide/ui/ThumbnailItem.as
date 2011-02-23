@@ -98,7 +98,7 @@ package com.bumpslide.ui
 		override protected function drawGridItem():void {			
 			cancelCall( _pendingLoad );
 			image.unload();  
-			_pendingLoad = callLater( 10, doLoad );
+			_pendingLoad = callLater( 1, doLoad );
 		}	
 
 		
