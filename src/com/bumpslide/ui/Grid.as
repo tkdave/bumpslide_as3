@@ -32,6 +32,7 @@ package com.bumpslide.ui
 		
 		protected var _itemRenderer:Class=null;
 		protected var _itemProps:Object;
+		protected var _roundedCellDimensions:Boolean = false;
 		
 		public function Grid( item_renderer:Class=null, column_width:Number=100, row_height:Number=100, orientation:String='vertical' ) {
 			super();
@@ -65,7 +66,7 @@ package com.bumpslide.ui
 			scrollbar.value -= event.delta * amt;
 			layout.scrollPosition = scrollbar.value;
 		}
-						override public function reset():void {
+				override public function reset():void {
 			super.reset();
 			layout.stopTweening();
 			layout.offset = 0;
@@ -93,19 +94,21 @@ package com.bumpslide.ui
 				h+=spacing;
 			}
 			
-			if(fixedColumnCount>0) {
-				layout.columnWidth =  Math.floor(w/fixedColumnCount );
+			var round:Function = _roundedCellDimensions ? Math.floor : function(n:Number):Number {return n;};
+			
+			if (fixedColumnCount > 0) {
+				layout.columnWidth = round(w / fixedColumnCount );
 				w = layout.columnWidth * fixedColumnCount;
-				if(fixedAspectRatio>0) {
-					layout.rowHeight =  Math.floor( layout.columnWidth / fixedAspectRatio);
+				if (fixedAspectRatio > 0) {
+					layout.rowHeight = round( layout.columnWidth / fixedAspectRatio);
 				}
 			}
-			
-			if(fixedRowCount>0) {
-				layout.rowHeight =  Math.floor(h/fixedRowCount);
+
+			if (fixedRowCount > 0) {
+				layout.rowHeight = round(h / fixedRowCount);
 				h = layout.rowHeight * fixedRowCount;
-				if(fixedAspectRatio>0) {
-					layout.columnWidth = Math.floor( layout.rowHeight * fixedAspectRatio);
+				if (fixedAspectRatio > 0) {
+					layout.columnWidth = round( layout.rowHeight * fixedAspectRatio);
 				}
 			}
 						
@@ -113,7 +116,7 @@ package com.bumpslide.ui
 			
 			super.setContentSize( w, h );
 		}
-		
+				
 		override public function get actualHeight():Number {
 			if(layout && padding) {
 				if(isVertical) {
@@ -254,7 +257,22 @@ package com.bumpslide.ui
 		public function getItemAt( n:uint, data_provider:*=null ):* {
 			var dp:* = data_provider ? data_provider : dataProvider;
 			if(dp==null) return null;
-			return dp.getItemAt != undefined ? dp.getItemAt(n) : dp[n];
+			return dp.getItemAt != undefined ? dp.getItemAt( n ) : dp[n];
+		}
+
+
+		/**
+		 * Whether or not cell dimensions should be rounded when auto-calculating 
+		 * 
+		 * This is ignored unless fixedRowCount or fixedColumnCount is set to true
+		 */
+		public function get roundedCellDimensions():Boolean {
+			return _roundedCellDimensions;
+		}
+
+
+		public function set roundedCellDimensions( roundedCellDimensions:Boolean ):void {
+			_roundedCellDimensions = roundedCellDimensions;
 		}
 	}
 }
