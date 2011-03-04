@@ -19,16 +19,10 @@ package com.bumpslide.view
 	import flash.display.DisplayObject;
 
 	/**
-	 * IView implementation that uses TweenLite to fadeIn/fadeOut
-	 * 
-	 * This view is designed to wrap any display object and facilitate
-	 * display management from a ViewStack.
-	 * 
-	 * If the content is a Bumpslide UI Component, this 
+	 * Wraps any display object and facilitates display management from a ViewStack. 
 	 */
-	public class ComponentView extends BasicView 
+	public class ComponentView extends BasicView implements IView
 	{
-
 		private var _content:DisplayObject;
 		
 		protected var _centerContent:Boolean = false;
@@ -36,9 +30,8 @@ package com.bumpslide.view
 		protected var _contentPercentWidth:Number = 1.0;
 		protected var _contentPercentHeight:Number = 1.0;
 		
-		public function ComponentView( childContent:DisplayObject=null ) 
+		public function ComponentView() 
 		{
-			content = childContent;
 			super();
 		}
 
@@ -67,8 +60,8 @@ package com.bumpslide.view
 				Align.center( content, width );
 				Align.middle( content, height );
 			} else {
-				content.x = 0;
-				content.y = 0;
+				//content.x = 0;
+				//content.y = 0;
 			}
 			
 		}

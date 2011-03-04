@@ -117,13 +117,13 @@ package com.bumpslide.ui
 			if(content is IView) {
 				currentView = content as IView;
 			} else if(content is DisplayObject) {
-				currentView = new ComponentView(content);
-				
-				var v:ComponentView = currentView as ComponentView;
+				var v:ComponentView = new ComponentView();
 				v.centerContent = centerContent;
 				v.resizeContent = resizeContent;
 				v.contentPercentHeight = contentPercentHeight;
 				v.contentPercentWidth = contentPercentWidth;
+				v.content = content;
+				currentView = v;
 				
 			}
 			if (currentView != null) {
