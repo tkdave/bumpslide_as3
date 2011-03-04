@@ -16,7 +16,7 @@ package com.bumpslide.ui {	import com.bumpslide.data.Binding;	import com.bum
 		public static const EVENT_SIZE_CHANGED:String = "sizeChanged";
 
 		// whether or not to wait a frame before drawing updates		public var delayUpdate:Boolean = true;
-		// whether or not to round x/y coordinates automatically		public var roundedPosition:Boolean = true;
+		// whether or not to round x/y coordinates automatically		public var roundedPosition:Boolean = false;
 		// change types (aka. validation constants) 		protected static const VALID_SIZE:String = "validSize";  // size has changed		protected static const VALID_DATA:String = "validData";  // data has changed
 				protected static const VALID_SKIN_STATE : String = "validSkinState";
 						// map of invalidation flags		private var _invalidated:Array;
@@ -34,12 +34,8 @@ package com.bumpslide.ui {	import com.bumpslide.data.Binding;	import com.bum
 					
 					// now, invalidate stage and wait for render event
 					// so we can update content inside the frames of movieclip skins
-					if (stage) {
-						stage.addEventListener( Event.RENDER, handleStageRender );
-						stage.invalidate();
-					} else {
-						Delegate.onEnterFrame( render );
-					}
+					triggerRender();
+					
 					validate( VALID_SKIN_STATE );
 				}
 				
@@ -52,7 +48,11 @@ package com.bumpslide.ui {	import com.bumpslide.data.Binding;	import com.bum
 					}
 				}
 				
-							}		}
+							}		}		/**
+		 * Trigger a stage Event.RENDER and handle it with the render method.
+		 * 
+		 * If there is no stage, render is called on the next frame.		 */		protected function triggerRender():void		{			if (stage) {				stage.addEventListener( Event.RENDER, handleStageRender );				stage.invalidate();			} else {				Delegate.onEnterFrame( render );			}		}
+		
 		
 		protected function handleStageRender( e:Event ):void
 		{
@@ -73,7 +73,8 @@ package com.bumpslide.ui {	import com.bumpslide.data.Binding;	import com.bum
 			invalidate(VALID_SIZE);
 			updateNow();
 		}				/**		 * Send the EVENT_DRAW UIEvent		 */		protected function notifyDrawn(event:Event = null):void 		{			sendEvent(Component.EVENT_DRAW);		}
-				/**		 * Triggers an update/draw on the next frame		 */		protected function invalidate(change_type:String = null, allow_validation_during_draw:Boolean=false):void 		{			if(_drawing && !allow_validation_during_draw) {				//trace("You shouldn't be invalidating during a draw cycle.");				return;			}			if(change_type != null) {				// mark this change type as invalid				if(_invalidated == null) _invalidated = new Array();				_invalidated[change_type] = true;			}						if(delayUpdate || initializing) {				addEventListener(Event.ENTER_FRAME, updateNow);			} else {				updateNow();			}		}
+				/**		 * Triggers an update/draw on the next frame		 */		protected function invalidate(change_type:String = null, allow_validation_during_draw:Boolean=false):void 		{			if(_drawing && !allow_validation_during_draw) {				//trace("You shouldn't be invalidating during a draw cycle.");				return;			}			if(change_type != null) {				// mark this change type as invalid				if(_invalidated == null) _invalidated = new Array();				_invalidated[change_type] = true;			}
+						if(delayUpdate || initializing) {				addEventListener(Event.ENTER_FRAME, updateNow);			} else {				updateNow();			}		}
 						private function _onAddedToStage( event:Event ) : void {			removeEventListener( Event.ADDED_TO_STAGE, _onAddedToStage );			stage.invalidate();		}				/**		 * Whether or not a given change type (validation constant) has changed		 */		protected function hasChanged( changeType:String ):Boolean 		{			if(_invalidated == null) return false;			else return _invalidated[changeType] != null;		}
 				/**		 * Marks a change type (validation constant) as valid		 */		protected function validate( changeType:String):void 		{			if(_invalidated != null) {				_invalidated[changeType] = null;				delete _invalidated[changeType];			}		}
 				/**		 * Force instant update by calling draw(), and cancels any pending update		 */		public function updateNow( e:Event = null ):void 		{			removeEventListener(Event.RENDER, updateNow);			removeEventListener(Event.ENTER_FRAME, updateNow);						// Do we need a commitProperties hook? ignore it if you want.			commitProperties();						if(boundsShape) {				boundsShape.visible = false;			}						// call draw			_drawing = true;			draw();			_drawing = false;						layoutChildren();						if(showBounds) {				drawBounds();			}
