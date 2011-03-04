@@ -73,8 +73,8 @@ package com.bumpslide.ui {
 
 		protected function handleChildSizeChange( event:UIEvent ) : void
 		{
-			
-			if(event.target.parent == _holder) {
+			var child:DisplayObject = event.target as DisplayObject;
+			if(child.parent == _holder) {
 				//trace( '[Panel] child size changed ' , event.target);
 				_handlingChildSizeChange = true;
 				invalidate(VALID_SIZE);

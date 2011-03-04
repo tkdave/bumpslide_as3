@@ -36,7 +36,6 @@ package com.bumpslide.ui
 		protected var _margin:Number = 0;		
 		protected var _pendingLoad:Timer;
 		protected var _padding:Padding;
-
 		
 		/**
 		 * Creates border, fill, and image clips
@@ -96,9 +95,10 @@ package com.bumpslide.ui
 		 * Update things tied to gridItemData
 		 */
 		override protected function drawGridItem():void {			
-			cancelCall( _pendingLoad );
-			image.unload();  
-			_pendingLoad = callLater( 1, doLoad );
+			//cancelCall( _pendingLoad );
+			//image.unload();  
+			//_pendingLoad = callLater( 1, doLoad );
+			doLoad();
 		}	
 
 		

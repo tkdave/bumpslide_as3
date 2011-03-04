@@ -10,12 +10,11 @@
  * More info at http://www.opensource.org/licenses/mit-license.php
  */
 
-package com.bumpslide.ui {
-	import flash.display.Sprite;
+package com.bumpslide.ui
+{
 	
 	/**
 	 * Quite ridiculous, actually
-	 * 
 	 * 
 	 * example:
 	 * 
@@ -71,7 +70,7 @@ package com.bumpslide.ui {
 			graphics.beginFill(_color, 1);
 			var num_rows:int = _data.length;
 			for ( var row:int=0; row<num_rows; ++row) {
-				var num_columns:int = _data[row].length;
+				var num_columns:int = String(_data[row]).length;
 				for(var col:int=0; col<num_columns; ++col) {
 					if((_data[row] as String).charAt(col)!=" ") graphics.drawRect(col, row, 1, 1);
 				}

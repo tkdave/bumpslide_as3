@@ -13,7 +13,6 @@
 package com.bumpslide.ui 
 {
 
-	import com.bumpslide.data.constant.AspectRatio;
 	import com.bumpslide.data.constant.Unit;
 	import com.bumpslide.events.UIEvent;
 	import com.bumpslide.util.DateUtil;
@@ -114,7 +113,7 @@ package com.bumpslide.ui
 				for (n = 0; n < num_days; n++) {
 					var item:Button = grid.layout.getGridItemAt( first_day + n ) as Button;
 					if (item != null && item.gridItemData != null) {
-						var d:Date = new Date( item.gridItemData.date );
+						var d:Date = new Date( DayVO(item.gridItemData).date );
 						// DateUtil.roundDown(d, Unit.DAY);
 						item.selected = d.time == selectedDate.time;
 					}
@@ -215,9 +214,7 @@ class DayVO extends Object {
 }
 
 class DayRenderer extends Button 
-{
-
-	
+{	
 	
 	override protected function addChildren():void
 	{

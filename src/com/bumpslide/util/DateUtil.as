@@ -91,7 +91,7 @@ package com.bumpslide.util
 				}
 			} catch (e:Error) {
 				var eStr:String = "Unable to parse the string [" + str + "] into a date. ";
-				eStr += "The internal error was: " + e.toString();
+				eStr += "The internal error was: " + String(e);
 				trace('[DateUtil] ' + eStr);
 				//throw new Error(eStr);
 			}
