@@ -95,10 +95,10 @@ package com.bumpslide.ui
 		 * Update things tied to gridItemData
 		 */
 		override protected function drawGridItem():void {			
-			//cancelCall( _pendingLoad );
+			cancelCall( _pendingLoad );
 			//image.unload();  
-			//_pendingLoad = callLater( 1, doLoad );
-			doLoad();
+			_pendingLoad = callLater( 10, doLoad );
+			//doLoad();
 		}	
 
 		

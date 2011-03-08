@@ -27,7 +27,7 @@ package com.bumpslide.ui
 		protected var _borderSize:int = -1;
 		protected var _borderColor:uint = 0x000000;
 		protected var _borderAlpha:Number = 1;
-		protected var _borderPixelHinting:Boolean = true;
+		protected var _borderPixelHinting:Boolean = false;
 		protected var _cornerRadius:Number = 0;
 		protected var _tileBitmap:BitmapData;
 		protected var _centerOrigin:Boolean = false;
@@ -97,7 +97,7 @@ package com.bumpslide.ui
 			backgroundColor = v;
 		}            
 
-		public function set gridIndex(v:int):void {
+		public function set gridIndex(v:Number):void {
 			_gridIndex = v; 
 		}   
 
@@ -105,7 +105,7 @@ package com.bumpslide.ui
 			return backgroundColor;			
 		}
 
-		public function get gridIndex():int {
+		public function get gridIndex():Number {
 			return _gridIndex;
 		}
 		

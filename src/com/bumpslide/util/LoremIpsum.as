@@ -68,45 +68,51 @@ package com.bumpslide.util {
 		];
 		
 		// most "interesting" creative commons photos on flickr with search keyword ('photoshop')
-		public static var IMAGES:Array = ['http://farm5.static.flickr.com/4057/4315145017_ea28fabda0_m.jpg',
-			'http://farm3.static.flickr.com/2587/3894970025_797612bdd8_m.jpg',
-			'http://farm3.static.flickr.com/2605/3667880356_02c4707471_m.jpg',
-			'http://farm4.static.flickr.com/3312/3650717808_46054cc96a_m.jpg',
-			'http://farm4.static.flickr.com/3566/3496095474_6f60f8fd33_m.jpg', // 4 - Square (lighthouse)
-			'http://farm4.static.flickr.com/3347/3411775886_fcf0af1a42_m.jpg', // 5 - Horizontal (tilt shift cars)
-			'http://farm4.static.flickr.com/3646/3306656930_4187b98452_m.jpg',
-			'http://farm4.static.flickr.com/3344/3215868087_cce5882430_m.jpg',
-			'http://farm4.static.flickr.com/3012/3017515135_2b8ab4f3a4_m.jpg',
-			'http://farm4.static.flickr.com/3051/2952609526_9fd245dfcd_m.jpg',
-			'http://farm4.static.flickr.com/3148/2843932314_8aa5597b68_m.jpg',
-			'http://farm4.static.flickr.com/3177/2842941601_66ef8dd667_m.jpg',
-			'http://farm4.static.flickr.com/3274/2812682461_3b00ed08ff_m.jpg',
-			'http://farm4.static.flickr.com/3044/2805475704_9a03215453_m.jpg',
-			'http://farm4.static.flickr.com/3254/2408535634_f9953a5dbf_m.jpg',
-			'http://farm3.static.flickr.com/2168/2208867228_b5ccdca0be_m.jpg',
-			'http://farm3.static.flickr.com/2164/2166043959_dc2ec8e8a1_m.jpg',
-			'http://farm3.static.flickr.com/2388/2086852016_5a58dd1881_m.jpg',
-			'http://farm3.static.flickr.com/2032/1979443914_355cc1996b_m.jpg',
-			'http://farm3.static.flickr.com/2276/1566967053_6776208e72_m.jpg',
-			'http://farm1.static.flickr.com/157/384323992_5fe67df84d_m.jpg',
-			'http://farm1.static.flickr.com/105/304640554_5029c0ec66_m.jpg',
-			'http://farm1.static.flickr.com/42/106957481_001a4604f7_m.jpg',
-			'http://farm1.static.flickr.com/32/55582632_0ee7885f06_m.jpg',
-			'http://farm1.static.flickr.com/2/2363345_da147122ff_m.jpg',
-			'http://farm3.static.flickr.com/2192/2485992852_afa8372b44_m.jpg',
-			'http://farm3.static.flickr.com/2634/4136823759_9d9c860e5c_m.jpg',
-			'http://farm4.static.flickr.com/3620/3664742198_784c6db9eb_m.jpg',
-			'http://farm4.static.flickr.com/3387/3599784525_8951cb70ec_m.jpg',
-			'http://farm3.static.flickr.com/2466/3597080409_4c27df9ec2_m.jpg',
-			'http://farm4.static.flickr.com/3361/3411746271_3cabded63e_m.jpg',
-			'http://farm4.static.flickr.com/3659/3387530824_e058ed6b55_m.jpg',
-			'http://farm4.static.flickr.com/3026/3253171814_8011d90128_m.jpg',
-			'http://farm4.static.flickr.com/3209/3045853162_f6af47aa7e_m.jpg',
-			'http://farm2.static.flickr.com/1143/525401952_93d80229ec_m.jpg',
-			'http://farm1.static.flickr.com/167/480467788_6670dc77b8_m.jpg',
-			'http://farm1.static.flickr.com/193/449052129_542ba9b0b1_m.jpg',
-			'http://farm1.static.flickr.com/134/358919966_e1381c1dc4_m.jpg'
+		public static var IMAGES:Array = ['http://farm5.static.flickr.com/4057/4315145017_ea28fabda0.jpg',
+			'http://farm3.static.flickr.com/2587/3894970025_797612bdd8.jpg',
+			'http://farm3.static.flickr.com/2605/3667880356_02c4707471.jpg',
+			'http://farm4.static.flickr.com/3312/3650717808_46054cc96a.jpg',
+			'http://farm4.static.flickr.com/3566/3496095474_6f60f8fd33.jpg', // 4 - Square (lighthouse)
+			'http://farm4.static.flickr.com/3347/3411775886_fcf0af1a42.jpg', // 5 - Horizontal (tilt shift cars)
+			'http://farm4.static.flickr.com/3646/3306656930_4187b98452.jpg',
+			'http://farm4.static.flickr.com/3344/3215868087_cce5882430.jpg',
+			'http://farm4.static.flickr.com/3012/3017515135_2b8ab4f3a4.jpg',
+			'http://farm4.static.flickr.com/3051/2952609526_9fd245dfcd.jpg',
+			'http://farm4.static.flickr.com/3148/2843932314_8aa5597b68.jpg',
+			'http://farm4.static.flickr.com/3177/2842941601_66ef8dd667.jpg',
+			'http://farm4.static.flickr.com/3274/2812682461_3b00ed08ff.jpg',
+			'http://farm4.static.flickr.com/3044/2805475704_9a03215453.jpg',
+			'http://farm4.static.flickr.com/3254/2408535634_f9953a5dbf.jpg',
+			'http://farm3.static.flickr.com/2168/2208867228_b5ccdca0be.jpg',
+			'http://farm3.static.flickr.com/2164/2166043959_dc2ec8e8a1.jpg',
+			'http://farm3.static.flickr.com/2388/2086852016_5a58dd1881.jpg',
+			'http://farm3.static.flickr.com/2032/1979443914_355cc1996b.jpg',
+			'http://farm3.static.flickr.com/2276/1566967053_6776208e72.jpg',
+			'http://farm1.static.flickr.com/157/384323992_5fe67df84d.jpg',
+			'http://farm1.static.flickr.com/105/304640554_5029c0ec66.jpg',
+			'http://farm1.static.flickr.com/42/106957481_001a4604f7.jpg',
+			'http://farm1.static.flickr.com/32/55582632_0ee7885f06.jpg',
+			'http://farm1.static.flickr.com/2/2363345_da147122ff.jpg',
+			'http://farm3.static.flickr.com/2192/2485992852_afa8372b44.jpg',
+			'http://farm3.static.flickr.com/2634/4136823759_9d9c860e5c.jpg',
+			'http://farm4.static.flickr.com/3620/3664742198_784c6db9eb.jpg',
+			'http://farm4.static.flickr.com/3387/3599784525_8951cb70ec.jpg',
+			'http://farm3.static.flickr.com/2466/3597080409_4c27df9ec2.jpg',
+			'http://farm4.static.flickr.com/3361/3411746271_3cabded63e.jpg',
+			'http://farm4.static.flickr.com/3659/3387530824_e058ed6b55.jpg',
+			'http://farm4.static.flickr.com/3026/3253171814_8011d90128.jpg',
+			'http://farm4.static.flickr.com/3209/3045853162_f6af47aa7e.jpg',
+			'http://farm2.static.flickr.com/1143/525401952_93d80229ec.jpg',
+			'http://farm1.static.flickr.com/167/480467788_6670dc77b8.jpg',
+			'http://farm1.static.flickr.com/193/449052129_542ba9b0b1.jpg',
+			'http://farm1.static.flickr.com/134/358919966_e1381c1dc4.jpg'
 		];
+		
+		// small (240) versions of IMAGES
+		public static function get THUMBNAILS():Array {
+			return IMAGES.map( Delegate.map( function (url:String):String { return url.replace('.jpg', '_m.jpg'); } ) );
+		}
+		
 		
 		public static const TITLE:String = "Lorem Ipsum";
 		
