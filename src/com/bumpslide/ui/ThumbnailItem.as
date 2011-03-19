@@ -53,6 +53,7 @@ package com.bumpslide.ui
 			
 			// configure image to fade in and crop
 			//image.fadeOnLoad = true;     
+			
 			image.scaleMode = Image.SCALE_CROP;
 			image.addEventListener(Image.EVENT_LOADED, onImageLoaded);
 		}

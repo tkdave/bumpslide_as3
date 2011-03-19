@@ -121,11 +121,11 @@ package com.bumpslide.util
 			
 			// center scrollRect in image (crop to fit)
 			if(centered) {
-				scroll_rect.x = Math.round( (target_size.width - w) / img.scaleX / 2 );
-				scroll_rect.y = Math.round( (target_size.height - h) / img.scaleY / 2 );
+				scroll_rect.x = ( (target_size.width - w) / img.scaleX / 2 );
+				scroll_rect.y = ( (target_size.height - h) / img.scaleY / 2 );
 			}
 			
-			img.cacheAsBitmap = true;
+			//img.cacheAsBitmap = true;
 			img.scrollRect = scroll_rect;
 		}
 		

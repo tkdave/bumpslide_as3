@@ -159,7 +159,7 @@ package com.bumpslide.ui
 
 
 		protected function onStageResize( event:Event = null ):void
-		{
+		{			
 			setSize( stage.stageWidth, stage.stageHeight );
 		}
 
