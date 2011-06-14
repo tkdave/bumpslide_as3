@@ -16,6 +16,7 @@ package com.bumpslide.ui.skin.defaults
 	import com.bumpslide.ui.Component;
 	import com.bumpslide.ui.PixelIcon;
 	import com.bumpslide.util.Align;
+	import com.bumpslide.util.DisplayUtil;
 
 
 	/**
@@ -66,7 +67,7 @@ package com.bumpslide.ui.skin.defaults
 			checkBox.borderColor = Style.INPUT_FOCUS_BORDER;
 			checkBox.backgroundColor = Style.INPUT_FOCUS_BACKGROUND;
 			check.visible = true;
-			colorize( check, Style.BUTTON_LABEL_OVER );
+			DisplayUtil.colorize( check, Style.BUTTON_LABEL_OVER );
 		}
 
 
@@ -75,7 +76,7 @@ package com.bumpslide.ui.skin.defaults
 			checkBox.borderColor = Style.INPUT_FOCUS_BORDER;
 			checkBox.backgroundColor = Style.INPUT_BACKGROUND;
 			check.visible = true;
-			colorize( check, Style.BUTTON_LABEL );
+			DisplayUtil.colorize( check, Style.BUTTON_LABEL );
 		}
 
 
@@ -84,7 +85,7 @@ package com.bumpslide.ui.skin.defaults
 			checkBox.borderColor = Style.INPUT_FOCUS_BORDER;
 			checkBox.backgroundColor = Style.INPUT_BACKGROUND;
 			check.visible = true;
-			colorize( check, Style.BUTTON_LABEL );
+			DisplayUtil.colorize( check, Style.BUTTON_LABEL );
 		}
 	}
 }

@@ -75,7 +75,11 @@ package com.bumpslide.ui
 				var displayMethod:Function = this['_' + skinState];
 				displayMethod.call( this );
 			} catch (e:Error) {
-				gotoAndStop( skinState );
+				try {
+					gotoAndStop( skinState );
+				} catch (e:ArgumentError) {
+					log('missing button state ' + skinState );
+				}
 			}
 			
 			// now, invalidate stage and wait for render event

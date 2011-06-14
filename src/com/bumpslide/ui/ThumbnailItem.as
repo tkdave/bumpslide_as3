@@ -12,6 +12,7 @@
 
 package com.bumpslide.ui 
 {
+	import flash.utils.getDefinitionByName;
 	import com.bumpslide.data.type.Padding;
 	import com.bumpslide.events.UIEvent;
 
@@ -116,7 +117,15 @@ package com.bumpslide.ui
 		 */
 		protected function doLoad(e:Event=null) : void {
 			//removeEventListener( Event.ENTER_FRAME, doLoad );
-			image.load( url, -gridIndex, new LoaderContext(true) );  		
+			var ctx:LoaderContext = new LoaderContext(true);
+			try {
+				var ImageDecodingPolicy:Class = getDefinitionByName("flash.system.ImageDecodingPolicy") as Class;
+				if(ImageDecodingPolicy) ctx['imageDecodingPolicy'] = ImageDecodingPolicy['ON_LOAD'];
+			} catch (e:Error) {
+				//trace(e);
+			}
+			
+			image.load( url, -gridIndex, ctx );  		
 		}
 		
 		/**

@@ -51,7 +51,7 @@ package com.bumpslide.ui {	import com.bumpslide.data.Binding;	import com.bum
 							}		}		/**
 		 * Trigger a stage Event.RENDER and handle it with the render method.
 		 * 
-		 * If there is no stage, render is called on the next frame.		 */		protected function triggerRender():void		{			if (stage) {				stage.addEventListener( Event.RENDER, handleStageRender );				stage.invalidate();			} else {				Delegate.onEnterFrame( render );			}		}
+		 * If there is no stage, render is called on the next frame.		 */		protected function triggerRender( e:Event=null ):void		{			if (stage) {				stage.addEventListener( Event.RENDER, handleStageRender );				stage.invalidate();			} else {				Delegate.onEnterFrame( render );			}		}
 		
 		
 		protected function handleStageRender( e:Event ):void
