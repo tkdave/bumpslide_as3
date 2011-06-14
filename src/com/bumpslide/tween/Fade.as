@@ -29,6 +29,8 @@ package com.bumpslide.tween
 	 */
 	public class Fade {
 		
+		static public var Easing:Class = Quad;
+		
 		/**
 		 *  fade in - with onComplete callback which gets run instantaneously if no tween is neded
 		 */
@@ -41,7 +43,7 @@ package com.bumpslide.tween
 				target.visible = true; 
 				target.alpha=0;
 			}
-			TweenLite.to( target, duration, { '_autoAlpha':1, ease:Quad.easeOut, delay:delay, onComplete:onComplete, overwrite:2});
+			TweenLite.to( target, duration, { autoAlpha:1.0, ease:Easing.easeOut, delay:delay, onComplete:onComplete, overwrite:2});
 		}
 		
 		/**
@@ -49,7 +51,7 @@ package com.bumpslide.tween
 		 */
 		static public function Out(target:DisplayObject, delay:Number=.1, duration:Number=.2, onComplete:Function=null) : void {
 			if (!target.visible) { target.alpha = 0; if(onComplete!=null) onComplete.call(null); return; }
-			TweenLite.to( target, duration, { '_autoAlpha':0, ease:Quad.easeIn, delay:delay, onComplete:onComplete, overwrite:2});   
+			TweenLite.to( target, duration, { autoAlpha:0, ease:Easing.easeIn, delay:delay, onComplete:onComplete, overwrite:2});   
 		}
 		
 		static public function Cancel( target:DisplayObject ) : void {
