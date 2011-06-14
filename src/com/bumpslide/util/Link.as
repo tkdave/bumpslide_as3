@@ -79,6 +79,7 @@ package com.bumpslide.util {
 		
 		public static const BOOKMARK_DELICIOUS:uint = 0;
 		public static const BOOKMARK_FACEBOOK:uint = 1;		public static const BOOKMARK_DIGG:uint = 2;		public static const BOOKMARK_REDDIT:uint = 3;		public static const BOOKMARK_STUMBLEUPON:uint = 4;
+		public static const BOOKMARK_TWITTER:uint = 5;
 				
 		public static function bookmarkThis( url:String, title:String="", type:uint=BOOKMARK_DELICIOUS ) : void {
 			Link.to( getBookmarkURL(url, title, type) );
@@ -91,9 +92,11 @@ package com.bumpslide.util {
 				case BOOKMARK_STUMBLEUPON:
 					return 'http://www.stumbleupon.com/submit?url='+escape(url)+'&title='+escape(title);
 				case BOOKMARK_REDDIT:
-					return 'http:/reddit.com/submit?url='+escape(url)+'&title='+escape(title);
+					return 'http://reddit.com/submit?url='+escape(url)+'&title='+escape(title);
 				case BOOKMARK_DIGG:
 					return 'http://digg.com/submit?phase=2&url='+escape(url)+'&title='+escape(title);
+				case BOOKMARK_TWITTER:
+					return 'http://twitter.com/share?url='+escape(url)+'&title='+escape(title);
 				default:
 					return 'http://delicious.com/save?url='+escape(url)+'&title='+escape(title);
 			}
