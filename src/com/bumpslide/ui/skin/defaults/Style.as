@@ -60,7 +60,10 @@ package com.bumpslide.ui.skin.defaults
 		public static var SCROLLBAR_GAP:Number = 4;
 		public static var SCROLLBAR_WIDTH:Number = 20;
 		
-		public static var SLIDER_BACKGROUND_PADDING:Padding=new Padding( 2, 2); // Slider Track
+		public static var SLIDER_BACKGROUND_PADDING:Padding = new Padding( 2, 2 );
+
+		// Slider Track
+		public static const BORDER_PIXEL_HINTING:Boolean = true;
 
 	
 	}

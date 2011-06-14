@@ -12,6 +12,7 @@
 
 package com.bumpslide.ui 
 {
+	import com.bumpslide.ui.skin.defaults.Style;
 	import flash.display.BitmapData;
 
 	/**
@@ -27,12 +28,12 @@ package com.bumpslide.ui
 		protected var _borderSize:int = -1;
 		protected var _borderColor:uint = 0x000000;
 		protected var _borderAlpha:Number = 1;
-		protected var _borderPixelHinting:Boolean = false;
+		protected var _borderPixelHinting:Boolean = Style.BORDER_PIXEL_HINTING;
 		protected var _cornerRadius:Number = 0;
 		protected var _tileBitmap:BitmapData;
 		protected var _centerOrigin:Boolean = false;
 		
-		public function Box( color:Number=0xdddddd, width:Number = 64, height:Number = 64, x:Number = 0, y:Number = 0, corner_radius:Number = 0, border_width:Number=-1, border_color:uint=0x000000 ) {
+		public function Box( color:Number=0xdddddd, width:Number = 64, height:Number = 64, x:Number = 0, y:Number = 0, corner_radius:Number = 0, border_width:Number=-1, border_color:uint=0x000000) {
 			super();
 			_backgroundColor = color;		
 			_cornerRadius = corner_radius;	
