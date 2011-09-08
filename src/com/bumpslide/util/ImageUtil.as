@@ -76,7 +76,7 @@ package com.bumpslide.util
 
 			if(img == null || w <= 0 || h <= 0) {
 				// fail gracefully
-				trace( '[ImageUtil.crop] Error: image (' + img + ') cannot be cropped to ' + w + 'x' + h );
+				//trace( '[ImageUtil.crop] Error: image (' + img + ') cannot be cropped to ' + w + 'x' + h );
 				return;
 			}
 

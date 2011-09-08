@@ -43,9 +43,7 @@ package com.bumpslide.ui.skin.defaults
 				content: create( Button, { 
 					icon: new PixelIcon("  -, -,-,  -, -,-,  -, -,-", Style.BUTTON_LABEL) 
 				}) 
-			});
-			
-			//handle = add( Button, { icon: new PixelIcon("  -, -,-,  -, -,-,  -, -,-", Style.BUTTON_LABEL) } );			
+			});		
 		}
 	}
 }

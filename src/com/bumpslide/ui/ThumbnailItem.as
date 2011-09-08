@@ -97,10 +97,9 @@ package com.bumpslide.ui
 		 * Update things tied to gridItemData
 		 */
 		override protected function drawGridItem():void {			
+			super.drawGridItem();
 			cancelCall( _pendingLoad );
-			//image.unload();  
 			_pendingLoad = callLater( 10, doLoad );
-			//doLoad();
 		}	
 
 		
@@ -116,15 +115,7 @@ package com.bumpslide.ui
 		 * Load the image
 		 */
 		protected function doLoad(e:Event=null) : void {
-			//removeEventListener( Event.ENTER_FRAME, doLoad );
 			var ctx:LoaderContext = new LoaderContext(true);
-			try {
-				var ImageDecodingPolicy:Class = getDefinitionByName("flash.system.ImageDecodingPolicy") as Class;
-				if(ImageDecodingPolicy) ctx['imageDecodingPolicy'] = ImageDecodingPolicy['ON_LOAD'];
-			} catch (e:Error) {
-				//trace(e);
-			}
-			
 			image.load( url, -gridIndex, ctx );  		
 		}
 		

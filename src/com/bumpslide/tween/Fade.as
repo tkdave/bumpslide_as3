@@ -15,6 +15,8 @@ package com.bumpslide.tween
 
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Quad;
+	import com.greensock.plugins.AutoAlphaPlugin;
+	import com.greensock.plugins.TweenPlugin;
 
 	import flash.display.DisplayObject;
 
@@ -30,6 +32,8 @@ package com.bumpslide.tween
 	public class Fade {
 		
 		static public var Easing:Class = Quad;
+		
+		static private var __autoAlphaInit:Boolean = function():Boolean{ TweenPlugin.activate( [ AutoAlphaPlugin ] ); return true; }();
 		
 		/**
 		 *  fade in - with onComplete callback which gets run instantaneously if no tween is neded
