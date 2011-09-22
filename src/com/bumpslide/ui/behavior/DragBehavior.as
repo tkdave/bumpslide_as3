@@ -57,8 +57,8 @@ package com.bumpslide.ui.behavior
 		/**
 		 * Attaches behavior to a button
 		 */
-		static public function init( drag_target:InteractiveObject, bounds:Rectangle = null, do_drag:Boolean = true, ignore_child_clicks:Boolean=false):DragBehavior {
-			return new DragBehavior(drag_target, bounds, do_drag, ignore_child_clicks);	
+		static public function init( drag_target:InteractiveObject, bounds:Rectangle = null, do_drag:Boolean = true ):DragBehavior {
+			return new DragBehavior(drag_target, bounds, do_drag);	
 		}
 
 		/**
@@ -71,14 +71,14 @@ package com.bumpslide.ui.behavior
 		/**
 		 * Adds drag behavior to an interactive object 
 		 */
-		function DragBehavior( drag_target:InteractiveObject, bounds:Rectangle = null, do_drag:Boolean = true, ignore_child_clicks:Boolean=false ) 
+		function DragBehavior( drag_target:InteractiveObject, bounds:Rectangle = null, do_drag:Boolean = true) 
 		{		
 			DragBehavior.destroy(drag_target);			
 			dragTarget = drag_target;
-			dragTarget.addEventListener(MouseEvent.MOUSE_DOWN, handleMouseDown);
+			// get mouse down events in capture phase so as not to disturb child events
+			dragTarget.addEventListener(MouseEvent.MOUSE_DOWN, handleMouseDown, true);
 			_dragBounds = bounds;		
 			_doDrag = do_drag;	
-			_ignoreChildClicks = ignore_child_clicks;
 			_targets[dragTarget] = this;
 		}
 
@@ -104,12 +104,12 @@ package com.bumpslide.ui.behavior
 		protected function handleMouseDown(event:MouseEvent):void {
 			//trace(this + ' MOUSE DOWN ' +event.target );
 			if(!enabled) return;
-			if(_ignoreChildClicks && event.target!=event.currentTarget) return;
-			if(event) event.stopPropagation();
+			//if(event) event.stopPropagation();
 			mouseStart = new Point(event.stageX, event.stageY);
 			spriteStart = new Point(dragTarget.x, dragTarget.y);
 			previousLoc = spriteStart.clone();	
-			_justDragged = false;		
+			_justDragged = false;	
+			_isDragging = true;	
 			dragTarget.stage.addEventListener(MouseEvent.MOUSE_MOVE, whileDragging);
 			dragTarget.stage.addEventListener(MouseEvent.MOUSE_UP, stopDragging);
 			dragTarget.stage.addEventListener(Event.MOUSE_LEAVE, stopDragging);			
@@ -120,12 +120,13 @@ package com.bumpslide.ui.behavior
 			
 			Delegate.cancel( velocityCheck );
 			
+			if(!_isDragging) return;
+			
 			var delta:Point = getDragDelta();
 			
 			// add delta to the starting location
 			var targetLoc:Point = spriteStart.add(delta);			
 			
-			_isDragging = true;
 			if(delta.length>_validDragDistance) {
 				_justDragged = true;
 			}
@@ -174,6 +175,7 @@ package com.bumpslide.ui.behavior
 
 		
 		public function stopDragging(event:Event = null, dispatch_event:Boolean=true):void {		
+			if(_isDragging==false) return;
 			Delegate.cancel( velocityCheck );	
 			if(velocity==null) velocity=new Point();
 			_isDragging = false;

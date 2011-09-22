@@ -78,7 +78,6 @@ package com.bumpslide.util {
 		private static function dumpObject(o:Object):void {
 			var type:String;
 			for (var i:String in o) {
-				type = describeType(o[i]).@name;
 				if (type == 'Array' || type == 'Object') {
 					appendStr(getSpaces() + i + ":");
 					dump(o[i]);

@@ -28,7 +28,7 @@ package com.bumpslide.data {
 		
 		function bind( property:String, target:Object, setterOrFunction:*=null ):Binding ;
 		
-		function unbind( target:Object ):void;
+		function unbind( target:Object, property:String=null ):void;
 		
 	}
 }
