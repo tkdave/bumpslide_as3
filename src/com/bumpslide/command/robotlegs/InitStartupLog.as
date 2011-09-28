@@ -1,17 +1,18 @@
 package com.bumpslide.command.robotlegs
 {
 
-	import org.robotlegs.core.ICommandMap;
 	import com.bumpslide.command.Command;
 	import com.bumpslide.command.CommandEvent;
 	import com.bumpslide.data.type.Padding;
 	import com.bumpslide.ui.Label;
 	import com.bumpslide.util.ObjectUtil;
 
+	import org.robotlegs.core.ICommandMap;
 	import org.robotlegs.core.IInjector;
 	import org.robotlegs.core.IViewMap;
 
 	import flash.desktop.NativeApplication;
+	import flash.display.NativeWindow;
 	import flash.display.Stage;
 	import flash.text.TextFormat;
 
@@ -49,7 +50,21 @@ package com.bumpslide.command.robotlegs
 			if(isNaN(color)) color = parseInt( String(color).replace('#',''), 16 ); 
 			if(!padding is Padding) padding = Padding.create(padding);
 			
-			var stage:Stage = NativeApplication.nativeApplication.activeWindow.stage;
+			var window:NativeWindow = NativeApplication.nativeApplication.activeWindow;
+			if(window==null) {
+				trace('[InitStartupLog] no active window');
+				notifyComplete();
+				return;
+			}
+			
+			var stage:Stage = window.stage;
+			
+			if(stage==null) {
+				trace('[InitStartupLog] no active stage');
+				notifyComplete();
+				return;
+			}
+			
 			var format:TextFormat = new TextFormat( fontName, fontSize, color, bold );
 			
 			// create a label to display the text
