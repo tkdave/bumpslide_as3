@@ -30,8 +30,10 @@ package com.bumpslide.ui.skin.defaults
 		
 		override protected function draw() : void
 		{
-			background.visible = hostComponent.backgroundVisible;
-			background.setSize( width, height );
+			if(background && hostComponent) {
+				background.visible = hostComponent.backgroundVisible;
+				background.setSize( width, height );
+			}
 		}
 
 

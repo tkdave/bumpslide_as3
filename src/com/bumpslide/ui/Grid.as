@@ -72,7 +72,7 @@ package com.bumpslide.ui
 			layout.offset = 0;
 			scrollbar.value = 0;		}
 		public function set dataProvider( dp:* ):void {
-			if(layout.itemRenderer == null) layout.itemRenderer = GridItem;
+			if(layout.itemRenderer == null) layout.itemRenderer = (gridItemRenderer!=null) ? gridItemRenderer : GridItem;
 			layout.itemInitProperties = gridItemProps;
 			log('setting dataProvider ' + dp); 
 			layout.dataProvider = dp;
@@ -137,7 +137,7 @@ package com.bumpslide.ui
 
 		public function set gridItemRenderer(item_renderer:Class):void {
 			_itemRenderer = item_renderer==null ? Button : item_renderer;
-			//trace('_itemRenderer: ' + (_itemRenderer));
+			//trace('_itemRenderer: ', _itemRenderer, item_renderer);
 			//trace('layout: ' + (layout));
 			if(layout != null) layout.itemRenderer = _itemRenderer;
 		}
