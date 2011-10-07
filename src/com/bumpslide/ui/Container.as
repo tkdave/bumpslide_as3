@@ -56,7 +56,6 @@ package com.bumpslide.ui
 
 		private function handleChildAddedOrRemoved( event:Event ):void
 		{
-			if (event.target == boundsShape) return;
 			invalidate();
 		}
 
@@ -72,19 +71,9 @@ package com.bumpslide.ui
 			}
 		}
 
-
-		// override protected function drawShape():void {
-		// if(backgroundVisible) super.drawShape();
-		// }
-		protected function childFilter( item:*, index:int, array:Array ):Boolean
-		{
-			return item != boundsShape;
-		}
-
-
 		override public function layoutChildren():void
 		{
-			var kids:Array = children.filter( childFilter );
+			var kids:Array = children;
 
 			for each ( var child:DisplayObject in kids ) {
 				child[ layout == Direction.HORIZONTAL ? 'y' : 'x' ] = 0;

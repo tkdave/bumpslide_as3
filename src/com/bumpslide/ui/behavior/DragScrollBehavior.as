@@ -47,8 +47,8 @@ package com.bumpslide.ui.behavior
 		/**
 		 * Attaches behavior to a button
 		 */
-		static public function init( drag_target:InteractiveObject, scrollable_content:IScrollable ):DragScrollBehavior {
-			return new DragScrollBehavior( drag_target, scrollable_content);	
+		static public function init( drag_target:InteractiveObject, scrollable_content:IScrollable, use_capture:Boolean = false ):DragScrollBehavior {
+			return new DragScrollBehavior( drag_target, scrollable_content, use_capture);	
 		}
 		
 
@@ -62,7 +62,7 @@ package com.bumpslide.ui.behavior
 		/**
 		 * Adds drag and zoom behavior to a display object and zoomable content
 		 */
-		function DragScrollBehavior( drag_target:InteractiveObject, scrollable_content:IScrollable) {		
+		function DragScrollBehavior( drag_target:InteractiveObject, scrollable_content:IScrollable, use_capture:Boolean = false) {		
 			
 			DragScrollBehavior.destroy( drag_target );
 			
@@ -71,7 +71,7 @@ package com.bumpslide.ui.behavior
 		
 			_targets[dragTarget] = this;
 			
-			dragBehavior = DragBehavior.init( drag_target, null, false);
+			dragBehavior = DragBehavior.init( drag_target, null, false, use_capture);
 			
 			drag_target.addEventListener( DragEvent.EVENT_DRAG_START, handleDragStart);
 			drag_target.addEventListener( DragEvent.EVENT_DRAG_MOVE, handleDragMove);
@@ -103,6 +103,10 @@ package com.bumpslide.ui.behavior
 		
 		private function handleDragStop( event:DragEvent ):void
 		{
+		}
+		
+		public function get isDragging() : Boolean {
+			return dragBehavior.isDragging;
 		}
 		
 

@@ -6,7 +6,7 @@ package com.bumpslide.ui.skin.defaults
 	import com.bumpslide.ui.skin.BasicSkin;
 
 	/**
-	 * DefaultPanelSkin
+	 * The Panel Skin is really just the background skin
 	 *
 	 * @author David Knape
 	 */
@@ -21,10 +21,7 @@ package com.bumpslide.ui.skin.defaults
 
 		override protected function addChildren() : void
 		{
-			background = add( Box );
-			background.backgroundColor = Style.PANEL_BACKGROUND_COLOR;
-			background.cornerRadius = Style.PANEL_CORNER_RADIUS;
-			background.filters = [ Style.BEVEL_FILTER_INSET ];
+			background = add( Box, Style.PANEL_BACKGROUND );
 		}
 		
 		

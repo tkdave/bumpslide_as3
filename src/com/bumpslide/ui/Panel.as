@@ -10,20 +10,7 @@
  * More info at http://www.opensource.org/licenses/mit-license.php
  */
 
-package com.bumpslide.ui {
-
-	import com.bumpslide.data.constant.Direction;
-	import com.bumpslide.data.type.Padding;
-	import com.bumpslide.events.UIEvent;
-	import com.bumpslide.ui.skin.defaults.DefaultPanelSkin;
-	import com.bumpslide.ui.skin.defaults.Style;
-
-	import flash.display.DisplayObject;
-	import flash.display.Sprite;
-	import flash.events.Event;
-	import flash.events.MouseEvent;
-	import flash.geom.Rectangle;
-	
+package com.bumpslide.ui {	import com.bumpslide.data.constant.Direction;	import com.bumpslide.data.type.Padding;	import com.bumpslide.events.UIEvent;	import com.bumpslide.ui.skin.defaults.DefaultPanelSkin;	import com.bumpslide.ui.skin.defaults.Style;	import flash.display.DisplayObject;	import flash.display.Sprite;	import flash.events.Event;	import flash.events.MouseEvent;	import flash.geom.Rectangle;	
 	/**	 * Simple Container with Background box and padding.	 * 	 * This is a core base class for the scroll panels and grids	 * 	 * This component can be instantiated via code, or it can be created 	 * inside a FLA.  Missing pieces will be dynamically added to the 	 * display list. Background is no longer transparent by default.  We still 	 * need it for absorbing certain mouse events in various child components.	 * 
 	 * Update 2010-10: Background is now drawn with skin. 
 	 * 	 * @author David Knape	 */	public class Panel extends Component 	{

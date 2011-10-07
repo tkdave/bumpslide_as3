@@ -25,10 +25,13 @@ package com.bumpslide.ui.skin.defaults
 	 */
 	public class Style
 	{	
-		// Default Panel Styles
-		public static var PANEL_BACKGROUND_COLOR:Number = 0xEEEEEE;
-		public static var PANEL_PADDING:Number = 5;
-		public static var PANEL_CORNER_RADIUS:Number = 0;
+		// default panel skin properties (background:Box)
+		public static var PANEL_BACKGROUND:Object = {
+			alpha: 0, 
+			backgroundColor: 0xeeeeee, 
+			cornerRadius: 0
+		};
+		public static var PANEL_PADDING:Number = 0;
 		
 		// Default Button Styles
 		public static var BUTTON_OFF:uint = 0xDDDDDD;
