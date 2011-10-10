@@ -25,6 +25,7 @@ package com.bumpslide.util
 		/**		* Resizes an image or rectangle to fit within a bounding box		* while preserving aspect ratio.  The third parameter is optional.		* AllowStretching allows the image bounds to be stetched beyond the 		* original size. By default this is off. We use this most often for sizing 		* dynamically loaded JPG's, and we don't want them to be stetched larger 		*  		* @param	original - image size as a rectangle, max dimensions if allowStetching is left to false		* @param	bounds - the target size and/or available space for displaying the image		* @param	allowStetching - default is false		*/
 		static public function resizeRect( original:Rectangle, bounds:Rectangle, allowStretching:Boolean = true ) : Rectangle
 		{
+			if(original==null || original.width==0 || original.height==0) return new Rectangle();
 			var size:Rectangle = original.clone();
 			var aspectRatio:Number = original.width / original.height;
 			// first we size based on width

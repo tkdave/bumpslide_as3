@@ -105,7 +105,7 @@ package com.bumpslide.ui.behavior
 		}
 		
 		protected function handleMouseDown(event:MouseEvent):void {
-			trace(this + ' MOUSE DOWN ' +event.target );
+			//trace(this + ' MOUSE DOWN ' +event.target );
 			if(!enabled) return;
 			if(event) event.stopPropagation();
 			mouseStart = new Point(event.stageX, event.stageY);

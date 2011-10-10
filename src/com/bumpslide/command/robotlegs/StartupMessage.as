@@ -4,6 +4,7 @@ package com.bumpslide.command.robotlegs
 	import com.bumpslide.command.Command;
 	import com.bumpslide.command.CommandEvent;
 	import com.bumpslide.ui.Label;
+	import com.bumpslide.util.Delegate;
 
 	/**
 	 * Post message to startup log
@@ -17,6 +18,7 @@ package com.bumpslide.command.robotlegs
 		public var startupLogDisplay:Label;
 
 		public var text:String = "";
+		public var pause:uint = 200;
 		
 		override public function execute( event:CommandEvent = null ):void
 		{
@@ -25,8 +27,9 @@ package com.bumpslide.command.robotlegs
 			}
 
 			startupLogDisplay.text += "\n" + text;
+			startupLogDisplay.updateNow();
 
-			super.execute( event );
+			Delegate.callLater( 10 + pause, super.execute, event );
 		}
 	}
 }

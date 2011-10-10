@@ -134,7 +134,7 @@ package com.bumpslide.ui
 		/**		 * attaches content		 */
 		public function set content( displayObj:DisplayObject ):void {
 			
-			if (displayObj != _content) {
+			if (_content!=null && displayObj != _content) {
 				sendEvent( EVENT_CLOSED );
 			}
 			_content = displayObj;
