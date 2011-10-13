@@ -34,9 +34,10 @@ package com.bumpslide.ui
 
 		private var _backgroundVisible:Boolean = false;
 
-		public function Container( layout:String = 'horizontal' )
+		public function Container( layout:String = 'horizontal', spacing:Number=10 )
 		{
 			this.layout = layout;
+			this.spacing = spacing;
 			super();
 		}
 
