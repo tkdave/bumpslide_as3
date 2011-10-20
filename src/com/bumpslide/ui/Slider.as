@@ -22,7 +22,7 @@ package com.bumpslide.ui {	import com.bumpslide.data.IBindable;	import com.b
 					(skin as ISkin).renderSkin(skinState);
 				}
 				validate(VALID_DATA);
-			}		}						///////////////////////////////////		// event handlers		///////////////////////////////////		private function handleBackgroundMouseDown(event:MouseEvent):void 		{						// figure out where we are			var pos:Number = isVertical ? mouseY - padding.top : mouseX - padding.left;			pos -= getHandleSize() / 2; // center handle at mouse loc						percent = pos/getHandleBounds();			// notify our friends			notifyChanged();			
+			}		}						///////////////////////////////////		// event handlers		///////////////////////////////////		private function handleBackgroundMouseDown(event:MouseEvent):void 		{						// figure out where we are			var pos:Number = isVertical ? mouseY - padding.top : mouseX - padding.left;			pos -= getHandleSize() / 2; // center handle at mouse loc						percent = pos/getHandleBounds();			// notify our friends			if(notifyWhileDragging) notifyChanged();			
 			invalidate( VALID_SKIN_STATE );
 						// render now - we need the handle to be at it's new loc before we start dragging			updateNow();			
 			callLater( 10, _dragBehavior.startDragging, event);		}				private function handleDragStart(event:DragEvent):void 		{			// keep bounds updated			updateDragBounds();		}				/**		 * Handles drag start and move events		 */				private function handleDragMove(event:DragEvent):void 		{			//var handleLoc:Number = (isVertical) ? handle.y - padding.top : handle.x - padding.left;			percent = getActualHandlePosition() / getHandleBounds();		    
