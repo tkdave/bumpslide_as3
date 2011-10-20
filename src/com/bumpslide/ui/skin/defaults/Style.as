@@ -33,6 +33,10 @@ package com.bumpslide.ui.skin.defaults
 		};
 		public static var PANEL_PADDING:Number = 0;
 		
+		public static var SLIDER_BACKGROUND:Object = {
+			backgroundColor: 0xeeeeee
+		};
+		
 		// Default Button Styles
 		public static var BUTTON_OFF:uint = 0xDDDDDD;
 		public static var BUTTON_OVER:uint = 0xEEEEEE;
