@@ -163,6 +163,7 @@ package com.bumpslide.net
 				_result = getResult();
 			} catch (e:Error) {
 				raiseError( e );
+				trace(_data);
 				return;
 			}
 			// pass data to responders

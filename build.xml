@@ -41,9 +41,9 @@
 			<fileset dir="${report.loc}" defaultexcludes="false">
 				<include name="**/*" />
 			</fileset>
-			<fileset dir="${bin.loc}" defaultexcludes="false">
+			<!--<fileset dir="${bin.loc}" defaultexcludes="false">
 				<include name="**/*" />
-			</fileset>
+			</fileset>-->
 		</delete>
 		<delete dir="${report.loc}" failonerror="true"/>
 		<delete dir="${bin.loc}" failonerror="true"/>

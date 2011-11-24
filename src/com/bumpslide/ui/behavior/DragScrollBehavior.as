@@ -37,11 +37,6 @@ package com.bumpslide.ui.behavior
 		private var scrollableContent:IScrollable;
 		private var scrollStart:Number;
 		
-		public var tweenEaseFactor:Number  = .15;
-		public var tweenUpdateDelay:Number = 30;
-
-		public var tweenEnabled:Boolean = false;
-
 		private var dragBehavior:DragBehavior;
 
 		/**

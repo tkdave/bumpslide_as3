@@ -18,6 +18,7 @@ package com.bumpslide.ui
 	import flash.events.FocusEvent;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
+	import flash.text.TextFormat;
 
 	[Event(name='change',type='flash.events.Event')]
 	/**
@@ -70,7 +71,7 @@ package com.bumpslide.ui
 
 			if (input_txt == null) input_txt = getSkinPart( 'input_txt' );
 			if (hint_txt == null) hint_txt = getSkinPart( 'hint_txt' );
-
+			
 			if (input_txt != null) {
 				input_txt.addEventListener( Event.CHANGE, handleTextInput );
 				input_txt.addEventListener( FocusEvent.FOCUS_IN, handleTextBoxFocusIn );
@@ -86,6 +87,8 @@ package com.bumpslide.ui
 		override protected function destroySkin():void
 		{
 			if (input_txt != null) {
+				input_txt.tabEnabled = true;
+				input_txt.needsSoftKeyboard = true;
 				input_txt.removeEventListener( Event.CHANGE, handleTextInput );
 				input_txt.removeEventListener( FocusEvent.FOCUS_IN, handleTextBoxFocusIn );
 				input_txt.removeEventListener( FocusEvent.FOCUS_OUT, handleTextBoxFocusOut );
@@ -128,6 +131,7 @@ package com.bumpslide.ui
 		protected function handleTextBoxFocusIn( event:FocusEvent ):void
 		{
 			skinState = 'focused';
+			if(input_txt) input_txt.requestSoftKeyboard();
 		}
 
 
@@ -144,6 +148,7 @@ package com.bumpslide.ui
 
 
 		public function set text( val:String ):void {
+			if(val==null) val='';
 			_text = val;
 			invalidate( 'text' );
 		}
@@ -163,5 +168,6 @@ package com.bumpslide.ui
 		override public function get height():Number {
 			return actualHeight;
 		}
+
 	}
 }

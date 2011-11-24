@@ -23,7 +23,7 @@ package com.bumpslide.ui.behavior
 	public interface IBehavior 
 	{
 		
-		
+				
 		
 	}
 }

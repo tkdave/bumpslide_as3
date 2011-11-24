@@ -68,7 +68,7 @@ package com.bumpslide.net
 		
 		static protected function defaultErrorHandler(event:NetStatusEvent):void 
 		{
-			trace('[AMFRequest:Class (static)] defaultErrorHandler() - caught unhandled net status event ' + event.info.code);
+			trace('[AMFRequest:Class (static)] defaultErrorHandler() - caught unhandled net status event ' + event.info['code']);
 		}
 
 		

@@ -36,11 +36,11 @@ package com.bumpslide.ui.behavior
 		// track instances locally to aid in event management
 		static private var _targets:Dictionary = new Dictionary(true);
 		
-		private var dragTarget:InteractiveObject;
-		private var mouseStart:Point;
-		private var spriteStart:Point;
-		private var previousLoc:Point;
-		private var velocity:Point;
+		public var dragTarget:InteractiveObject;
+		public var mouseStart:Point;
+		public var spriteStart:Point;
+		public var previousLoc:Point;
+		public var velocity:Point;
 		
 		protected var _doDrag:Boolean = true;				protected var _isDragging:Boolean=false;
 		protected var _dragBounds:Rectangle;
@@ -50,9 +50,9 @@ package com.bumpslide.ui.behavior
 		protected var _trackVelocity:Boolean = false;
 		protected var _ignoreChildClicks:Boolean = false;
 		
-		private var velocityCheck:Timer;
+		protected var velocityCheck:Timer;
 
-		private var useCapture:Boolean = false;
+		protected var useCapture:Boolean = false;
 		
 
 		

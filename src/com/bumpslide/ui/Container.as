@@ -89,6 +89,8 @@ package com.bumpslide.ui
 					Align.vbox( kids, spacing );
 					break;
 			}
+			
+			super.layoutChildren();
 		}
 
 

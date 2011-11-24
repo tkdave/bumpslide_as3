@@ -51,8 +51,8 @@ package com.bumpslide.ui.skin.defaults
 			}
 			background.buttonMode = true;
 
-			inputText = add( Label, { editable:true, maxLines:1, selectable:true, padding:3 } );
-			hintText = add( Label, { alpha:.5, maxLines:1, padding:"0 3" } );
+			inputText = add( Label, { editable:true, maxLines:1, selectable:true, padding:5 } );
+			hintText = add( Label, { alpha:.5, maxLines:1, padding:5 } );
 
 			input_txt = inputText.textField;
 			hint_txt = hintText.textField;
@@ -85,6 +85,12 @@ package com.bumpslide.ui.skin.defaults
 
 		public function _normal():void
 		{
+			hintText.color = Style.INPUT_TEXT_HINT;
+			inputText.color = Style.INPUT_TEXT;
+			
+			hintText.bold = false;
+			inputText.bold = false;
+						
 			// Should this logic be in the component?
 			hintText.visible = hostComponent.text == null || hostComponent.text.length == 0;
 			inputText.visible = !hintText.visible;

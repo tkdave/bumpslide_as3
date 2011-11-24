@@ -44,7 +44,7 @@ package com.bumpslide.ui
 
 		protected var _pendingLoad:Timer;
 
-		protected var _padding:Padding;
+		
 
 		/**
 		 * Creates border, fill, and image clips
@@ -54,7 +54,7 @@ package com.bumpslide.ui
 			// delayUpdate = false;
 			// cacheAsBitmap = true;
 
-			if (_padding == null) _padding = new Padding( 3 );
+			
 
 			// add children
 			border = addChild( new Box( _borderColor ) ) as Box;
@@ -96,6 +96,8 @@ package com.bumpslide.ui
 			fill.backgroundColor = fillColor;
 			border.visible = (borderThickness > 0);
 
+			if (_padding == null) _padding = new Padding();
+			
 			if (hasChanged( VALID_SIZE )) {
 				// position the boxes
 				border.move( margin, margin );
@@ -199,5 +201,8 @@ package com.bumpslide.ui
 		public function get url():String {
 			return gridItemData;
 		}
+
+
+		
 	}
 }

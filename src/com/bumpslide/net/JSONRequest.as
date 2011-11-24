@@ -28,7 +28,7 @@ package com.bumpslide.net {
 		}
 		
 		override protected function getResult():* {
-			return JSON.decode(data, false);
+			return com.adobe.serialization.json.JSON.decode(data, false);
 		}
 	}
 }
