@@ -12,8 +12,12 @@
 
 package com.bumpslide.ui 
 {
+
+	import com.bumpslide.data.type.Gradient;
 	import com.bumpslide.ui.skin.defaults.Style;
+
 	import flash.display.BitmapData;
+	import flash.display.GradientType;
 
 	/**
 	 * A Box
@@ -32,6 +36,7 @@ package com.bumpslide.ui
 		protected var _cornerRadius:Number = 0;
 		protected var _tileBitmap:BitmapData;
 		protected var _centerOrigin:Boolean = false;
+		protected var _gradientFill:Gradient = null;
 		
 		public function Box( color:Number=0xdddddd, width:Number = 64, height:Number = 64, x:Number = 0, y:Number = 0, corner_radius:Number = 0, border_width:Number=-1, border_color:uint=0x000000) {
 			super();
@@ -65,13 +70,16 @@ package com.bumpslide.ui
 			super.draw();
 			
 			graphics.clear();
-			graphics.beginFill(backgroundColor, backgroundAlpha);	
 			if(borderWidth>=0) {
 				graphics.lineStyle( borderWidth, borderColor, borderAlpha, borderPixelHinting);
 			}		
 			if(_tileBitmap) {
 				graphics.beginBitmapFill(_tileBitmap);
-			}			
+			} else if(_gradientFill) {
+				_gradientFill.beginFill(graphics,width, height);
+			} else {
+				graphics.beginFill(backgroundColor, backgroundAlpha);
+			}
 			drawShape();
 			graphics.endFill();	
 			
@@ -196,6 +204,16 @@ package com.bumpslide.ui
 		
 		public function set borderPixelHinting(borderPixelHinting:Boolean):void {
 			_borderPixelHinting = borderPixelHinting;
+			invalidate();
+		}
+
+
+		public function get gradientFill():Gradient {
+			return _gradientFill;
+		}
+
+		public function set gradientFill( gradientFill:Gradient ):void {
+			_gradientFill = gradientFill;
 			invalidate();
 		}
 	}

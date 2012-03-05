@@ -22,6 +22,12 @@ package com.bumpslide.ui
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 
+	[Event(name="onLightboxOpened", type="com.bumpslide.events.UIEvent")]
+	[Event(name="onLightboxClosed", type="com.bumpslide.events.UIEvent")]
+	
+	[Event(name="close", type="flash.events.Event")]
+		
+	
 	/**	 * Lightbox	 * 	 * @author David Knape	 */
 	public class Lightbox extends ViewLoader
 	{
@@ -108,6 +114,7 @@ package com.bumpslide.ui
 		/**		 * Closes lightbox and removes content from the display list		 */
 		public function close( e:Event = null ):void
 		{
+			dispatchEvent( new Event( Event.CLOSE, true ) );
 			content = null;
 		}
 		

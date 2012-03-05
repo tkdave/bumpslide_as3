@@ -44,15 +44,14 @@ package com.bumpslide.ui.skin.defaults
 		override protected function addChildren():void
 		{
 			if (this['_background'] == null) {
-				background = addChild( new Box( 0xffffff, 1, 1, 0, 0, Style.BUTTON_CORNER_RADIUS, 1, 0xaaaaaa ) ) as Box;
-				background.filters = [ Style.BEVEL_FILTER_INSET ];
+				background = add( Box, Style.INPUT_BACKGROUND_PROPS );
 			} else {
 				background = this['_background'];
 			}
 			background.buttonMode = true;
 
-			inputText = add( Label, { editable:true, maxLines:1, selectable:true, padding:5 } );
-			hintText = add( Label, { alpha:.5, maxLines:1, padding:5 } );
+			inputText = add( Label, { editable:true, maxLines:1, selectable:true, padding:Style.INPUT_PADDING, textFormat:Style.INPUT_TEXT_FORMAT } );
+			hintText = add( Label, { alpha:.5, maxLines:1, padding:Style.INPUT_PADDING, textFormat:Style.INPUT_TEXT_FORMAT } );
 
 			input_txt = inputText.textField;
 			hint_txt = hintText.textField;
@@ -65,7 +64,9 @@ package com.bumpslide.ui.skin.defaults
 
 			inputText.width = hostComponent.width;
 			hintText.width = hostComponent.width;
+			inputText.logEnabled = true;
 			background.setSize( hostComponent.width, inputText.height );
+			inputText.logEnabled = false;
 		}
 
 

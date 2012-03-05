@@ -21,7 +21,6 @@ package com.bumpslide.ui.skin
 	 * ImageButtonSkin
 	 *
 	 * @author David Knape
-	 * @version SVN: $Id: $
 	 */
 	public class ImageButtonSkin extends BasicSkin
 	{

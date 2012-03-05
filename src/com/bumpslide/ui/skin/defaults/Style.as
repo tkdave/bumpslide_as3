@@ -13,6 +13,7 @@
 package com.bumpslide.ui.skin.defaults
 {
 
+	import flash.text.TextFormatAlign;
 	import com.bumpslide.data.type.Padding;
 
 	import flash.filters.BevelFilter;
@@ -33,18 +34,25 @@ package com.bumpslide.ui.skin.defaults
 		};
 		public static var PANEL_PADDING:Number = 0;
 		
-		public static var SLIDER_BACKGROUND:Object = {
-			backgroundColor: 0xeeeeee
+		public static var SLIDER_BACKGROUND_PROPS:Object = {
+			backgroundColor: 0xeeeeee,
+			cornerRadius: 3,
+			filters:[ BEVEL_FILTER_INSET ]
 		};
 		
 		// Default Button Styles
 		public static var BUTTON_OFF:uint = 0xDDDDDD;
-		public static var BUTTON_OVER:uint = 0xEEEEEE;
-		public static var BUTTON_DOWN:uint = 0xDDDDDD;
-		public static var BUTTON_SELECTED:uint = 0x999999;
+		public static var BUTTON_OVER:uint = 0xDDEEFF;
+		public static var BUTTON_DOWN:uint = 0xBBCCDD;
+		public static var BUTTON_SELECTED:uint = 0xffdd99;
 		public static var BUTTON_LABEL:uint = 0x333333;
-		public static var BUTTON_LABEL_OVER:uint = 0xDDDDDD;
-		public static var BUTTON_CORNER_RADIUS:Number = 0;
+		public static var BUTTON_LABEL_OVER:uint = 0x000000;
+		public static var BUTTON_PADDING:* = "5 10";
+		public static var BUTTON_TEXT_FORMAT:TextFormat = new TextFormat( 'Arial', 11, 0x333333, true, null, null, null, null, TextFormatAlign.CENTER);
+		public static var BUTTON_BACKGROUND_PROPS:Object = {
+			cornerRadius: 3,
+			filters:[ BEVEL_FILTER ]
+		};
 		
 		// Default Input Styles
 		public static var INPUT_BORDER:uint = 0xDDDDDD;
@@ -53,6 +61,14 @@ package com.bumpslide.ui.skin.defaults
 		public static var INPUT_FOCUS_BACKGROUND:uint = 0xFFFFFF;		
 		public static var INPUT_TEXT:uint = 0x333333;
 		public static var INPUT_TEXT_HINT:uint = 0xAAAAAA;
+		public static var INPUT_PADDING:* = "5 5 7 5";
+		public static var INPUT_BACKGROUND_PROPS:Object = {
+			cornerRadius: 0,
+			borderWidth: 0,
+			borderColor: INPUT_BORDER,
+			filters:[ BEVEL_FILTER_INSET ]
+		};
+		
 		
 		// Default Label Text Format
 		public static var LABEL_TEXT_FORMAT:TextFormat = new TextFormat('Arial', 11, 0x333333, true);
@@ -66,8 +82,13 @@ package com.bumpslide.ui.skin.defaults
 
 		public static var SCROLLBAR_GAP:Number = 4;
 		public static var SCROLLBAR_WIDTH:Number = 20;		
-		public static var SLIDER_BACKGROUND_PADDING:Padding = new Padding( 2, 2 );
+		public static var SLIDER_BACKGROUND_PADDING:* = "2 2";
+
 		public static var BORDER_PIXEL_HINTING:Boolean = true;
+
+		public static var INPUT_TEXT_FORMAT:TextFormat = new TextFormat('Arial', 11, 0x333333, false );
+
+
 
 	
 	}

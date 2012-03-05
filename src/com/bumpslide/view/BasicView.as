@@ -30,10 +30,13 @@ package com.bumpslide.view
 				
 		protected var _viewState:String = ViewState.INACTIVE;
 		
+		public var transitionsEnabled:Boolean = true;
+		
 		public function transitionIn():void {
 			_viewState = ViewState.TRANSITIONING_IN;
 			dispatchEvent( new ViewChangeEvent( ViewChangeEvent.TRANSITION_IN ) );
-			doTransitionIn();
+			if(transitionsEnabled) doTransitionIn();
+			else transitionInComplete();
 		}
 
 
@@ -45,7 +48,8 @@ package com.bumpslide.view
 		public function transitionOut():void {
 			_viewState = ViewState.TRANSITIONING_OUT;			
 			dispatchEvent( new ViewChangeEvent( ViewChangeEvent.TRANSITION_OUT ) );
-			doTransitionOut();
+			if(transitionsEnabled) doTransitionOut();
+			else transitionOutComplete();
 		}
 
 

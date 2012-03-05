@@ -79,7 +79,7 @@ package com.bumpslide.net
 
 
 		/**		 * Adds a responder to the request		 */
-		public function addResponder( responder:IResponder ):void
+		public function addResponder( responder:IResponder ):IRequest
 		{
 			if(_responders == null)
 				_responders = new Array();
@@ -89,38 +89,40 @@ package com.bumpslide.net
 					_responders.push( responder );
 				}
 			}
+			return this;
 		}
 
 		/**
 		 * Remove a responder
 		 */
-		public function removeResponder( responder:IResponder ) : void
+		public function removeResponder( responder:IResponder ) : IRequest
 		{
 			var idx:int = _responders.indexOf( responder );
 			if(idx != -1) {
 				_responders.splice( idx, 1 );
 			}
+			return this;
 		}
 
 
 		/**		 * Starts loading the request		 */
-		public function load():void
+		public function load():IRequest
 		{
-			if(cancelled)
-				return;
-			if(loading)
-				return;
+			if(cancelled || loading) {
+				return this;
+			}
 			initTimer();
 			try {
 				initRequest();
 			} catch (error:Error) {
 				raiseError( error );
 			}
+			return this;
 		}
 
 
 		/**		 * Cancels pending request		 */
-		public function cancel():void
+		public function cancel():IRequest
 		{
 			// only allow cancelling requests that are still pending
 			if(!_complete) {
@@ -129,6 +131,25 @@ package com.bumpslide.net
 				raiseError( new Error( ERROR_MSG_CANCELLED ) );
 				dispatchEvent( new Event( Event.CANCEL ) );
 			}
+			return this;
+		}
+
+		/**
+		 * Cancel and reset to default state so request can be re-used
+		 * 
+		 * Note that this method can also optionally remove all repsponders, but this is disabled by default.
+		 */
+		public function reset( remove_responders:Boolean = false ):IRequest {
+			cancel();
+			_cancelled = false;
+			_loading = false;
+			_complete = false;
+			_result = null;
+			_data = null;
+			if(remove_responders) {
+				_responders = new Array();
+			}
+			return this;
 		}
 
 
@@ -209,6 +230,7 @@ package com.bumpslide.net
 		/**		 * After request times out, try again		 */
 		protected function handleTimeout( e:TimerEvent = null ):void
 		{
+			
 			debug( 'handleTimeout' );
 			killRequest();
 			

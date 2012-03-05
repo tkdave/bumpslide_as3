@@ -33,9 +33,11 @@ package com.bumpslide.net
 		
 		public function UploadRequest( file_reference:FileReference=null, url_request:URLRequest=null, responder:IResponder=null )
 		{
+			super( url_request, responder );
+			
 			timeout = 999999; 
-			_fileReference = file_reference;
-			super( url_request, responder );			
+			retryCount = 1;
+			_fileReference = file_reference;		
 		}
 
 		

@@ -39,6 +39,8 @@ package com.bumpslide.ui.behavior
 		
 		private var dragBehavior:DragBehavior;
 
+		public var snapToPage:Boolean = false;
+
 		/**
 		 * Attaches behavior to a button
 		 */
@@ -92,12 +94,15 @@ package com.bumpslide.ui.behavior
 		private function handleDragMove(event:DragEvent):void {
 			if(event.target!=event.currentTarget) return;
 			var delta:Number = scrollableContent.orientation==Direction.HORIZONTAL ? event.delta.x : event.delta.y;			
-			scrollableContent.scrollPosition = scrollStart - delta / scrollableContent.pixelsPerUnit;
+			if(Math.abs(delta)>16) scrollableContent.scrollPosition = scrollStart - delta / scrollableContent.pixelsPerUnit;
 		}
 		
 		
 		private function handleDragStop( event:DragEvent ):void
 		{
+			if(snapToPage) {
+				scrollableContent.scrollPosition = Math.round( scrollableContent.scrollPosition /  scrollableContent.visibleSize ) * scrollableContent.visibleSize;
+			}
 		}
 		
 		public function get isDragging() : Boolean {

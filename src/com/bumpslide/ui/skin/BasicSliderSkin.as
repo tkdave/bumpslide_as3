@@ -65,7 +65,7 @@ package com.bumpslide.ui.skin
 		 */
 		protected function drawBack():void
 		{
-			if (background == null) return;
+			if (background == null || hostComponent==null) return;
 
 			if (background is IResizable) {
 				(background as IResizable).setSize( hostComponent.width, hostComponent.height );
@@ -83,7 +83,7 @@ package com.bumpslide.ui.skin
 		{
 			// trace('draw handle');
 
-			if (handle == null) return;
+			if (handle == null || hostComponent==null) return;
 
 			var hs:Number = hostComponent.getHandleSize();
 			if (hostComponent.isVertical) {

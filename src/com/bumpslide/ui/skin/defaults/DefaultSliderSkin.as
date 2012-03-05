@@ -31,9 +31,7 @@ package com.bumpslide.ui.skin.defaults
 			//logEnabled = true;
 			
 			// Use panel to control padding around background art
-			background = add( Box, Style.SLIDER_BACKGROUND );
-			Box(background).cornerRadius = Style.BUTTON_CORNER_RADIUS;
-			background.filters = [Style.BEVEL_FILTER_INSET]; 
+			background = add( Box, Style.SLIDER_BACKGROUND_PROPS );
 			
 			handle = add( Panel, { 
 				padding: Style.SLIDER_BACKGROUND_PADDING, 

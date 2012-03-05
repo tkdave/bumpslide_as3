@@ -31,7 +31,13 @@ package com.bumpslide.ui {
 		protected var _zoom:Number = 1;
 		protected var _panX:Number = 0;
 		protected var _panY:Number = 0;
+
 		private var viewPort:Rectangle;
+
+		private var useScrollRect:Boolean = false;		
+		
+		
+		
 
 		/**
 		 * Cache as bitmap to improve performance with scrollRect
@@ -81,7 +87,20 @@ package com.bumpslide.ui {
 			
 			viewPort.width = width;
 			viewPort.height = height;
-			scrollRect = viewPort;
+			
+			if(useScrollRect) {
+				scrollRect = viewPort;
+				destroyChild( mask );
+				mask = null;
+			} else {
+				scrollRect = null;
+				if(mask==null) {
+					mask = add( Box );
+				}
+				(mask as Box).setSize( viewPort.width, viewPort.height );
+				content.x = -viewPort.x;
+				content.y = -viewPort.y;
+			}
 			
 			super.draw();		
 		}
@@ -101,6 +120,8 @@ package com.bumpslide.ui {
 				img = _content as Image;
 				if(loader) loader.contentLoaderInfo.removeEventListener(Event.INIT, refreshContentSize);
 				if(img) img.removeEventListener(Image.EVENT_LOADED, refreshContentSize);
+				destroyChild( mask );
+				mask = null;
 				destroyChild(_content);
 			}
 			_content = content;

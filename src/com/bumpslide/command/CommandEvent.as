@@ -55,7 +55,7 @@ package com.bumpslide.command
 		}
 
 		
-		public function fault(info:Object):void 
+		public function fault(info:Error):void 
 		{
 			if(faultHandler != null) {
 				try {

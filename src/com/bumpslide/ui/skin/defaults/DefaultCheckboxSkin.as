@@ -12,6 +12,8 @@
 package com.bumpslide.ui.skin.defaults
 {
 
+	import com.bumpslide.ui.skin.ISkinnable;
+	import com.bumpslide.ui.Label;
 	import com.bumpslide.ui.Box;
 	import com.bumpslide.ui.Component;
 	import com.bumpslide.ui.PixelIcon;
@@ -29,24 +31,30 @@ package com.bumpslide.ui.skin.defaults
 		public var checkBox:Box;
 		public var check:Component;
 
-		override protected function addChildren():void
+		
+		override public function initHostComponent( host_component:ISkinnable ):void
 		{
-			super.addChildren();
-
+			super.initHostComponent( host_component );
+			
 			// hide the background (make it like the hit area)
 			background.alpha = 0;
+			
+			checkBox = add( Box, Style.INPUT_BACKGROUND_PROPS );
+			
+			//checkBox = addChild( new Box( 0xcccccc, 16, 16, 0, 0, 0, 0 ) ) as Box;
+			//checkBox.filters = [ Style.BEVEL_FILTER_INSET ];
 
-			checkBox = addChild( new Box( 0xcccccc, 16, 16, 0, 0, 0, 0 ) ) as Box;
-			checkBox.filters = [ Style.BEVEL_FILTER_INSET ];
-
-			check = addChild( new PixelIcon( [ '*   *', ' * *', '  * ', ' * *', '*   *' ] ) ) as PixelIcon;
+			//addChild( check = new PixelIcon( [ '*   *', ' * *', '  * ', ' * *', '*   *' ] ) );
+			addChild( check = new Label( 'X', Style.BUTTON_TEXT_FORMAT ) );
+			
+			_off();
 		}
 
 
 		override protected function draw():void
 		{
 			super.draw();
-
+			if(!checkBox)  return;
 			checkBox.width = checkBox.height = background.height;
 
 			Align.center( check, checkBox.width );
@@ -58,6 +66,7 @@ package com.bumpslide.ui.skin.defaults
 		{
 			checkBox.borderColor = Style.INPUT_BORDER;
 			checkBox.backgroundColor = Style.INPUT_BACKGROUND;
+			DisplayUtil.colorize( check, Style.BUTTON_LABEL );
 			check.visible = false;
 		}
 

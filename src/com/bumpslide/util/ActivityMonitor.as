@@ -45,6 +45,7 @@ package com.bumpslide.util {
 		public function start():void {
 			debug('start');
 			timeStart = new Date().time;
+			_timer.reset();
 			_timer.start();
 			_stage.addEventListener(MouseEvent.MOUSE_UP, uiEventHandler);
 			_stage.addEventListener(MouseEvent.MOUSE_DOWN, uiEventHandler);

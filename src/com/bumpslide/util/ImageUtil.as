@@ -12,8 +12,11 @@
 package com.bumpslide.util
 {
 
+	import com.bumpslide.ui.Box;
 	import flash.display.*;
+	import flash.geom.Matrix;
 	import flash.geom.Rectangle;
+	import flash.geom.Transform;
 
 	/**	* Some Bitmap and image-related utility functions	* 	* In as2, we had image smoothing stuff here.  For as3, just set bmp.smoothing=true	* where bmp = (loader.content as Bitmap)	* 
 	 * Now includes support for Flex assets. But, we do it dynamically, so there are
@@ -47,16 +50,14 @@ package com.bumpslide.util
 		/**
 		 * Resizes a display object to fit inside a box width dimensions maxWidth and maxHeight
 		 */
-		static public function resize( mc:DisplayObject, maxWidth:Number, maxHeight:Number, allowStretching:Boolean = true ):void
+		static public function resize( img:DisplayObject, maxWidth:Number, maxHeight:Number, allowStretching:Boolean = true ):void
 		{
-			var img:DisplayObject = mc;
-			if(mc is Loader) {
-				try {
-					img = (mc as Loader).content;
-				} catch (error:Error) {
-				}
+			if(img == null || maxWidth <= 0 || maxHeight <= 0) {
+				// fail gracefully
+				return;
 			}
-			img.scaleX = img.scaleY = 1;
+			
+			reset(img);
 
 			var newSize:Rectangle = ImageUtil.resizeRect( ImageUtil.getSize( img ), new Rectangle( 0, 0, maxWidth, maxHeight ), allowStretching );
 
@@ -68,30 +69,18 @@ package com.bumpslide.util
 		/**         * Crops display object using a scrollrect - stretches to fill rect defined by width and height         */
 		static public function crop( img:DisplayObject, w:Number, h:Number, centered:Boolean = true ) : void
 		{
-			if(img is Loader) {
-				try {
-					img = (img as Loader).content;
-				} catch (error:Error) {
-				}
-			}
-
 			if(img == null || w <= 0 || h <= 0) {
 				// fail gracefully
-				//trace( '[ImageUtil.crop] Error: image (' + img + ') cannot be cropped to ' + w + 'x' + h );
 				return;
 			}
-
-			// reset scale
-			img.scaleX = img.scaleY = 1;
+			
+			reset(img);
 			
 			// Original Size
 			var size:Rectangle = ImageUtil.getSize( img );
-			
+		
 			// Original Aspect Ratio
 			var aspect_ratio:Number = size.width / size.height;
-			
-			// Rect that will become the scroll rect we use for cropping (use target width and height)
-			var scroll_rect:Rectangle = new Rectangle( 0, 0, w, h );
 			
 			// Begins as the target crop size, and becomes the calculated actual image size (before cropping)
 			var target_size:Rectangle = new Rectangle( 0, 0, w, h );
@@ -113,20 +102,20 @@ package com.bumpslide.util
 				
 				target_size.height = target_size.width / aspect_ratio;
 			}
-
-			img.width = target_size.width;
-			img.height = target_size.height;
 			
-			scroll_rect.width /= img.scaleX;
-			scroll_rect.height /= img.scaleY;
+			var scale:Number = target_size.width/size.width;
 			
+			img.scaleX = img.scaleY = scale;
+			
+			// the scroll rect we use for cropping 
+			var scroll_rect:Rectangle = new Rectangle( 0, 0, w/scale, h/scale );
+					
 			// center scrollRect in image (crop to fit)
 			if(centered) {
-				scroll_rect.x = ( (target_size.width - w) / img.scaleX / 2 );
-				scroll_rect.y = ( (target_size.height - h) / img.scaleY / 2 );
+				scroll_rect.x = ( (target_size.width - w) / scale / 2 );
+				scroll_rect.y = ( (target_size.height - h) / scale / 2 );
 			}
 			
-			//img.cacheAsBitmap = true;
 			img.scrollRect = scroll_rect;
 		}
 		
@@ -135,26 +124,55 @@ package com.bumpslide.util
 		 * Remove any crop or scale performed by this class
 		 */
 		static public function reset( img:DisplayObject ):void {
-			
+			/*
 			if(img is Loader) {
 				try {
 					img = (img as Loader).content;
 				} catch (error:Error) {
 				}
-			}
+			}*/
+			
+			img.scaleX = img.scaleY = 1.0;
 			img.scrollRect = null;
-			img.scaleX = img.scaleY = 1;
-			img.cacheAsBitmap = false;		
 		}
 
 
 		static public function getSize( img:DisplayObject ) : Rectangle
-		{
+		{			
+			if(img==null) return new Rectangle();
+			
 			if(isFlexAsset( img )) {
 				return new Rectangle( 0, 0, img['measuredWidth'], img['measuredHeight'] );
 			} else {
-				return new Rectangle( 0, 0, img.width, img.height );
+				return getFullBounds( img );
 			}
+		}
+		
+		/**
+		 * This function works like DisplayObject.getBounds(), except it will find the full
+		 * bounds of any display object, even after its scrollRect has been set.
+		 *
+		 * http://usecake.com/lab/find-the-height-and-width-of-a-sprite-with-a-scrollrect.html
+		 * 
+		 * @param displayObject - a display object that may have a scrollRect applied
+		 * @return a rectangle describing the dimensions of the unmasked content
+		 */
+		static public function getFullBounds( displayObject:DisplayObject ):Rectangle
+		{
+			var bounds:Rectangle, transform:Transform,
+			toGlobalMatrix:Matrix, currentMatrix:Matrix;
+
+			transform = displayObject.transform;
+			currentMatrix = transform.matrix;
+			toGlobalMatrix = transform.concatenatedMatrix;
+			toGlobalMatrix.invert();
+			transform.matrix = toGlobalMatrix;
+
+			bounds = transform.pixelBounds.clone();
+
+			transform.matrix = currentMatrix;
+
+			return bounds;
 		}
 
 

@@ -84,6 +84,7 @@ package com.bumpslide.view
 			_content = value;
 			if(_content) addChild( _content );
 			invalidate( VALID_SIZE );
+			callLater(10, invalidate, VALID_SIZE);
 		}
 
 

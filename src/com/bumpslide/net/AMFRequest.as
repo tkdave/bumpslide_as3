@@ -159,10 +159,10 @@ package com.bumpslide.net
 		}
 
 		
-		override public function cancel():void
+		override public function cancel():IRequest
 		{
 			AMFRequest.closeActiveConnection(gatewayUrl, debugEnabled);
-			super.cancel();
+			return super.cancel();			
 		}
 
 		

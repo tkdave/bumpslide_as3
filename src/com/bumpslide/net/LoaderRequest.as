@@ -57,10 +57,11 @@ package com.bumpslide.net
 		/**
 		 * Cancel pending request and unload image
 		 */
-		override public function cancel():void
+		override public function cancel():IRequest
 		{
 			super.cancel();
 			if(cancelled) doUnloadContent();
+			return this;
 		}
 
 		

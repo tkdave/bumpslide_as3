@@ -77,8 +77,7 @@ package com.bumpslide.ui
 			var kids:Array = children;
 
 			for each ( var child:DisplayObject in kids ) {
-				child[ layout == Direction.HORIZONTAL ? 'y' : 'x' ] = 0;
-				child.x = child.y = 0;
+				child[ layout == Direction.HORIZONTAL ? 'x' : 'y' ] = 0;
 			}
 
 			switch( layout ) {

@@ -62,6 +62,7 @@ package com.bumpslide.ui
 			scrollbar.scrollTarget = layout;			}
 
 		override protected function onMouseWheel(event:MouseEvent):void {
+			if(!mouseWheelEnabled) return;
 			var amt:Number = scrollAmount / ( isVertical ? rowHeight : columnWidth);
 			scrollbar.value -= event.delta * amt;
 			layout.scrollPosition = scrollbar.value;

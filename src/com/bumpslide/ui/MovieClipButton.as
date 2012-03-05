@@ -12,6 +12,7 @@
 package com.bumpslide.ui
 {
 
+	import flash.display.DisplayObject;
 	import com.bumpslide.util.Delegate;
 
 	import flash.display.MovieClip;
@@ -33,7 +34,7 @@ package com.bumpslide.ui
 	{
 
 		// background placed on the stage
-		public var background:MovieClip;
+		public var background:DisplayObject;
 
 		// dynamic text field place on the stage
 		public var label_txt:TextField;

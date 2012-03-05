@@ -12,13 +12,13 @@
 package com.bumpslide.ui
 {
 
+	import flash.text.TextFieldType;
 	import com.bumpslide.ui.skin.defaults.DefaultTextInputSkin;
 
 	import flash.events.Event;
 	import flash.events.FocusEvent;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
-	import flash.text.TextFormat;
 
 	[Event(name='change',type='flash.events.Event')]
 	/**
@@ -41,6 +41,8 @@ package com.bumpslide.ui
 		private var _text:String = "";
 
 		private var _hintText:String = "";
+
+		private var _focusEnabled:Boolean = true;
 
 		public function TextInput( text:String = "", hintText:String = "" )
 		{
@@ -81,14 +83,16 @@ package com.bumpslide.ui
 			addEventListener( MouseEvent.MOUSE_DOWN, handleMouseDown );
 
 			skinState = 'normal';
+			
+			//invalidate('text');
+			//invalidate('hintText');
 		}
-
+		
+		
 
 		override protected function destroySkin():void
 		{
 			if (input_txt != null) {
-				input_txt.tabEnabled = true;
-				input_txt.needsSoftKeyboard = true;
 				input_txt.removeEventListener( Event.CHANGE, handleTextInput );
 				input_txt.removeEventListener( FocusEvent.FOCUS_IN, handleTextBoxFocusIn );
 				input_txt.removeEventListener( FocusEvent.FOCUS_OUT, handleTextBoxFocusOut );
@@ -102,7 +106,7 @@ package com.bumpslide.ui
 
 		private function handleMouseDown( event:MouseEvent ):void
 		{
-			if (input_txt && stage.focus != input_txt) stage.focus = input_txt;
+			if (input_txt && focusEnabled && stage.focus != input_txt) stage.focus = input_txt;
 		}
 
 
@@ -110,6 +114,11 @@ package com.bumpslide.ui
 		{
 			super.commitProperties();
 
+			if(input_txt) {
+				input_txt.tabEnabled = focusEnabled;
+				input_txt.type = focusEnabled ? TextFieldType.INPUT : TextFieldType.DYNAMIC;
+				input_txt.needsSoftKeyboard = focusEnabled;
+			}
 			if (hasChanged( 'text' ) && input_txt) {
 				input_txt.text = text;
 				dispatchEvent( new Event( Event.CHANGE ) );
@@ -131,7 +140,7 @@ package com.bumpslide.ui
 		protected function handleTextBoxFocusIn( event:FocusEvent ):void
 		{
 			skinState = 'focused';
-			if(input_txt) input_txt.requestSoftKeyboard();
+			if(input_txt && focusEnabled) input_txt.requestSoftKeyboard();
 		}
 
 
@@ -151,6 +160,7 @@ package com.bumpslide.ui
 			if(val==null) val='';
 			_text = val;
 			invalidate( 'text' );
+			invalidate(VALID_SKIN_STATE);
 		}
 
 
@@ -162,11 +172,24 @@ package com.bumpslide.ui
 		public function set hintText( val:String ):void {
 			_hintText = val;
 			invalidate( 'hintText' );
+			invalidate(VALID_SKIN_STATE);
 		}
 
 
 		override public function get height():Number {
 			return actualHeight;
+		}
+
+
+		public function get focusEnabled():Boolean {
+			return _focusEnabled;
+		}
+
+
+		public function set focusEnabled( focusEnabled:Boolean ):void {
+			_focusEnabled = focusEnabled;
+
+			invalidate(VALID_SKIN_STATE);
 		}
 
 	}

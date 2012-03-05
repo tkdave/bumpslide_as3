@@ -68,7 +68,7 @@ package com.bumpslide.command {
 		/**
 		 * Notifies callback of error
 		 */
-		public function notifyError(info:Object) : void {
+		public function notifyError(info:Error) : void {
 			dispatchEvent( new Event(Event.COMPLETE) ); // used by CommandQueue to know when to advance
 			if(callback) callback.fault( info );
 		}

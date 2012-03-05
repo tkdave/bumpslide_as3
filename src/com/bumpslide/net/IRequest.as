@@ -15,15 +15,36 @@ package com.bumpslide.net {
 	/**
 	 * Interface for asynchronous commands such as web API calls and requests for assets
 	 * 
+	 * All methods are chainable
+	 * 
 	 * @author David Knape
 	 */
 	public interface IRequest {
 		
-		function load():void;		
-		function cancel():void;
-						
-		function addResponder( responder:IResponder ):void;
-		function removeResponder( responder:IResponder ):void;
+		/**
+		 * Load the request
+		 */
+		function load():IRequest;
+		
+		/**
+		 * Cancel the request
+		 */
+		function cancel():IRequest;
+		
+		/**
+		 * Cancel and reset so request can be reused. Optionally remove all responders.
+		 */
+		function reset( remove_responders:Boolean = false ):IRequest;
+			
+		/**
+		 * Add responder with result and fault handlers
+		 */					
+		function addResponder( responder:IResponder ):IRequest;
+		
+		/**
+		 * Remove responder
+		 */
+		function removeResponder( responder:IResponder ):IRequest;
 		
 	}
 }

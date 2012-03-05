@@ -105,7 +105,7 @@ package com.bumpslide.ui.behavior
 		}
 		
 		protected function handleMouseDown(event:MouseEvent):void {
-			//trace(this + ' MOUSE DOWN ' +event.target );
+			trace(this + ' MOUSE DOWN ' +event.target );
 			if(!enabled) return;
 			if(event) event.stopPropagation();
 			mouseStart = new Point(event.stageX, event.stageY);
@@ -143,7 +143,7 @@ package com.bumpslide.ui.behavior
 			}
 			velocity = targetLoc.subtract(previousLoc);			
 			dragTarget.dispatchEvent(new DragEvent(DragEvent.EVENT_DRAG_MOVE, spriteStart, targetLoc, velocity));
-			if(dragTarget is DisplayObjectContainer) { 
+			if(dragTarget is DisplayObjectContainer && justDragged) { 
 				(dragTarget as DisplayObjectContainer).mouseChildren=false;
 			}
 			previousLoc = targetLoc.clone();
@@ -194,6 +194,7 @@ package com.bumpslide.ui.behavior
 			if(dragTarget is DisplayObjectContainer) { 
 				(dragTarget as DisplayObjectContainer).mouseChildren=true;
 			}
+			
 		}				public function get dragBounds():Rectangle {
 			return _dragBounds;		}				public function set dragBounds(dragBounds:Rectangle):void {
 			_dragBounds = dragBounds;		}

@@ -10,10 +10,10 @@
  * More info at http://www.opensource.org/licenses/mit-license.php
  */
 
-package com.bumpslide.ui {	import com.bumpslide.data.constant.Direction;	import com.bumpslide.data.type.Padding;	import com.bumpslide.events.UIEvent;	import com.bumpslide.ui.skin.defaults.DefaultPanelSkin;	import com.bumpslide.ui.skin.defaults.Style;	import flash.display.DisplayObject;	import flash.display.Sprite;	import flash.events.Event;	import flash.events.MouseEvent;	import flash.geom.Rectangle;	
+package com.bumpslide.ui {	import com.bumpslide.view.IView;	import com.bumpslide.data.constant.Direction;	import com.bumpslide.data.type.Padding;	import com.bumpslide.events.UIEvent;	import com.bumpslide.ui.skin.defaults.DefaultPanelSkin;	import com.bumpslide.ui.skin.defaults.Style;	import flash.display.DisplayObject;	import flash.display.Sprite;	import flash.events.Event;	import flash.events.MouseEvent;	import flash.geom.Rectangle;	
 	/**	 * Simple Container with Background box and padding.	 * 	 * This is a core base class for the scroll panels and grids	 * 	 * This component can be instantiated via code, or it can be created 	 * inside a FLA.  Missing pieces will be dynamically added to the 	 * display list. Background is no longer transparent by default.  We still 	 * need it for absorbing certain mouse events in various child components.	 * 
 	 * Update 2010-10: Background is now drawn with skin. 
-	 * 	 * @author David Knape	 */	public class Panel extends Component 	{
+	 * 	 * @author David Knape	 */	public class Panel extends Component implements IGridItem	{
 		static public var DefaultSkinClass:Class = DefaultPanelSkin;		// children		public var background:DisplayObject;		public var viewrect:Sprite; // avatar on stage to determine content padding		protected var _content:DisplayObject;		protected var _holder:Sprite;		// content and scrollbar padding in relationship to background		protected var _padding:Padding; 		protected var _autoSizeHeight:Boolean = false;		protected var _constructorArgs:Array;				private var _backgroundVisible:Boolean = true;
 
 		private var _handlingChildSizeChange:Boolean=false;
@@ -24,7 +24,7 @@ package com.bumpslide.ui {	import com.bumpslide.data.constant.Direction;	imp
 				function Panel( content:DisplayObject = null, padding:*=  null, background_color:uint = NaN, background_alpha:Number = NaN):void 		{
 			//trace(this+' CTOR');
 			_holder = add( Sprite );			_constructorArgs = arguments;			super();		}				override protected function postConstruct():void 		{
-			super.postConstruct();						// apply constructor arguments			if(_constructorArgs!=null) {				if(content==null) content = _constructorArgs[0];				if(_constructorArgs[1]!=null) padding = _constructorArgs[1];				if(backgroundBox != null && !isNaN( _constructorArgs[2])) backgroundBox.backgroundColor = _constructorArgs[2];				if(!isNaN( _constructorArgs[3])) background.alpha = _constructorArgs[3];			}
+			super.postConstruct();						// apply constructor arguments			if(_constructorArgs!=null) {				if(content==null) content = _constructorArgs[0];				if(_constructorArgs[1]!=null) padding = _constructorArgs[1];				if(backgroundBox != null && !isNaN( _constructorArgs[2])) backgroundBox.backgroundColor = _constructorArgs[2];				if(background != null && !isNaN( _constructorArgs[3])) background.alpha = _constructorArgs[3];			}
 			
 			initDefaultSkin();
 		}
@@ -82,7 +82,9 @@ package com.bumpslide.ui {	import com.bumpslide.data.constant.Direction;	imp
 			}						
 			super.draw();
 			
-			_handlingChildSizeChange = false;		}				protected function positionContent():void 		{			_holder.x = padding.left;			_holder.y = padding.top;		}				protected function setContentSize(w:Number, h:Number):void 		{			//trace('setContentSize ' +w, h );
+			_handlingChildSizeChange = false;		}				protected function positionContent():void 		{
+			if(_holder) {				_holder.x = padding.left;				_holder.y = padding.top;
+			}		}				protected function setContentSize(w:Number, h:Number):void 		{			//trace('setContentSize ' +w, h );
 			
 			// mask
 			scrollRectSet('width', contentWidth);
@@ -96,7 +98,13 @@ package com.bumpslide.ui {	import com.bumpslide.data.constant.Direction;	imp
 			_holder.scrollRect = rect;		}				//-------------------		// GETTERS/SETTERS		//-------------------				/**		 * The content being scrolled		 */			public function set content( c:DisplayObject ):void {	
 			
 			log('set content = '+c);
-						// if we had old content, remove it			if(_content != null && _holder.contains(_content) ) {				_holder.removeChild(_content);			}			// add to stage inside holder						if(c != null) _holder.addChild(c);										_content = c;			invalidate();		}				public function get content():DisplayObject {			return _content;		}				public function get contentWidth():Number {			return width - padding.width;		}				public function get contentHeight():Number {			return height - padding.height;		}				public function set padding( p:* ):void {			_padding = Padding.create( p );			invalidate();		}						public function get padding():Padding {
+						// if we had old content, remove it			if(_content != null && _holder.contains(_content) ) {				_holder.removeChild(_content);			}			// add to stage inside holder						if(c != null) _holder.addChild(c);										_content = c;			invalidate();		}				public function get content():DisplayObject {			return _content;		}
+		
+		/**
+		 * content as IView		 */
+		public function get contentView():IView {
+			return content as IView;
+		}		[Bindable(name='sizeChanged')]		public function get contentWidth():Number {			return width - padding.width;		}		[Bindable(name='sizeChanged')]		public function get contentHeight():Number {			return height - padding.height;		}				public function set padding( p:* ):void {			_padding = Padding.create( p );			invalidate();		}						public function get padding():Padding {
 			if(_padding==null) _padding = new Padding(Style.PANEL_PADDING);			return _padding;		}				/**		 * If background was not explicitly set or placed on the stage, this is the default background		 */		public function get backgroundBox():Box {			if(background is Box) {				return background as Box;			} else {				return null;			}		}				public function get autoSizeHeight():Boolean {			return _autoSizeHeight;		}				public function set autoSizeHeight(autoSize:Boolean):void {			_autoSizeHeight = autoSize;			invalidate();		}				override public function get height():Number {			// get display object height.  Calls actualHeight getter from component class if found			// this is overriden by TextBox to return the 			var contentheight:Number = content ? (content is Component ? (content as Component).actualHeight : content.height) : 0;
 			if(!contentVisible) return padding.height;			else return (autoSizeHeight) ? contentheight + padding.height : super.height;		}						public function get backgroundVisible():Boolean {			return _backgroundVisible;		}						public function set backgroundVisible(backgroundVisible:Boolean):void {			_backgroundVisible = backgroundVisible;			invalidate();		}
 
@@ -132,6 +140,7 @@ package com.bumpslide.ui {	import com.bumpslide.data.constant.Direction;	imp
 
 		public function set title( title:String ) : void {
 			_title = title;
-			invalidate();
-		}
+			invalidate();		}
+		/**
+		 * IGridItem imeplementation		 */		private var _gridIndex:Number;		private var _gridItemData:*;		public function get gridIndex():Number {			return _gridIndex;		}		public function set gridIndex( gridIndex:Number ):void {			_gridIndex = gridIndex;		}		public function get gridItemData() {			return _gridItemData;		}		public function set gridItemData( gridItemData ):void {			_gridItemData = gridItemData;			content = gridItemData;		}
 	}}

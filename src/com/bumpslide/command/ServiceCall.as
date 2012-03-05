@@ -42,8 +42,8 @@ package com.bumpslide.command {
 			rpc.cancel();
 		}
 		
-		public function fault(info:Object):void {
-			debug( String(info) );
+		public function fault(info:Error):void {
+			debug( String( info ) );
 			notifyError( info );
 		}
 		

@@ -25,11 +25,11 @@
 		/**
 		 * changes the color of a movieclip
 		 */
-		static public function colorize( mc:DisplayObject, color:uint ):void
+		static public function colorize( mc:DisplayObject, color:int=-1):void
 		{
 			var current_alpha:Number = mc.alpha;
-			if (isNaN( color )) {
-				mc.transform.colorTransform = null;
+			if ( color < 0 ) {
+				mc.transform.colorTransform = new ColorTransform();
 			} else {
 				var ct:ColorTransform = new ColorTransform();
 				ct.color = color;
@@ -37,5 +37,7 @@
 			}
 			mc.alpha = current_alpha;
 		}
+		
+		
 	}
 }

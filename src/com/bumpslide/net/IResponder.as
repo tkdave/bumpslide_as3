@@ -20,7 +20,7 @@ package com.bumpslide.net {
 	 * @author David Knape
 	 */
 	public interface IResponder {
-		function fault(info : Object) : void;
+		function fault(info : Error) : void;
 		function result(data : Object) : void;
 	}
 }
