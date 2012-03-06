@@ -28,13 +28,17 @@ package com.bumpslide.ui.skin.defaults
 	 */
 	dynamic public class DefaultTextInputSkin extends BasicSkin
 	{
-		public var inputText:Label;
-		public var hintText:Label;
-		
-		// Skin parts (TextInput is just looking for the text fields)
-		public var input_txt:TextField;
-		public var hint_txt:TextField;
+
 		private var background:Box;
+
+		private var inputText:Label;
+		private var hintText:Label;
+
+		// Skin parts 
+		// (TextInput is just looking for the text fields)
+		public var input_txt:TextField;
+
+		public var hint_txt:TextField;
 
 		public function get hostComponent():TextInput {
 			return _hostComponent as TextInput;
@@ -49,32 +53,39 @@ package com.bumpslide.ui.skin.defaults
 				background = this['_background'];
 			}
 			background.buttonMode = true;
-
-			inputText = add( Label, { editable:true, maxLines:1, selectable:true, padding:Style.INPUT_PADDING, textFormat:Style.INPUT_TEXT_FORMAT } );
-			hintText = add( Label, { alpha:.5, maxLines:1, padding:Style.INPUT_PADDING, textFormat:Style.INPUT_TEXT_FORMAT } );
+			
+			inputText = add( Label, { editable: true, maxLines: 1, selectable: true, padding: Style.INPUT_PADDING, textFormat: Style.INPUT_TEXT_FORMAT } );
+			hintText = add( Label, { alpha: .5, maxLines: 1, padding: Style.INPUT_PADDING, textFormat: Style.INPUT_TEXT_FORMAT } );
 
 			input_txt = inputText.textField;
 			hint_txt = hintText.textField;
 		}
 
 
+		override protected function draw():void
+		{
+			if (hasChanged( VALID_SIZE )) {
+				inputText.width = hostComponent.width;
+				hintText.width = hostComponent.width;
+				background.setSize( hostComponent.width, inputText.height );
+			}
+			
+			input_txt.text = hostComponent.text;
+			hint_txt.text = hostComponent.hintText;
+		}
+		
+		
 		override public function renderSkin( skinState:String ):void
 		{
 			super.renderSkin( skinState );
-
-			inputText.width = hostComponent.width;
-			hintText.width = hostComponent.width;
-			inputText.logEnabled = true;
-			background.setSize( hostComponent.width, inputText.height );
-			inputText.logEnabled = false;
+			
+			input_txt.text = hostComponent.text;
+			hint_txt.text = hostComponent.hintText;
 		}
 
 
 		public function _focused():void
 		{
-			// Should this logic be in the component? 
-			// Reflex says it goes in the Behavior
-			// Maybe we should put it in an observable view-model
 			hintText.visible = false;
 			inputText.visible = true;
 
@@ -88,24 +99,16 @@ package com.bumpslide.ui.skin.defaults
 		{
 			hintText.color = Style.INPUT_TEXT_HINT;
 			inputText.color = Style.INPUT_TEXT;
-			
+
 			hintText.bold = false;
 			inputText.bold = false;
-						
-			// Should this logic be in the component?
+
 			hintText.visible = hostComponent.text == null || hostComponent.text.length == 0;
-			inputText.visible = !hintText.visible;
+			inputText.visible = true;//!hintText.visible;
 
 			background.backgroundColor = Style.INPUT_BACKGROUND;
 			background.borderColor = Style.INPUT_BORDER;
 			background.filters = [ Style.BEVEL_FILTER_INSET ];
-		}
-
-
-		override protected function draw():void
-		{
-			inputText.width = hostComponent.width;
-			hintText.width = hostComponent.width;
 		}
 	}
 }

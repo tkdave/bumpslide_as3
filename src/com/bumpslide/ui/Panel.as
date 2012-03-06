@@ -142,5 +142,5 @@ package com.bumpslide.ui {	import com.bumpslide.view.IView;	import com.bumps
 			_title = title;
 			invalidate();		}
 		/**
-		 * IGridItem imeplementation		 */		private var _gridIndex:Number;		private var _gridItemData:*;		public function get gridIndex():Number {			return _gridIndex;		}		public function set gridIndex( gridIndex:Number ):void {			_gridIndex = gridIndex;		}		public function get gridItemData() {			return _gridItemData;		}		public function set gridItemData( gridItemData ):void {			_gridItemData = gridItemData;			content = gridItemData;		}
+		 * IGridItem imeplementation		 */		private var _gridIndex:Number;		private var _gridItemData:*;		public function get gridIndex():Number {			return _gridIndex;		}		public function set gridIndex( gridIndex:Number ):void {			_gridIndex = gridIndex;		}		public function get gridItemData():* {			return _gridItemData;		}		public function set gridItemData( gridItemData:* ):void {			_gridItemData = gridItemData;			content = gridItemData;		}
 	}}

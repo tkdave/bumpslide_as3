@@ -21,11 +21,9 @@ package com.bumpslide.ui
 	import flash.text.TextField;
 
 	[Event(name='change',type='flash.events.Event')]
+	
 	/**
 	 * TextInput Component
-	 *
-	 * Supports Programattic of Flash Skinning
-	 * 
 	 * 
 	 * @author David Knape
 	 */
@@ -35,13 +33,10 @@ package com.bumpslide.ui
 		static public var DefaultSkinClass:Class = DefaultTextInputSkin;
 
 		public var input_txt:TextField;
-
 		public var hint_txt:TextField;
 
 		private var _text:String = "";
-
 		private var _hintText:String = "";
-
 		private var _focusEnabled:Boolean = true;
 
 		public function TextInput( text:String = "", hintText:String = "" )
@@ -119,11 +114,6 @@ package com.bumpslide.ui
 				input_txt.type = focusEnabled ? TextFieldType.INPUT : TextFieldType.DYNAMIC;
 				input_txt.needsSoftKeyboard = focusEnabled;
 			}
-			if (hasChanged( 'text' ) && input_txt) {
-				input_txt.text = text;
-				dispatchEvent( new Event( Event.CHANGE ) );
-			}
-			if (hasChanged( 'hintText' ) && hint_txt) hint_txt.text = hintText;
 		}
 
 
@@ -158,9 +148,10 @@ package com.bumpslide.ui
 
 		public function set text( val:String ):void {
 			if(val==null) val='';
+			if(val==_text) return;
 			_text = val;
-			invalidate( 'text' );
 			invalidate(VALID_SKIN_STATE);
+			dispatchEvent( new Event( Event.CHANGE ) );
 		}
 
 
@@ -171,7 +162,6 @@ package com.bumpslide.ui
 
 		public function set hintText( val:String ):void {
 			_hintText = val;
-			invalidate( 'hintText' );
 			invalidate(VALID_SKIN_STATE);
 		}
 
@@ -188,7 +178,6 @@ package com.bumpslide.ui
 
 		public function set focusEnabled( focusEnabled:Boolean ):void {
 			_focusEnabled = focusEnabled;
-
 			invalidate(VALID_SKIN_STATE);
 		}
 
