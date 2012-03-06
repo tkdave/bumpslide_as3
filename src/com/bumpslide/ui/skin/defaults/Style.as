@@ -60,7 +60,7 @@ package com.bumpslide.ui.skin.defaults
 		public static var INPUT_BACKGROUND:uint = 0xF8F8F8;
 		public static var INPUT_FOCUS_BACKGROUND:uint = 0xFFFFFF;		
 		public static var INPUT_TEXT:uint = 0x333333;
-		public static var INPUT_TEXT_HINT:uint = 0xAAAAAA;
+		public static var INPUT_TEXT_HINT:uint = 666666;
 		public static var INPUT_PADDING:* = "5 5 7 5";
 		public static var INPUT_BACKGROUND_PROPS:Object = {
 			cornerRadius: 0,

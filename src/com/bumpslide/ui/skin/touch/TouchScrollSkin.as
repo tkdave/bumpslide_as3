@@ -32,7 +32,7 @@ package com.bumpslide.ui.skin.touch
 			addChild( handle );
 		}
 
-		public function set handleColor( c:uint ) {
+		public function set handleColor( c:uint ):void {
 			handleShape.backgroundColor = c;
 		}
 
