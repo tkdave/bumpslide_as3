@@ -3,7 +3,7 @@ package com.bumpslide.ui.skin.defaults
 
 	import com.bumpslide.ui.Box;
 	import com.bumpslide.ui.Panel;
-	import com.bumpslide.ui.skin.BasicSkin;
+	import com.bumpslide.ui.BasicSkin;
 
 	/**
 	 * The Panel Skin is really just the background skin

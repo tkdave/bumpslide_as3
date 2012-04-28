@@ -15,7 +15,7 @@ package com.bumpslide.ui.skin.defaults
 	import com.bumpslide.ui.Button;
 	import com.bumpslide.ui.DatePicker;
 	import com.bumpslide.ui.Label;
-	import com.bumpslide.ui.skin.BasicSkin;
+	import com.bumpslide.ui.BasicSkin;
 	import com.bumpslide.util.DateUtil;
 
 

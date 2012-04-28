@@ -23,8 +23,8 @@ package com.bumpslide.view
 	/**
 	 * Makes use of the transition in and out methods of views to manage content
 	 * 
-	 * This is a rather abstract view stack.  You could use this to switch between
-	 * sections of a web page, or to switch view when changing a tab in a form.
+	 * This is a rather abstract views stack.  You could use this to switch between
+	 * sections of a web page, or to switch views when changing a tab in a form.
 	 * 
 	 * Note that this class extends BasicView so that views can be nested.
 	 * Transitioning out a viewloader will transition out it's children.
@@ -44,7 +44,7 @@ package com.bumpslide.view
 		// validation constant
 		public static const VALID_VIEW:String = "validView";
 
-		// the curent view
+		// the curent views
 		protected var _currentView:IView;
 
 		// holder for old views
@@ -62,7 +62,7 @@ package com.bumpslide.view
 		}
 
 		/**
-		 * Override this and add new view to stage while saving reference as 'currentView'
+		 * Override this and add new views to stage while saving reference as 'currentView'
 		 */
 		protected function initView():void {
 			trace('WARNING: You need to implement the initView() method in your ViewLoader implementation.  This is where you set currentView and add it to the stage.');
@@ -105,7 +105,7 @@ package com.bumpslide.view
 //				//removeView( currentView );
 //			}
 			
-			// If we have old views still hanging around, remove them now, including current view
+			// If we have old views still hanging around, remove them now, including current views
 			if(_oldViews.length) {
 				// remove stale views, including current views that happen to be still transitioning out
 				removeOldViews( true );				
@@ -113,16 +113,16 @@ package com.bumpslide.view
 				
 			if(currentView != null) {
 				
-				// instead of killing the current view, move a reference
+				// instead of killing the current views, move a reference
 				// to a stack of old views, so we can add new views on top
 				// and allow for crossfades, and things of that sort
 				_oldViews.push(currentView);
 				
-				log('updatePage() - transitioning out current view ' + currentView );
+				log('updatePage() - transitioning out current views ' + currentView );
 				currentView.transitionOut();
 				//currentView = null;
 			} else {
-				log('updatePage() - currentView is null. Adding new view now...');
+				log('updatePage() - currentView is null. Adding new views now...');
 				addNewView();
 			}
 			
@@ -198,14 +198,14 @@ package com.bumpslide.view
 		}
 		
 		/**
-		 * The current view
+		 * The current views
 		 */
 		public function get currentView():IView {
 			return _currentView;
 		}
 
 		/**
-		 * Set the current view.  This should be a display object.
+		 * Set the current views.  This should be a display object.
 		 */
 		public function set currentView(currentView:IView):void {
 			_currentView = currentView;
@@ -217,7 +217,7 @@ package com.bumpslide.view
 		//------------------------------------------------------------
 		
 		/**
-		 * Transition out the child view
+		 * Transition out the child views
 		 */
 		override public function transitionOut():void {
 			if(currentView!=null) {

@@ -99,7 +99,8 @@ package com.bumpslide.ui.behavior
 		 */
 		public function remove():void {
 			_keyboardScope.removeEventListener(Event.REMOVED_FROM_STAGE, removeKeyboardListener);
-			_gridLayout.timeline.removeEventListener( FocusEvent.MOUSE_FOCUS_CHANGE, handleFocusChange );			_gridLayout.timeline.removeEventListener( FocusEvent.KEY_FOCUS_CHANGE, handleFocusChange );
+			_gridLayout.timeline.removeEventListener( FocusEvent.MOUSE_FOCUS_CHANGE, handleFocusChange );
+			_gridLayout.timeline.removeEventListener( FocusEvent.KEY_FOCUS_CHANGE, handleFocusChange );
 			removeKeyboardListener();
 			
 		}
@@ -146,7 +147,7 @@ package com.bumpslide.ui.behavior
 				// don't tween, we need clips right now
 				gridLayout.tweeningEnabled = false;
 								
-				// if selected index is not in the current view, scroll so that it is
+				// if selected index is not in the current views, scroll so that it is
 				if(focusIndex < gridLayout.indexFirst) {
 					gridLayout.scrollPosition = focusIndex;
 				} else  if (focusIndex >= gridLayout.indexLast) {
@@ -171,11 +172,14 @@ package com.bumpslide.ui.behavior
 			switch(event.keyCode) {
 				case Keyboard.DOWN: 	
 					focusDown(); 	
-					break; 				case Keyboard.UP: 		
+					break; 
+				case Keyboard.UP: 		
 					focusUp(); 		
-					break; 				case Keyboard.RIGHT:	
+					break; 
+				case Keyboard.RIGHT:	
 					focusRight(); 	
-					break; 				case Keyboard.LEFT: 	
+					break; 
+				case Keyboard.LEFT: 	
 					focusLeft(); 	
 					break; 
 			}
@@ -229,5 +233,6 @@ package com.bumpslide.ui.behavior
 		}
 
 		// track instances locally to aid in event management
-		static private var _grids:Dictionary = new Dictionary(true);	}
+		static private var _grids:Dictionary = new Dictionary(true);
+	}
 }

@@ -12,9 +12,12 @@
 package com.bumpslide.ui.skin
 {
 
-	import com.bumpslide.ui.Component;
+    import com.bumpslide.ui.BasicSkin;
+    import com.bumpslide.ui.Component;
 	import com.bumpslide.ui.IResizable;
-	import com.bumpslide.ui.Slider;
+    import com.bumpslide.ui.ISkin;
+    import com.bumpslide.ui.ISkinnable;
+    import com.bumpslide.ui.Slider;
 
 	import flash.display.MovieClip;
 

@@ -15,7 +15,9 @@ package com.bumpslide.ui.skin
 
 	import com.bumpslide.ui.Component;
 	import com.bumpslide.ui.IResizable;
-	import com.bumpslide.util.Delegate;
+    import com.bumpslide.ui.ISkin;
+    import com.bumpslide.ui.ISkinnable;
+    import com.bumpslide.util.Delegate;
 
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;

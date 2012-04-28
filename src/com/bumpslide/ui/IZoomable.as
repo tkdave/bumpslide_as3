@@ -41,7 +41,7 @@ package com.bumpslide.ui {
 		// get y pan location
 		function get panY() : Number;
 		
-		 // set the dimensions of the view rect (mask)
+		 // set the dimensions of the views rect (mask)
 		function setSize(w:Number, h:Number) : void; 
 		
 		// get width of viewing window

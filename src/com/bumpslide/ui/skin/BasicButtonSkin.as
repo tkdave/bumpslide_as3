@@ -12,10 +12,12 @@
 package com.bumpslide.ui.skin
 {
 
-	import com.bumpslide.ui.Box;
+    import com.bumpslide.ui.BasicSkin;
+    import com.bumpslide.ui.Box;
 	import com.bumpslide.ui.Button;
 	import com.bumpslide.ui.IResizable;
-	import com.bumpslide.ui.Label;
+    import com.bumpslide.ui.ISkinnable;
+    import com.bumpslide.ui.Label;
 	import com.bumpslide.ui.skin.defaults.Style;
 	import com.bumpslide.util.Align;
 	import com.bumpslide.util.ObjectUtil;

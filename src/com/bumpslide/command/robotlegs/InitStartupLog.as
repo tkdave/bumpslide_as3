@@ -52,7 +52,7 @@ package com.bumpslide.command.robotlegs
 			// create a label to display the text
 			var label:Label = ObjectUtil.create( Label, { padding:padding, width:1280, height:720, textFormat:format} );
 			
-			// add it as a child to this context view
+			// add it as a child to this context views
 			viewMap.contextView.addChild( label );
 			
 			// let other commands access this label

@@ -18,7 +18,7 @@ package com.bumpslide.ui.skin.defaults
 	import flash.text.TextField;
 
 	import com.bumpslide.ui.Label;
-	import com.bumpslide.ui.skin.BasicSkin;
+	import com.bumpslide.ui.BasicSkin;
 
 
 	/**

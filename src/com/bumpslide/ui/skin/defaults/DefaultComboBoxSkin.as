@@ -14,7 +14,7 @@ package com.bumpslide.ui.skin.defaults
 
 	import com.bumpslide.ui.Button;
 	import com.bumpslide.ui.PixelIcon;
-	import com.bumpslide.ui.skin.BasicSkin;
+	import com.bumpslide.ui.BasicSkin;
 
 
 	/**

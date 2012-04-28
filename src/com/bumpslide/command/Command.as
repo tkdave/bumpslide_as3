@@ -25,7 +25,7 @@ package com.bumpslide.command {
 	 * that was inspired by the UM Cairngorm extensions 
 	 * 
 	 * Basically, a CommandEvent can also be a responder which gives
-	 * view components a way to get called back directly when 
+	 * views components a way to get called back directly when
 	 * a service call finishes or failts (result and fault, respectively)
 	 * 
 	 * The notifyComplete and notifyError methods here facilitate these 

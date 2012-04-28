@@ -13,8 +13,10 @@
 package com.bumpslide.ui.skin 
 {
 	import com.bumpslide.data.type.Padding;
+    import com.bumpslide.ui.ISkinnable;
 
-	/**
+
+    /**
 	 * MovieClipSliderSkin
 	 *
 	 * @author David Knape

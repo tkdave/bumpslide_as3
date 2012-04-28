@@ -12,7 +12,7 @@
 package com.bumpslide.ui.skin.defaults
 {
 
-	import com.bumpslide.ui.skin.ISkinnable;
+	import com.bumpslide.ui.ISkinnable;
 	import com.bumpslide.ui.Label;
 	import com.bumpslide.ui.Box;
 	import com.bumpslide.ui.Component;

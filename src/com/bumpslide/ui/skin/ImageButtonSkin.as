@@ -13,9 +13,11 @@
 package com.bumpslide.ui.skin
 {
 
-	import com.bumpslide.ui.Button;
+    import com.bumpslide.ui.BasicSkin;
+    import com.bumpslide.ui.Button;
+    import com.bumpslide.ui.ISkinnable;
 
-	import flash.display.Sprite;
+    import flash.display.Sprite;
 
 	/**
 	 * ImageButtonSkin

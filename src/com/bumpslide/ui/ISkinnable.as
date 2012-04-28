@@ -10,7 +10,7 @@
  * More info at http://www.opensource.org/licenses/mit-license.php
  */
 
-package com.bumpslide.ui.skin 
+package com.bumpslide.ui
 {
 	import com.bumpslide.ui.IResizable;
 	import flash.display.DisplayObject;
