@@ -14,7 +14,7 @@ package com.bumpslide.ui.skin.defaults
 
 	import com.bumpslide.ui.Button;
 	import com.bumpslide.ui.PixelIcon;
-	import com.bumpslide.ui.BasicSkin;
+	import com.bumpslide.ui.Skin;
 
 
 	/**
@@ -22,7 +22,7 @@ package com.bumpslide.ui.skin.defaults
 	 *
 	 * @author David Knape
 	 */
-	public class DefaultComboBoxSkin extends BasicSkin
+	public class DefaultComboBoxSkin extends Skin
 	{
 		public var arrowIcon:Array = [ '*****', ' ***', '  *' ];
 		public var icon:PixelIcon;

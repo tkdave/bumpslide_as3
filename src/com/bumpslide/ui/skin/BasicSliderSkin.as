@@ -12,7 +12,7 @@
 package com.bumpslide.ui.skin
 {
 
-    import com.bumpslide.ui.BasicSkin;
+    import com.bumpslide.ui.Skin;
     import com.bumpslide.ui.Component;
 	import com.bumpslide.ui.IResizable;
     import com.bumpslide.ui.ISkin;
@@ -27,7 +27,7 @@ package com.bumpslide.ui.skin
 	 *
 	 * @author David Knape
 	 */
-	public class BasicSliderSkin extends BasicSkin implements ISkin
+	public class BasicSliderSkin extends Skin implements ISkin
 	{
 
 		public var handle:MovieClip;

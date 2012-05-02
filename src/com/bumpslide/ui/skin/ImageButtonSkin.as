@@ -13,7 +13,7 @@
 package com.bumpslide.ui.skin
 {
 
-    import com.bumpslide.ui.BasicSkin;
+    import com.bumpslide.ui.Skin;
     import com.bumpslide.ui.Button;
     import com.bumpslide.ui.ISkinnable;
 
@@ -24,7 +24,7 @@ package com.bumpslide.ui.skin
 	 *
 	 * @author David Knape
 	 */
-	public class ImageButtonSkin extends BasicSkin
+	public class ImageButtonSkin extends Skin
 	{
 
 		[Embed(source="/assets/button_bg.png",scaleGridTop="5", scaleGridLeft="5", scaleGridRight="35",  scaleGridBottom="17")]

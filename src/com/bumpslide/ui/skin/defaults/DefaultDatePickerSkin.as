@@ -15,7 +15,7 @@ package com.bumpslide.ui.skin.defaults
 	import com.bumpslide.ui.Button;
 	import com.bumpslide.ui.DatePicker;
 	import com.bumpslide.ui.Label;
-	import com.bumpslide.ui.BasicSkin;
+	import com.bumpslide.ui.Skin;
 	import com.bumpslide.util.DateUtil;
 
 
@@ -26,7 +26,7 @@ package com.bumpslide.ui.skin.defaults
 	 *
 	 * @author David Knape
 	 */
-	public class DefaultDatePickerSkin extends BasicSkin
+	public class DefaultDatePickerSkin extends Skin
 	{
 		// The calendar icon
 		[Embed(source="/assets/calendar_icon2.png")]

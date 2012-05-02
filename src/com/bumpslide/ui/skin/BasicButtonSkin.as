@@ -12,7 +12,7 @@
 package com.bumpslide.ui.skin
 {
 
-    import com.bumpslide.ui.BasicSkin;
+    import com.bumpslide.ui.Skin;
     import com.bumpslide.ui.Box;
 	import com.bumpslide.ui.Button;
 	import com.bumpslide.ui.IResizable;
@@ -30,7 +30,7 @@ package com.bumpslide.ui.skin
 	 * 
 	 * @author David Knape
 	 */
-	public class BasicButtonSkin extends BasicSkin
+	public class BasicButtonSkin extends Skin
 	{
 		public var background:DisplayObject;
 		public var labelDisplay:Label;

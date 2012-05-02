@@ -16,6 +16,8 @@ package com.bumpslide.ui
     import com.bumpslide.ui.behavior.DragScrollBehavior;
     import com.bumpslide.ui.skin.touch.TouchScrollSkin;
 
+    import flash.events.Event;
+
 
     /**
      * List/Grid Component setup for touch-style interaction
@@ -32,14 +34,11 @@ package com.bumpslide.ui
         {
             super();
 
-            //fixedColumnCount = 1;
-            //gap = 4;
-            scrollbarWidth = 6;
-
             // enable dragging
             touchBehavior = DragScrollBehavior.init(this, layout);
 
             // add touch-style scroll bar
+            scrollbarWidth = 6;
             scrollbar.skinClass = TouchScrollSkin;
 
             // tweak the advanced layout options

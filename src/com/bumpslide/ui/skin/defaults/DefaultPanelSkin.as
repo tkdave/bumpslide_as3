@@ -3,14 +3,14 @@ package com.bumpslide.ui.skin.defaults
 
 	import com.bumpslide.ui.Box;
 	import com.bumpslide.ui.Panel;
-	import com.bumpslide.ui.BasicSkin;
+	import com.bumpslide.ui.Skin;
 
 	/**
 	 * The Panel Skin is really just the background skin
 	 *
 	 * @author David Knape
 	 */
-	public class DefaultPanelSkin extends BasicSkin
+	public class DefaultPanelSkin extends Skin
 	{
 
 		private var background:Box;
